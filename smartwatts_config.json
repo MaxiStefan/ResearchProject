@@ -1,0 +1,30 @@
+
+{
+  "verbose": true,
+  "stream": true,
+  "input": {
+    "puller":{
+      "type": "mongodb",
+      "uri": "mongodb://127.0.0.1",
+      "db": "powerapi",
+      "collection": "hwpcsensor"
+    }
+  },
+  "output": {
+    "pusher_power": {
+      "type": "influxdb",
+      "model": "PowerReport",
+      "uri": "127.0.0.1",
+      "port": 8086,
+      "db": "powerapi_formula",
+      "collection": "smartwatts"
+    }
+  },
+  "cpu-frequency-base": 2200,
+  "cpu-frequency-min": 800,
+  "cpu-frequency-max": 5000,
+  "cpu-error-threshold": 2.0,
+  "disable-dram-formula": true,
+  "sensor-report-sampling-interval": 1000
+}
+

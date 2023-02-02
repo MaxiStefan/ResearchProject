@@ -19,12 +19,9 @@ echo "
   },
   \"output\": {
     \"pusher_power\": {
-      \"type\": \"influxdb\",
+      \"type\": \"csv\",
       \"model\": \"PowerReport\",
-      \"uri\": \"127.0.0.1\",
-      \"port\": 8086,
-      \"db\": \"powerapi_formula\",
-      \"collection\": \"smartwatts\"
+      \"uri\": \"/tmp/sensor_output/output.csv\"
     }
   },
   \"cpu-frequency-base\": $basefrequency,

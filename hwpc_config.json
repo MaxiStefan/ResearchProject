@@ -2,7 +2,7 @@
   "name": "sensor",
   "verbose": false,
   "frequency": 500,
-  "output": {
+  "output": {    
     "type": "mongodb",
     "uri": "mongodb://127.0.0.1",
     "database": "powerapi",

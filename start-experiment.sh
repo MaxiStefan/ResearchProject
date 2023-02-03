@@ -24,10 +24,19 @@ echo "Waiting $(cat .env | cut -d '=' -f 2) minutes for the benchmark to finish"
 sleep $(cat .env | cut -d '=' -f 2)
 
 echo "Extracting power reports"
+sudo docker exec -it researchproject-power-api-smartwatts-1 bash
+cd ..
+chmod -R 777 powerapi/
+sleep 5
+exit
 sudo docker cp researchproject-power-api-smartwatts-1:/opt/powerapi /home/maxi/Desktop/Work/ResearchProject
 
 echo "Waiting for the extraction to be complete"
 sleep 5
+
+cd powerapi/
+rm -rf .bash_history .bash_logout .cache .local .bashrc .profile
+cd ..
 
 #Clean cgroups
 # sudo cgdelete perf_event:matrix

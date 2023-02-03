@@ -14,12 +14,12 @@
     "pusher_power": {
       "type": "csv",
       "model": "PowerReport",
-      "uri": "/tmp/sensor_output/output.csv"
+      "uri": "/tmp/sensor_output/"
     }
   },
-  "cpu-frequency-base": 2200,
-  "cpu-frequency-min": 800,
-  "cpu-frequency-max": 5000,
+  "cpu-frequency-base": 2000,
+  "cpu-frequency-min": 1000,
+  "cpu-frequency-max": 4000,
   "cpu-error-threshold": 2.0,
   "disable-dram-formula": true,
   "sensor-report-sampling-interval": 1000

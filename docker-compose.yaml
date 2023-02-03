@@ -33,22 +33,6 @@ services:
     environment:
      - ExperimentDuration=${ExperimentDuration}
 
-  mongo:
-    container_name: mongo
-    image: mongo
-    network_mode: "host"
-    ports:
-      - 27017:27017
-    environment:
-      - "TZ=Europe/Amsterdam" 
-    restart : always
-    healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/ --quiet
-      interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 40s
-
   power-api-hwpc:
     image: powerapi/hwpc-sensor:latest
     cap_add:
@@ -56,12 +40,10 @@ services:
     network_mode: "host" 
     privileged: true
     pid: "host"
-    depends_on:
-      mongo : 
-        condition: service_healthy
     volumes:
       - /sys:/sys
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /tmp/powerapi-sensor-reporting:/reporting 
       - ./hwpc_config.json:/hwpc_config.json
     command:
       - "--config-file"
@@ -70,10 +52,10 @@ services:
 
   power-api-smartwatts:
     image: powerapi/smartwatts-formula
-    privileged: true
     cap_add:
       - ALL
     volumes:
+      - /tmp/sensor_output:/PowerReport.csv
       - ./smartwatts_config.json:/smartwatts_config.json
     command:
       - "--config-file"

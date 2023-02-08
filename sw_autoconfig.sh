@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-#maxfrequency=$(printf %.0f $(lscpu -b -p=MAXMHZ | tail -n -1| cut -d , -f 1))
-#minfrequency=$(printf %.0f $(lscpu -b -p=MINMHZ | tail -n -1 | cut -d , -f 1))
+maxfrequency=$(printf %.0f $(lscpu -b -p=MAXMHZ | tail -n -1| cut -d , -f 1))
+minfrequency=$(printf %.0f $(lscpu -b -p=MINMHZ | tail -n -1 | cut -d , -f 1))
 basefrequency=$(lscpu | grep "Model name" | cut -d @ -f 2 | cut -d G -f 1)
 basefrequency=$(expr ${basefrequency}\*1000 | bc | cut -d . -f 1)
-maxfrequency=$(($basefrequency * 2))
-minfrequency=$(($basefrequency - 1000))
+#maxfrequency=$(($basefrequency * 2))
+#minfrequency=$(($basefrequency - 1000))
 
 echo "
 {

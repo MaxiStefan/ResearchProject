@@ -1,5 +1,5 @@
 #!/bin/sh
-
+ExperimentTimeout=8
 SudoPassword=maximus
 
 echo "Restarting docker service"

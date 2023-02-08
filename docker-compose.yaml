@@ -32,6 +32,42 @@ services:
      - 1056:80
     environment:
      - ExperimentDuration=${ExperimentDuration}
+     
+  influxdb:
+    container_name: influx
+    image: influxdb:1.8
+    ports:
+      - 8086:8086
+    environment:
+      - INFLUXDB_DB=powerapi_formula
+      - INFLUXDB_HTTP_LOG_ENABLED=true
+      - INFLUXDB_LOGGING_LEVEL=debug
+      - INFLUXDB_HTTP_FLUX_ENABLED=true
+      - DOCKER_INFLUXDB_INIT_ORG=org
+    healthcheck:
+      test: "curl -f http://localhost:8086/ping"
+      interval: 3s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+    command: -config /etc/influxdb/influxdb.conf
+
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    network_mode: "host"
+    ports:
+      - 27017:27017
+    environment:
+      - "TZ=Europe/Amsterdam" 
+    restart : always
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/ --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
 
   power-api-hwpc:
     image: powerapi/hwpc-sensor:latest
@@ -40,6 +76,9 @@ services:
     network_mode: "host" 
     privileged: true
     pid: "host"
+    depends_on:
+      mongo : 
+        condition: service_healthy
     volumes:
       - /sys:/sys
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
@@ -55,12 +94,13 @@ services:
     cap_add:
       - ALL
     volumes:
-      - /tmp/sensor_output:/PowerReport.csv
       - ./smartwatts_config.json:/smartwatts_config.json
     command:
       - "--config-file"
       - "/smartwatts_config.json"
     depends_on:
+      influxdb : 
+         condition : service_healthy
       power-api-hwpc : 
          condition : service_started
     network_mode: "host"

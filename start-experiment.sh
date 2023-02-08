@@ -24,10 +24,10 @@ do
         echo $SudoPassword | sudo -S systemctl start docker
 
         echo "Bringing the system up"
-        echo $SudoPassword | sudo -S docker compose up
+        echo $SudoPassword | sudo -S docker compose up -d
         if [ "$treatment" != "IDLE" ]; then
             cd Containers/
-            echo $SudoPassword | sudo -S docker compose up
+            echo $SudoPassword | sudo -S docker compose up -d
             cd ..
         fi
 
@@ -59,8 +59,8 @@ do
 
         echo "Started treatment at $(date "+%T")"
 
-        echo "Waiting $(cat .env | cut -d '=' -f 2) minutes for the benchmark to finish"
-        TreatmentDuration=$(($(cat .env | cut -d '=' -f 2) * 60))
+        echo "Waiting $(cat ./SmartWatts/.env | cut -d '=' -f 2) minutes for the benchmark to finish"
+        TreatmentDuration=$(($(cat ./SmartWatts/.env | cut -d '=' -f 2) * 60))
         sleep $TreatmentDuration
 
         #After the TreatmentDuration extract the SmartWatts readings using docker cp

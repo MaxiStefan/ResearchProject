@@ -80,7 +80,12 @@ do
 
         echo "Bringing system down"
         #Bring system down
-        echo $SudoPassword | sudo -S docker compose down
+        echo $SudoPassword | cd SmartWatts/; sudo -S docker compose down; cd ..;
+        if [ "$treatment" != "IDLE" ]; then
+            cd Containers/
+            echo $SudoPassword | sudo -S docker compose down
+            cd ..
+        fi
         echo $SudoPassword | sudo -S systemctl stop docker
 
         #Clean cgroups
@@ -104,6 +109,10 @@ do
         unset new_treatments
 
         echo -e "Remainder treatments ${treatments[@]} \n"
+
+        echo -e "Taking the treatment timeout for $TreatmentTimeout minutes \n"
+        TimeoutDuration=$(echo "$TreatmentTimeoutMinutes * 60" | bc)
+        sleep $TimeoutDuration
 
     done
 done

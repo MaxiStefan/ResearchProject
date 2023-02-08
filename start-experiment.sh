@@ -24,7 +24,9 @@ do
         echo $SudoPassword | sudo -S systemctl start docker
 
         echo "Bringing the system up"
-        echo $SudoPassword | cd SmartWatts/; sudo -S docker compose up -d; cd ..;
+        cd SmartWatts/ 
+        echo $SudoPassword | sudo -S docker compose up -d
+        cd ..
         if [ "$treatment" != "IDLE" ]; then
             cd Containers/
             echo $SudoPassword | sudo -S docker compose up -d
@@ -73,14 +75,16 @@ do
 
         #Remove unnecessary files
         # cd powerapi/$experimentIteration/$treatment/
-        rm -rf powerapi/$experimentIteration/$treatment/.bash_history  powerapi/$experimentIteration/$treatment/.bash_logout powerapi/$experimentIteration/$treatment/.cache powerapi/$experimentIteration/$treatment/.local powerapi/$experimentIteration/$treatment/.bashrc powerapi/$experimentIteration/$treatment/.profile
+        rm -rf powerapi/$experimentIteration/$treatment/.bash_history powerapi/$experimentIteration/$treatment/.bash_logout powerapi/$experimentIteration/$treatment/.cache powerapi/$experimentIteration/$treatment/.local powerapi/$experimentIteration/$treatment/.bashrc powerapi/$experimentIteration/$treatment/.profile
         # cd ..
 
         echo "Stopped treatment at $(date "+%T")"
 
         echo "Bringing system down"
         #Bring system down
-        echo $SudoPassword | cd SmartWatts/; sudo -S docker compose down; cd ..;
+        cd SmartWatts/
+        echo $SudoPassword | sudo -S docker compose down
+        cd ..
         if [ "$treatment" != "IDLE" ]; then
             cd Containers/
             echo $SudoPassword | sudo -S docker compose down

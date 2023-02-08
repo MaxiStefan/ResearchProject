@@ -34,7 +34,7 @@ do
         fi
 
         echo "Waiting for services to start"
-        sleep 5
+        sleep 15
         echo "Services started."
 
         #If the treatment is BUBBLE_COLLATZ or FIBO_MATRIX start their tasks
@@ -61,8 +61,8 @@ do
 
         echo "Started treatment at $(date "+%T")"
 
-        echo "Waiting $(cat ./SmartWatts/.env | cut -d '=' -f 2) minutes for the benchmark to finish"
-        TreatmentDuration=$(($(cat ./SmartWatts/.env | cut -d '=' -f 2) * 60))
+        echo "Waiting $(cat ./Containers/.env | cut -d '=' -f 2) minutes for the benchmark to finish"
+        TreatmentDuration=$(($(cat ./Containers/.env | cut -d '=' -f 2) * 60))
         sleep $TreatmentDuration
 
         #After the TreatmentDuration extract the SmartWatts readings using docker cp

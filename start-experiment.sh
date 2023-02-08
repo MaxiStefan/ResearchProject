@@ -67,8 +67,9 @@ do
 
         #After the TreatmentDuration extract the SmartWatts readings using docker cp
         echo "Extracting power reports"
-        echo $SudoPassword | sudo -S docker exec -it researchproject-power-api-smartwatts-1 bash -C "cd ..; chmod -R 777 powerapi/;exit;"
-        echo $SudoPassword | sudo -S docker cp researchproject-power-api-smartwatts-1:/opt/powerapi /home/maxi/Desktop/Work/ResearchProject/$experimentIteration/$treatment
+        mkdir -p "Experiment_Iteration_$experimentIteration/$treatment"
+        echo $SudoPassword | sudo -S docker exec -it smartwatts-power-api-smartwatts-1 bash -C "cd ..; chmod -R 777 powerapi/;exit;"
+        echo $SudoPassword | sudo -S docker cp smartwatts-power-api-smartwatts-1:/opt/powerapi /home/maxi/Desktop/Work/ResearchProject/Experiment_Iteration_$experimentIteration/$treatment
 
         echo "Waiting for the extraction to be complete"
         sleep 5

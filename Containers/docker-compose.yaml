@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  fibonacci:
+    container_name: fibonacci
+    image: macsi21/fibonacci
+    ports:
+     - 1055:80
+    environment:
+     - ExperimentDuration=${ExperimentDuration}
+     
+  bubblesort:
+    container_name: bubblesort
+    image: macsi21/bubblesort
+    ports:
+     - 1057:80
+    environment:
+     - ExperimentDuration=${ExperimentDuration}
+   
+  collatz:
+    container_name: collatz
+    image: macsi21/collatz
+    ports:
+     - 1058:80
+    environment:
+     - ExperimentDuration=${ExperimentDuration}
+      
+  matrix:
+    container_name: matrix  
+    image: macsi21/matrix
+    ports:
+     - 1056:80
+    environment:
+     - ExperimentDuration=${ExperimentDuration}
+     

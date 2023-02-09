@@ -75,7 +75,7 @@ do
         sleep 5
 
         #Remove unnecessary files
-        sudo rm -rf /$experimentIteration/$treatment/powerapi/.bash_history powerapi/$experimentIteration/$treatment/.bash_logout powerapi/$experimentIteration/$treatment/.cache powerapi/$experimentIteration/$treatment/.local powerapi/$experimentIteration/$treatment/.bashrc powerapi/$experimentIteration/$treatment/.profile
+        sudo rm -rf /Experiment_Iteration_$experimentIteration/$treatment/powerapi/.bash_history /Experiment_Iteration_$experimentIteration/$treatment/.bash_logout/powerapi /Experiment_Iteration_$experimentIteration/$treatment/.cache/powerapi /Experiment_Iteration_$experimentIteration/$treatment/.local/powerapi /Experiment_Iteration_$experimentIteration/$treatment/.bashrc/powerapi /Experiment_Iteration_$experimentIteration/$treatment/.profile/powerapi
 
         echo "Stopped treatment at $(date "+%T")"
 

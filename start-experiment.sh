@@ -76,12 +76,9 @@ do
         echo "Waiting for the extraction to be complete"
         sleep $LogsExtractionTimeout
 
-        #Remove unnecessary files
-        sudo rm -rf /Experiment_Iteration_$experimentIteration/$treatment/powerapi/.bash_history /Experiment_Iteration_$experimentIteration/$treatment/.bash_logout/powerapi /Experiment_Iteration_$experimentIteration/$treatment/.cache/powerapi /Experiment_Iteration_$experimentIteration/$treatment/.local/powerapi /Experiment_Iteration_$experimentIteration/$treatment/.bashrc/powerapi /Experiment_Iteration_$experimentIteration/$treatment/.profile/powerapi
-
         treatmentStopTime=$(date "+%T.%6N")
         echo "Stopped $treatment at $treatmentStopTime"
-        echo "$treatmentIteration,$treatment,$treatmentStartTime,$treatmentStopTime" >> experiment_log.csv
+        echo "$experimentIteration,$treatment,$treatmentStartTime,$treatmentStopTime" >> experiment_log.csv
 
         echo "Bringing system down"
         #Bring system down
@@ -122,3 +119,5 @@ do
 
     done
 done
+
+sh ./clean-files.sh

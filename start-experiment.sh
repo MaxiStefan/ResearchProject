@@ -1,9 +1,9 @@
 #!/bin/bash
 TreatmentTaskDuration=$(($(head -n 1 ./Containers/.env | tail -1 | cut -d '=' -f 2) * 60))
 TreatmentTimeout=$(($(head -n 2 ./Containers/.env | tail -1 | cut -d '=' -f 2) * 60))
-LogsExtractionTimeout=$((head -n 3 ./Containers/.env | tail -1 | cut -d '=' -f 2))
-ServiceStartTimeout=$((head -n 4 ./Containers/.env | tail -1 | cut -d '=' -f 2))
-SudoPassword=$(echo $(head -n 5 ./Containers/.env | tail -1 | cut -d '=' -f 2))
+LogsExtractionTimeout=$(head -n 3 ./Containers/.env | tail -1 | cut -d '=' -f 2)
+ServiceStartTimeout=$(head -n 4 ./Containers/.env | tail -1 | cut -d '=' -f 2)
+SudoPassword=$(head -n 5 ./Containers/.env | tail -1 | cut -d '=' -f 2)
 
 for experimentIteration in  1 2 3 4 5 6 7 8 9 10
 do

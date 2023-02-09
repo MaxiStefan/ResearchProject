@@ -38,7 +38,7 @@ do
         unset new_treatments
 
         echo -e "Remainder treatments ${treatments[@]} \n"
-        mkdir -p "Experiment_Iteration_1$experimentIteration/$treatment"
+        mkdir -p "$(pwd)/Experiment_Iteration_$experimentIteration/$treatment"
 
         sleep 1
 

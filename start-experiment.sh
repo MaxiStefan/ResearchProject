@@ -69,7 +69,7 @@ do
         echo "Extracting power reports"
         mkdir -p "Experiment_Iteration_$experimentIteration/$treatment"
         echo $SudoPassword | sudo -S docker exec -it smartwatts-power-api-smartwatts-1 bash -C "cd ..; chmod -R 777 powerapi/;exit;"
-        echo $SudoPassword | sudo -S docker cp smartwatts-power-api-smartwatts-1:/opt/powerapi /home/maxi/Desktop/Work/ResearchProject/Experiment_Iteration_$experimentIteration/$treatment
+        echo $SudoPassword | sudo -S docker cp smartwatts-power-api-smartwatts-1:/opt/powerapi $(pwd)/Experiment_Iteration_$experimentIteration/$treatment
 
         echo "Waiting for the extraction to be complete"
         sleep 5
@@ -116,7 +116,7 @@ do
         echo -e "Remainder treatments ${treatments[@]} \n"
 
         echo -e "Taking the treatment timeout for $TreatmentTimeout minutes \n"
-        TimeoutDuration=$(echo "$TreatmentTimeoutMinutes * 60" | bc)
+        TimeoutDuration=$(echo "$TreatmentTimeout * 60" | bc)
         sleep $TimeoutDuration
 
     done

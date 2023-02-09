@@ -64,7 +64,7 @@ do
 
         treatmentStartTime=$(date "+%T.%6N")
         echo "Started $treatment at $treatmentStartTime"
-        echo "Waiting $(cat ./Containers/.env | cut -d '=' -f 2) minutes for the benchmark to finish"
+        echo "Waiting for the benchmark to finish"
         sleep $TreatmentTaskDuration
 
         #After the TreatmentTaskDuration extract the SmartWatts readings using docker cp

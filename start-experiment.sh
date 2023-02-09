@@ -1,6 +1,9 @@
 #!/bin/bash
-TreatmentTimeout=2
-SudoPassword=maximus
+TreatmentTaskDuration=$(($(head -n 1 ./Containers/.env | tail -1 | cut -d '=' -f 2) * 60))
+TreatmentTimeout=$(($(head -n 2 ./Containers/.env | tail -1 | cut -d '=' -f 2) * 60))
+LogsExtractionTimeout=$((head -n 3 ./Containers/.env | tail -1 | cut -d '=' -f 2))
+ServiceStartTimeout=$((head -n 4 ./Containers/.env | tail -1 | cut -d '=' -f 2))
+SudoPassword=$(echo $(head -n 5 ./Containers/.env | tail -1 | cut -d '=' -f 2))
 
 for experimentIteration in  1 2 3 4 5 6 7 8 9 10
 do
@@ -34,7 +37,7 @@ do
         fi
 
         echo "Waiting for services to start"
-        sleep 15
+        sleep $ServiceStartTimeout
         echo "Services started."
 
         #If the treatment is BUBBLE_COLLATZ or FIBO_MATRIX start their tasks
@@ -59,25 +62,26 @@ do
             curl localhost:1058/start > /dev/null 2>&1 &
         fi
 
-        echo "Started treatment at $(date "+%T")"
-
+        treatmentStartTime=$(date "+%T.%6N")
+        echo "Started $treatment at $treatmentStartTime"
         echo "Waiting $(cat ./Containers/.env | cut -d '=' -f 2) minutes for the benchmark to finish"
-        TreatmentDuration=$(($(cat ./Containers/.env | cut -d '=' -f 2) * 60))
-        sleep $TreatmentDuration
+        sleep $TreatmentTaskDuration
 
-        #After the TreatmentDuration extract the SmartWatts readings using docker cp
+        #After the TreatmentTaskDuration extract the SmartWatts readings using docker cp
         echo "Extracting power reports"
         mkdir -p "Experiment_Iteration_$experimentIteration/$treatment"
         echo $SudoPassword | sudo -S docker exec -it smartwatts-power-api-smartwatts-1 bash -C "cd ..; chmod -R 777 powerapi/;exit;"
         echo $SudoPassword | sudo -S docker cp smartwatts-power-api-smartwatts-1:/opt/powerapi $(pwd)/Experiment_Iteration_$experimentIteration/$treatment
 
         echo "Waiting for the extraction to be complete"
-        sleep 5
+        sleep $LogsExtractionTimeout
 
         #Remove unnecessary files
         sudo rm -rf /Experiment_Iteration_$experimentIteration/$treatment/powerapi/.bash_history /Experiment_Iteration_$experimentIteration/$treatment/.bash_logout/powerapi /Experiment_Iteration_$experimentIteration/$treatment/.cache/powerapi /Experiment_Iteration_$experimentIteration/$treatment/.local/powerapi /Experiment_Iteration_$experimentIteration/$treatment/.bashrc/powerapi /Experiment_Iteration_$experimentIteration/$treatment/.profile/powerapi
 
-        echo "Stopped treatment at $(date "+%T")"
+        treatmentStopTime=$(date "+%T.%6N")
+        echo "Stopped $treatment at $treatmentStopTime"
+        echo "$treatmentIteration,$treatment,$treatmentStartTime,$treatmentStopTime" >> experiment_log.csv
 
         echo "Bringing system down"
         #Bring system down
@@ -113,9 +117,8 @@ do
 
         echo -e "Remainder treatments ${treatments[@]} \n"
 
-        echo -e "Taking the treatment timeout for $TreatmentTimeout minutes \n"
-        TimeoutDuration=$(echo "$TreatmentTimeout * 60" | bc)
-        sleep $TimeoutDuration
+        echo -e "Taking the treatment timeout \n"
+        sleep $TreatmentTimeout
 
     done
 done

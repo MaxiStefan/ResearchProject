@@ -81,7 +81,7 @@ do
         echo "$experimentIteration,$treatment,$treatmentStartTime,$treatmentStopTime" >> experiment_log.csv
         
         #Remove unwanted files
-        chmod 777 -R Experiment_Iteration_$experimentIteration
+        echo $SudoPassword | sudo -S chmod 777 -R Experiment_Iteration_$experimentIteration
         cd Experiment_Iteration_$experimentIteration/$treatment/powerapi
         echo $SudoPassword | sudo -S rm -rf .local .cache
         cd ..; cd ..; cd ..;

@@ -7,8 +7,8 @@ SudoPassword=$(echo $(head -n 5 ./Containers/.env | tail -1 | cut -d '=' -f 2))
 ResidualLoggingTime=3600
 TreatmentCount=5
 ExperimentIterations=10
-#LoggerDuration=$(( ($TreatmentTaskDuration + $TreatmentTimeout + $LogsExtractionTimeout + $LogsExtractionTimeout + $ServiceStartTimeout ) * $TreatmentCount * $ExperimentIterations + $ResidualLoggingTime ))
-LoggerDuration=120
+LoggerDuration=$(( ($TreatmentTaskDuration + $TreatmentTimeout + $LogsExtractionTimeout + $LogsExtractionTimeout + $ServiceStartTimeout ) * $TreatmentCount * $ExperimentIterations + $ResidualLoggingTime ))
+#LoggerDuration=120
 
 echo "Started logging at $(date "+%T.%6N")"
 

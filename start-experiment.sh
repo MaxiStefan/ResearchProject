@@ -28,11 +28,11 @@ do
 
         echo "Bringing the system up"
         cd SmartWatts/ 
-        echo $SudoPassword | sudo -S docker compose up -d
+        echo $SudoPassword | sudo -S docker compose up -d  > /dev/null 2>&1 &
         cd ..
         if [ "$treatment" != "IDLE" ]; then
             cd Containers/
-            echo $SudoPassword | sudo -S docker compose up -d
+            echo $SudoPassword | sudo -S docker compose up -d  > /dev/null 2>&1 &
             cd ..
         fi
 
@@ -71,19 +71,19 @@ do
         echo "Extracting power reports"
         mkdir -p "Experiment_Iteration_$experimentIteration/$treatment"
         echo $SudoPassword | sudo -S docker exec -it smartwatts-power-api-smartwatts-1 bash -C "cd ..; chmod -R 777 powerapi/;exit;"
-        echo $SudoPassword | sudo -S docker cp smartwatts-power-api-smartwatts-1:/opt/powerapi $(pwd)/Experiment_Iteration_$experimentIteration/$treatment
-
+        echo $SudoPassword | sudo -S docker cp smartwatts-power-api-smartwatts-1:/opt/powerapi $(pwd)/Experiment_Iteration_$experimentIteration/$treatment  > /dev/null 2>&1 &
+        sleep $LogsExtractionTimeout
         echo "Waiting for the extraction to be complete"
         
         #Remove unwanted files
-        echo "Started removing files at $(date "+%T.%6N")"
+        echo "Started removing unwated files at $(date "+%T.%6N")"
         echo $SudoPassword | sudo -S chmod 777 -R Experiment_Iteration_$experimentIteration
         cd Experiment_Iteration_$experimentIteration/$treatment/powerapi
-        echo $SudoPassword | sudo -S rm -rf .local .cache
-        cd ..; cd ..; cd ..;
-        echo "Finished removing files at $(date "+%T.%6N")"
-
+        echo $SudoPassword | sudo -S rm -rf .local .cache > /dev/null 2>&1 &
         sleep $LogsExtractionTimeout
+        cd ..; cd ..; cd ..;
+        echo "Finished removing unwated files at $(date "+%T.%6N")"
+
 
         treatmentStopTime=$(date "+%T.%6N")
         echo "Stopped $treatment at $treatmentStopTime"

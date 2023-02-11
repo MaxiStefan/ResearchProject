@@ -129,5 +129,3 @@ do
 
     done
 done
-
-sh ./clean-files.sh

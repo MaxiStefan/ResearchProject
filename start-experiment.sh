@@ -74,17 +74,21 @@ do
         echo $SudoPassword | sudo -S docker cp smartwatts-power-api-smartwatts-1:/opt/powerapi $(pwd)/Experiment_Iteration_$experimentIteration/$treatment
 
         echo "Waiting for the extraction to be complete"
+        
+        #Remove unwanted files
+        echo "Started removing files at $(date "+%T.%6N")"
+        echo $SudoPassword | sudo -S chmod 777 -R Experiment_Iteration_$experimentIteration
+        cd Experiment_Iteration_$experimentIteration/$treatment/powerapi
+        echo $SudoPassword | sudo -S rm -rf .local .cache
+        cd ..; cd ..; cd ..;
+        echo "Finished removing files at $(date "+%T.%6N")"
+
         sleep $LogsExtractionTimeout
 
         treatmentStopTime=$(date "+%T.%6N")
         echo "Stopped $treatment at $treatmentStopTime"
         echo "$experimentIteration,$treatment,$treatmentStartTime,$treatmentStopTime" >> experiment_log.csv
         
-        #Remove unwanted files
-        echo $SudoPassword | sudo -S chmod 777 -R Experiment_Iteration_$experimentIteration
-        cd Experiment_Iteration_$experimentIteration/$treatment/powerapi
-        echo $SudoPassword | sudo -S rm -rf .local .cache
-        cd ..; cd ..; cd ..;
 
         echo "Bringing system down"
         #Bring system down

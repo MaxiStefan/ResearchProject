@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "yyM0b+dUEdvohW8QCLdU/jcgSc0iErbiuSwH1vuIgMZjeVTPv6vp+xf9niiWMAK7VH4w5ErwTV8ZVJCyz1jkTA==",
+  "success": true,
+  "projectFilePath": "C:\\scul\\ResearchProject\\BubbleSort\\BubbleSort.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\MaximilianFloroiu\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.15.1\\microsoft.visualstudio.azure.containers.tools.targets.1.15.1.nupkg.sha512"
+  ],
+  "logs": []
+}

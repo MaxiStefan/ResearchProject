@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "LZft85BQ0/iqErCdUq7XbxMrbguLuVWHJUFJPnVcWWRTrFOKFcYiJoMaus3urvMDmTRuJLsXYJ6QTwQzz5rijw==",
+  "success": true,
+  "projectFilePath": "C:\\scul\\ResearchProject\\MatrixMultiplication\\MatrixMultiplication.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\MaximilianFloroiu\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.15.1\\microsoft.visualstudio.azure.containers.tools.targets.1.15.1.nupkg.sha512",
+    "C:\\Users\\MaximilianFloroiu\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
+    "C:\\Users\\MaximilianFloroiu\\.nuget\\packages\\system.drawing.common\\7.0.0\\system.drawing.common.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

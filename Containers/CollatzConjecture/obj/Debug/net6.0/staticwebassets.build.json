@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "3+cyNcjQ2MVNC3tSGuBfTH4EfIJ5oz53FC2K4B8/Y1g=",
+  "Source": "CollatzConjecture",
+  "BasePath": "_content/CollatzConjecture",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

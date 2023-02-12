@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "CL9DTSLp6pvl0H4M159WTJQpYfTlSz4i33OCtTXakxaPpCEjj8UevukfFdxjFGkJkrpC2Onu87OOScVoFGUx8Q==",
+  "success": true,
+  "projectFilePath": "C:\\scul\\ResearchProject\\FibonacciSeq\\FibonacciSeq.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\MaximilianFloroiu\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.15.1\\microsoft.visualstudio.azure.containers.tools.targets.1.15.1.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -4,7 +4,7 @@ TreatmentTimeout=$(($(head -n 2 ./Containers/.env | tail -1 | cut -d '=' -f 2) *
 LogsExtractionTimeout=$(head -n 3 ./Containers/.env | tail -1 | cut -d '=' -f 2)
 ServiceStartTimeout=$(head -n 4 ./Containers/.env | tail -1 | cut -d '=' -f 2)
 SudoPassword=$(echo $(head -n 5 ./Containers/.env | tail -1 | cut -d '=' -f 2))
-ResidualLoggingTime=18000
+ResidualLoggingTime=10000
 TreatmentCount=5
 ExperimentIterations=10
 LoggerDuration=$(( ($TreatmentTaskDuration + $TreatmentTimeout + $LogsExtractionTimeout + $LogsExtractionTimeout + $ServiceStartTimeout ) * $TreatmentCount * $ExperimentIterations + $ResidualLoggingTime ))

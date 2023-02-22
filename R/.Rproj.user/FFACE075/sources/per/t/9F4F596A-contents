@@ -1,0 +1,3285 @@
+install.packages('dplyr')
+install.packages('tidyverse')
+install.packages('readr')
+install.packages('pracma') # trapezoid
+install.packages('anytime') #time processing
+install.packages("lubridate") #time processig
+install.packages('ggplot2')
+library(dplyr)
+library(readr)
+library(tidyverse)
+library(pracma)
+library(anytime)
+library(lubridate) #time processig
+library(ggplot2)
+
+bubble_cycle1_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_1/BUBBLE_COLLATZ/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle2_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_2/BUBBLE_COLLATZ/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle3_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_3/BUBBLE_COLLATZ/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle4_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_4/BUBBLE_COLLATZ/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle5_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_5/BUBBLE_COLLATZ/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle6_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_6/BUBBLE_COLLATZ/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle7_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_7/BUBBLE_COLLATZ/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle8_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_8/BUBBLE_COLLATZ/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle9_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_9/BUBBLE_COLLATZ/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle10_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_10/BUBBLE_COLLATZ/powerapi/sensor-bubblesort/PowerReport.csv"
+
+fibo_cycle1_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_1/BUBBLE_COLLATZ/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle2_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_2/BUBBLE_COLLATZ/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle3_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_3/BUBBLE_COLLATZ/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle4_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_4/BUBBLE_COLLATZ/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle5_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_5/BUBBLE_COLLATZ/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle6_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_6/BUBBLE_COLLATZ/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle7_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_7/BUBBLE_COLLATZ/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle8_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_8/BUBBLE_COLLATZ/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle9_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_9/BUBBLE_COLLATZ/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle10_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_10/BUBBLE_COLLATZ/powerapi/sensor-fibonacci/PowerReport.csv"
+
+matrix_cycle1_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_1/BUBBLE_COLLATZ/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle2_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_2/BUBBLE_COLLATZ/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle3_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_3/BUBBLE_COLLATZ/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle4_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_4/BUBBLE_COLLATZ/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle5_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_5/BUBBLE_COLLATZ/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle6_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_6/BUBBLE_COLLATZ/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle7_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_7/BUBBLE_COLLATZ/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle8_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_8/BUBBLE_COLLATZ/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle9_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_9/BUBBLE_COLLATZ/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle10_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_10/BUBBLE_COLLATZ/powerapi/sensor-matrix/PowerReport.csv"
+
+collatz_cycle1_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_1/BUBBLE_COLLATZ/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle2_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_2/BUBBLE_COLLATZ/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle3_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_3/BUBBLE_COLLATZ/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle4_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_4/BUBBLE_COLLATZ/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle5_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_5/BUBBLE_COLLATZ/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle6_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_6/BUBBLE_COLLATZ/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle7_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_7/BUBBLE_COLLATZ/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle8_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_8/BUBBLE_COLLATZ/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle9_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_9/BUBBLE_COLLATZ/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle10_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_10/BUBBLE_COLLATZ/powerapi/sensor-collatz/PowerReport.csv"
+
+rapl_cycle1_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_1/BUBBLE_COLLATZ/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle2_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_2/BUBBLE_COLLATZ/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle3_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_3/BUBBLE_COLLATZ/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle4_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_4/BUBBLE_COLLATZ/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle5_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_5/BUBBLE_COLLATZ/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle6_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_6/BUBBLE_COLLATZ/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle7_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_7/BUBBLE_COLLATZ/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle8_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_8/BUBBLE_COLLATZ/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle9_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_9/BUBBLE_COLLATZ/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle10_BUBBLE_COLLATZ_treatment <- "/Experiment_Iteration_10/BUBBLE_COLLATZ/powerapi/sensor-rapl/PowerReport.csv"
+#FIBO_MATRIX treatment (10values)
+fibo_cycle1_FIBO_MATRIX_treatment <- "/Experiment_Iteration_1/FIBO_MATRIX/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle2_FIBO_MATRIX_treatment <- "/Experiment_Iteration_2/FIBO_MATRIX/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle3_FIBO_MATRIX_treatment <- "/Experiment_Iteration_3/FIBO_MATRIX/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle4_FIBO_MATRIX_treatment <- "/Experiment_Iteration_4/FIBO_MATRIX/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle5_FIBO_MATRIX_treatment <- "/Experiment_Iteration_5/FIBO_MATRIX/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle6_FIBO_MATRIX_treatment <- "/Experiment_Iteration_6/FIBO_MATRIX/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle7_FIBO_MATRIX_treatment <- "/Experiment_Iteration_7/FIBO_MATRIX/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle8_FIBO_MATRIX_treatment <- "/Experiment_Iteration_8/FIBO_MATRIX/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle9_FIBO_MATRIX_treatment <- "/Experiment_Iteration_9/FIBO_MATRIX/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle10_FIBO_MATRIX_treatment <- "/Experiment_Iteration_10/FIBO_MATRIX/powerapi/sensor-fibonacci/PowerReport.csv"
+
+bubble_cycle1_FIBO_MATRIX_treatment <- "/Experiment_Iteration_1/FIBO_MATRIX/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle2_FIBO_MATRIX_treatment <- "/Experiment_Iteration_2/FIBO_MATRIX/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle3_FIBO_MATRIX_treatment <- "/Experiment_Iteration_3/FIBO_MATRIX/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle4_FIBO_MATRIX_treatment <- "/Experiment_Iteration_4/FIBO_MATRIX/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle5_FIBO_MATRIX_treatment <- "/Experiment_Iteration_5/FIBO_MATRIX/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle6_FIBO_MATRIX_treatment <- "/Experiment_Iteration_6/FIBO_MATRIX/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle7_FIBO_MATRIX_treatment <- "/Experiment_Iteration_7/FIBO_MATRIX/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle8_FIBO_MATRIX_treatment <- "/Experiment_Iteration_8/FIBO_MATRIX/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle9_FIBO_MATRIX_treatment <- "/Experiment_Iteration_9/FIBO_MATRIX/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle10_FIBO_MATRIX_treatment <- "/Experiment_Iteration_10/FIBO_MATRIX/powerapi/sensor-bubblesort/PowerReport.csv"
+
+matrix_cycle1_FIBO_MATRIX_treatment <- "/Experiment_Iteration_1/FIBO_MATRIX/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle2_FIBO_MATRIX_treatment <- "/Experiment_Iteration_2/FIBO_MATRIX/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle3_FIBO_MATRIX_treatment <- "/Experiment_Iteration_3/FIBO_MATRIX/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle4_FIBO_MATRIX_treatment <- "/Experiment_Iteration_4/FIBO_MATRIX/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle5_FIBO_MATRIX_treatment <- "/Experiment_Iteration_5/FIBO_MATRIX/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle6_FIBO_MATRIX_treatment <- "/Experiment_Iteration_6/FIBO_MATRIX/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle7_FIBO_MATRIX_treatment <- "/Experiment_Iteration_7/FIBO_MATRIX/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle8_FIBO_MATRIX_treatment <- "/Experiment_Iteration_8/FIBO_MATRIX/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle9_FIBO_MATRIX_treatment <- "/Experiment_Iteration_9/FIBO_MATRIX/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle10_FIBO_MATRIX_treatment <- "/Experiment_Iteration_10/FIBO_MATRIX/powerapi/sensor-matrix/PowerReport.csv"
+
+collatz_cycle1_FIBO_MATRIX_treatment <- "/Experiment_Iteration_1/FIBO_MATRIX/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle2_FIBO_MATRIX_treatment <- "/Experiment_Iteration_2/FIBO_MATRIX/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle3_FIBO_MATRIX_treatment <- "/Experiment_Iteration_3/FIBO_MATRIX/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle4_FIBO_MATRIX_treatment <- "/Experiment_Iteration_4/FIBO_MATRIX/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle5_FIBO_MATRIX_treatment <- "/Experiment_Iteration_5/FIBO_MATRIX/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle6_FIBO_MATRIX_treatment <- "/Experiment_Iteration_6/FIBO_MATRIX/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle7_FIBO_MATRIX_treatment <- "/Experiment_Iteration_7/FIBO_MATRIX/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle8_FIBO_MATRIX_treatment <- "/Experiment_Iteration_8/FIBO_MATRIX/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle9_FIBO_MATRIX_treatment <- "/Experiment_Iteration_9/FIBO_MATRIX/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle10_FIBO_MATRIX_treatment <- "/Experiment_Iteration_10/FIBO_MATRIX/powerapi/sensor-collatz/PowerReport.csv"
+
+rapl_cycle1_FIBO_MATRIX_treatment <- "/Experiment_Iteration_1/FIBO_MATRIX/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle2_FIBO_MATRIX_treatment <- "/Experiment_Iteration_2/FIBO_MATRIX/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle3_FIBO_MATRIX_treatment <- "/Experiment_Iteration_3/FIBO_MATRIX/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle4_FIBO_MATRIX_treatment <- "/Experiment_Iteration_4/FIBO_MATRIX/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle5_FIBO_MATRIX_treatment <- "/Experiment_Iteration_5/FIBO_MATRIX/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle6_FIBO_MATRIX_treatment <- "/Experiment_Iteration_6/FIBO_MATRIX/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle7_FIBO_MATRIX_treatment <- "/Experiment_Iteration_7/FIBO_MATRIX/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle8_FIBO_MATRIX_treatment <- "/Experiment_Iteration_8/FIBO_MATRIX/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle9_FIBO_MATRIX_treatment <- "/Experiment_Iteration_9/FIBO_MATRIX/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle10_FIBO_MATRIX_treatment <- "/Experiment_Iteration_10/FIBO_MATRIX/powerapi/sensor-rapl/PowerReport.csv"
+#ALL treatment (10values)
+fibo_cycle1_ALL_treatment <- "/Experiment_Iteration_1/ALL/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle2_ALL_treatment <- "/Experiment_Iteration_2/ALL/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle3_ALL_treatment <- "/Experiment_Iteration_3/ALL/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle4_ALL_treatment <- "/Experiment_Iteration_4/ALL/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle5_ALL_treatment <- "/Experiment_Iteration_5/ALL/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle6_ALL_treatment <- "/Experiment_Iteration_6/ALL/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle7_ALL_treatment <- "/Experiment_Iteration_7/ALL/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle8_ALL_treatment <- "/Experiment_Iteration_8/ALL/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle9_ALL_treatment <- "/Experiment_Iteration_9/ALL/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle10_ALL_treatment <- "/Experiment_Iteration_10/ALL/powerapi/sensor-fibonacci/PowerReport.csv"
+
+bubble_cycle1_ALL_treatment <- "/Experiment_Iteration_1/ALL/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle2_ALL_treatment <- "/Experiment_Iteration_2/ALL/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle3_ALL_treatment <- "/Experiment_Iteration_3/ALL/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle4_ALL_treatment <- "/Experiment_Iteration_4/ALL/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle5_ALL_treatment <- "/Experiment_Iteration_5/ALL/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle6_ALL_treatment <- "/Experiment_Iteration_6/ALL/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle7_ALL_treatment <- "/Experiment_Iteration_7/ALL/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle8_ALL_treatment <- "/Experiment_Iteration_8/ALL/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle9_ALL_treatment <- "/Experiment_Iteration_9/ALL/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle10_ALL_treatment <- "/Experiment_Iteration_10/ALL/powerapi/sensor-bubblesort/PowerReport.csv"
+
+matrix_cycle1_ALL_treatment <- "/Experiment_Iteration_1/ALL/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle2_ALL_treatment <- "/Experiment_Iteration_2/ALL/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle3_ALL_treatment <- "/Experiment_Iteration_3/ALL/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle4_ALL_treatment <- "/Experiment_Iteration_4/ALL/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle5_ALL_treatment <- "/Experiment_Iteration_5/ALL/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle6_ALL_treatment <- "/Experiment_Iteration_6/ALL/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle7_ALL_treatment <- "/Experiment_Iteration_7/ALL/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle8_ALL_treatment <- "/Experiment_Iteration_8/ALL/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle9_ALL_treatment <- "/Experiment_Iteration_9/ALL/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle10_ALL_treatment <- "/Experiment_Iteration_10/ALL/powerapi/sensor-matrix/PowerReport.csv"
+
+collatz_cycle1_ALL_treatment <- "/Experiment_Iteration_1/ALL/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle2_ALL_treatment <- "/Experiment_Iteration_2/ALL/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle3_ALL_treatment <- "/Experiment_Iteration_3/ALL/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle4_ALL_treatment <- "/Experiment_Iteration_4/ALL/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle5_ALL_treatment <- "/Experiment_Iteration_5/ALL/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle6_ALL_treatment <- "/Experiment_Iteration_6/ALL/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle7_ALL_treatment <- "/Experiment_Iteration_7/ALL/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle8_ALL_treatment <- "/Experiment_Iteration_8/ALL/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle9_ALL_treatment <- "/Experiment_Iteration_9/ALL/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle10_ALL_treatment <- "/Experiment_Iteration_10/ALL/powerapi/sensor-collatz/PowerReport.csv"
+
+rapl_cycle1_ALL_treatment <- "/Experiment_Iteration_1/ALL/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle2_ALL_treatment <- "/Experiment_Iteration_2/ALL/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle3_ALL_treatment <- "/Experiment_Iteration_3/ALL/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle4_ALL_treatment <- "/Experiment_Iteration_4/ALL/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle5_ALL_treatment <- "/Experiment_Iteration_5/ALL/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle6_ALL_treatment <- "/Experiment_Iteration_6/ALL/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle7_ALL_treatment <- "/Experiment_Iteration_7/ALL/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle8_ALL_treatment <- "/Experiment_Iteration_8/ALL/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle9_ALL_treatment <- "/Experiment_Iteration_9/ALL/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle10_ALL_treatment <- "/Experiment_Iteration_10/ALL/powerapi/sensor-rapl/PowerReport.csv"
+#UP_IDLE treatment (10values)
+fibo_cycle1_UP_IDLE_treatment <- "/Experiment_Iteration_1/UP_IDLE/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle2_UP_IDLE_treatment <- "/Experiment_Iteration_2/UP_IDLE/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle3_UP_IDLE_treatment <- "/Experiment_Iteration_3/UP_IDLE/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle4_UP_IDLE_treatment <- "/Experiment_Iteration_4/UP_IDLE/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle5_UP_IDLE_treatment <- "/Experiment_Iteration_5/UP_IDLE/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle6_UP_IDLE_treatment <- "/Experiment_Iteration_6/UP_IDLE/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle7_UP_IDLE_treatment <- "/Experiment_Iteration_7/UP_IDLE/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle8_UP_IDLE_treatment <- "/Experiment_Iteration_8/UP_IDLE/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle9_UP_IDLE_treatment <- "/Experiment_Iteration_9/UP_IDLE/powerapi/sensor-fibonacci/PowerReport.csv"
+fibo_cycle10_UP_IDLE_treatment <- "/Experiment_Iteration_10/UP_IDLE/powerapi/sensor-fibonacci/PowerReport.csv"
+
+bubble_cycle1_UP_IDLE_treatment <- "/Experiment_Iteration_1/UP_IDLE/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle2_UP_IDLE_treatment <- "/Experiment_Iteration_2/UP_IDLE/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle3_UP_IDLE_treatment <- "/Experiment_Iteration_3/UP_IDLE/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle4_UP_IDLE_treatment <- "/Experiment_Iteration_4/UP_IDLE/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle5_UP_IDLE_treatment <- "/Experiment_Iteration_5/UP_IDLE/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle6_UP_IDLE_treatment <- "/Experiment_Iteration_6/UP_IDLE/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle7_UP_IDLE_treatment <- "/Experiment_Iteration_7/UP_IDLE/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle8_UP_IDLE_treatment <- "/Experiment_Iteration_8/UP_IDLE/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle9_UP_IDLE_treatment <- "/Experiment_Iteration_9/UP_IDLE/powerapi/sensor-bubblesort/PowerReport.csv"
+bubble_cycle10_UP_IDLE_treatment <- "/Experiment_Iteration_10/UP_IDLE/powerapi/sensor-bubblesort/PowerReport.csv"
+
+matrix_cycle1_UP_IDLE_treatment <- "/Experiment_Iteration_1/UP_IDLE/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle2_UP_IDLE_treatment <- "/Experiment_Iteration_2/UP_IDLE/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle3_UP_IDLE_treatment <- "/Experiment_Iteration_3/UP_IDLE/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle4_UP_IDLE_treatment <- "/Experiment_Iteration_4/UP_IDLE/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle5_UP_IDLE_treatment <- "/Experiment_Iteration_5/UP_IDLE/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle6_UP_IDLE_treatment <- "/Experiment_Iteration_6/UP_IDLE/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle7_UP_IDLE_treatment <- "/Experiment_Iteration_7/UP_IDLE/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle8_UP_IDLE_treatment <- "/Experiment_Iteration_8/UP_IDLE/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle9_UP_IDLE_treatment <- "/Experiment_Iteration_9/UP_IDLE/powerapi/sensor-matrix/PowerReport.csv"
+matrix_cycle10_UP_IDLE_treatment <- "/Experiment_Iteration_10/UP_IDLE/powerapi/sensor-matrix/PowerReport.csv"
+
+collatz_cycle1_UP_IDLE_treatment <- "/Experiment_Iteration_1/UP_IDLE/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle2_UP_IDLE_treatment <- "/Experiment_Iteration_2/UP_IDLE/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle3_UP_IDLE_treatment <- "/Experiment_Iteration_3/UP_IDLE/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle4_UP_IDLE_treatment <- "/Experiment_Iteration_4/UP_IDLE/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle5_UP_IDLE_treatment <- "/Experiment_Iteration_5/UP_IDLE/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle6_UP_IDLE_treatment <- "/Experiment_Iteration_6/UP_IDLE/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle7_UP_IDLE_treatment <- "/Experiment_Iteration_7/UP_IDLE/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle8_UP_IDLE_treatment <- "/Experiment_Iteration_8/UP_IDLE/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle9_UP_IDLE_treatment <- "/Experiment_Iteration_9/UP_IDLE/powerapi/sensor-collatz/PowerReport.csv"
+collatz_cycle10_UP_IDLE_treatment <- "/Experiment_Iteration_10/UP_IDLE/powerapi/sensor-collatz/PowerReport.csv"
+
+rapl_cycle1_UP_IDLE_treatment <- "/Experiment_Iteration_1/UP_IDLE/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle2_UP_IDLE_treatment <- "/Experiment_Iteration_2/UP_IDLE/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle3_UP_IDLE_treatment <- "/Experiment_Iteration_3/UP_IDLE/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle4_UP_IDLE_treatment <- "/Experiment_Iteration_4/UP_IDLE/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle5_UP_IDLE_treatment <- "/Experiment_Iteration_5/UP_IDLE/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle6_UP_IDLE_treatment <- "/Experiment_Iteration_6/UP_IDLE/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle7_UP_IDLE_treatment <- "/Experiment_Iteration_7/UP_IDLE/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle8_UP_IDLE_treatment <- "/Experiment_Iteration_8/UP_IDLE/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle9_UP_IDLE_treatment <- "/Experiment_Iteration_9/UP_IDLE/powerapi/sensor-rapl/PowerReport.csv"
+rapl_cycle10_UP_IDLE_treatment <- "/Experiment_Iteration_10/UP_IDLE/powerapi/sensor-rapl/PowerReport.csv"
+main_dir <- getwd()
+
+#Create paths, dataframes and the trapezoid value for each iteration of each treatment
+#Bubble_Collatz
+
+bubble_cycle1_BUBBLE_COLLATZ_paths <- paste(main_dir, bubble_cycle1_BUBBLE_COLLATZ_treatment, sep="")
+bubble_cycle1_BUBBLE_COLLATZ_data <- read.csv(bubble_cycle1_BUBBLE_COLLATZ_paths, header=T)
+bubble_cycle1_BUBBLE_COLLATZ_data$id <- 1:nrow(bubble_cycle1_BUBBLE_COLLATZ_data)
+bubble_cycle1_BUBBLE_COLLATZ_data$time <- anytime(bubble_cycle1_BUBBLE_COLLATZ_data$timestamp / 1000)
+bubble_cycle1_BUBBLE_COLLATZ_data <- bubble_cycle1_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle1_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle1_BUBBLE_COLLATZ_data[1, 'time']), 0))
+bubble_cycle1_BUBBLE_COLLATZ_trapezoid_val <- trapz(bubble_cycle1_BUBBLE_COLLATZ_data$id, bubble_cycle1_BUBBLE_COLLATZ_data$power)
+
+bubble_cycle2_BUBBLE_COLLATZ_paths <- paste(main_dir, bubble_cycle2_BUBBLE_COLLATZ_treatment, sep="")
+bubble_cycle2_BUBBLE_COLLATZ_data <- read.csv(bubble_cycle2_BUBBLE_COLLATZ_paths, header=T)
+bubble_cycle2_BUBBLE_COLLATZ_data$id <- 1:nrow(bubble_cycle2_BUBBLE_COLLATZ_data)
+bubble_cycle2_BUBBLE_COLLATZ_data$time <- anytime(bubble_cycle2_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+bubble_cycle2_BUBBLE_COLLATZ_data <- bubble_cycle2_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle2_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle2_BUBBLE_COLLATZ_data[1, 'time']), 0))
+bubble_cycle2_BUBBLE_COLLATZ_trapezoid_val <- trapz(bubble_cycle2_BUBBLE_COLLATZ_data$id, bubble_cycle2_BUBBLE_COLLATZ_data$power) 
+
+bubble_cycle3_BUBBLE_COLLATZ_paths <- paste(main_dir, bubble_cycle3_BUBBLE_COLLATZ_treatment, sep="")
+bubble_cycle3_BUBBLE_COLLATZ_data <- read.csv(bubble_cycle3_BUBBLE_COLLATZ_paths, header=T)
+bubble_cycle3_BUBBLE_COLLATZ_data$id <- 1:nrow(bubble_cycle3_BUBBLE_COLLATZ_data)
+bubble_cycle3_BUBBLE_COLLATZ_data$time <- anytime(bubble_cycle3_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+bubble_cycle3_BUBBLE_COLLATZ_data <- bubble_cycle3_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle3_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle3_BUBBLE_COLLATZ_data[1, 'time']), 0))
+bubble_cycle3_BUBBLE_COLLATZ_trapezoid_val <- trapz(bubble_cycle3_BUBBLE_COLLATZ_data$id, bubble_cycle3_BUBBLE_COLLATZ_data$power) 
+
+bubble_cycle4_BUBBLE_COLLATZ_paths <- paste(main_dir, bubble_cycle4_BUBBLE_COLLATZ_treatment, sep="")
+bubble_cycle4_BUBBLE_COLLATZ_data <- read.csv(bubble_cycle4_BUBBLE_COLLATZ_paths, header=T)
+bubble_cycle4_BUBBLE_COLLATZ_data$id <- 1:nrow(bubble_cycle4_BUBBLE_COLLATZ_data)
+bubble_cycle4_BUBBLE_COLLATZ_data$time <- anytime(bubble_cycle4_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+bubble_cycle4_BUBBLE_COLLATZ_data <- bubble_cycle4_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle4_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle4_BUBBLE_COLLATZ_data[1, 'time']), 0))
+bubble_cycle4_BUBBLE_COLLATZ_trapezoid_val <- trapz(bubble_cycle4_BUBBLE_COLLATZ_data$id, bubble_cycle4_BUBBLE_COLLATZ_data$power) 
+
+bubble_cycle5_BUBBLE_COLLATZ_paths <- paste(main_dir, bubble_cycle5_BUBBLE_COLLATZ_treatment, sep="")
+bubble_cycle5_BUBBLE_COLLATZ_data <- read.csv(bubble_cycle5_BUBBLE_COLLATZ_paths, header=T)
+bubble_cycle5_BUBBLE_COLLATZ_data$id <- 1:nrow(bubble_cycle5_BUBBLE_COLLATZ_data)
+bubble_cycle5_BUBBLE_COLLATZ_data$time <- anytime(bubble_cycle5_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+bubble_cycle5_BUBBLE_COLLATZ_data <- bubble_cycle5_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle5_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle5_BUBBLE_COLLATZ_data[1, 'time']), 0))
+bubble_cycle5_BUBBLE_COLLATZ_trapezoid_val <- trapz(bubble_cycle5_BUBBLE_COLLATZ_data$id, bubble_cycle5_BUBBLE_COLLATZ_data$power) 
+
+bubble_cycle6_BUBBLE_COLLATZ_paths <- paste(main_dir, bubble_cycle6_BUBBLE_COLLATZ_treatment, sep="")
+bubble_cycle6_BUBBLE_COLLATZ_data <- read.csv(bubble_cycle6_BUBBLE_COLLATZ_paths, header=T)
+bubble_cycle6_BUBBLE_COLLATZ_data$id <- 1:nrow(bubble_cycle6_BUBBLE_COLLATZ_data)
+bubble_cycle6_BUBBLE_COLLATZ_data$time <- anytime(bubble_cycle6_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+bubble_cycle6_BUBBLE_COLLATZ_data <- bubble_cycle6_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle6_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle6_BUBBLE_COLLATZ_data[1, 'time']), 0))
+bubble_cycle6_BUBBLE_COLLATZ_trapezoid_val <- trapz(bubble_cycle6_BUBBLE_COLLATZ_data$id, bubble_cycle6_BUBBLE_COLLATZ_data$power) 
+
+bubble_cycle7_BUBBLE_COLLATZ_paths <- paste(main_dir, bubble_cycle7_BUBBLE_COLLATZ_treatment, sep="")
+bubble_cycle7_BUBBLE_COLLATZ_data <- read.csv(bubble_cycle7_BUBBLE_COLLATZ_paths, header=T)
+bubble_cycle7_BUBBLE_COLLATZ_data$id <- 1:nrow(bubble_cycle7_BUBBLE_COLLATZ_data)
+bubble_cycle7_BUBBLE_COLLATZ_data$time <- anytime(bubble_cycle7_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+bubble_cycle7_BUBBLE_COLLATZ_data <- bubble_cycle7_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle7_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle7_BUBBLE_COLLATZ_data[1, 'time']), 0))
+bubble_cycle7_BUBBLE_COLLATZ_trapezoid_val <- trapz(bubble_cycle7_BUBBLE_COLLATZ_data$id, bubble_cycle7_BUBBLE_COLLATZ_data$power) 
+
+bubble_cycle8_BUBBLE_COLLATZ_paths <- paste(main_dir, bubble_cycle8_BUBBLE_COLLATZ_treatment, sep="")
+bubble_cycle8_BUBBLE_COLLATZ_data <- read.csv(bubble_cycle8_BUBBLE_COLLATZ_paths, header=T)
+bubble_cycle8_BUBBLE_COLLATZ_data$id <- 1:nrow(bubble_cycle8_BUBBLE_COLLATZ_data)
+bubble_cycle8_BUBBLE_COLLATZ_data$time <- anytime(bubble_cycle8_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+bubble_cycle8_BUBBLE_COLLATZ_data <- bubble_cycle8_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle8_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle8_BUBBLE_COLLATZ_data[1, 'time']), 0))
+bubble_cycle8_BUBBLE_COLLATZ_trapezoid_val <- trapz(bubble_cycle8_BUBBLE_COLLATZ_data$id, bubble_cycle8_BUBBLE_COLLATZ_data$power) 
+
+bubble_cycle9_BUBBLE_COLLATZ_paths <- paste(main_dir, bubble_cycle9_BUBBLE_COLLATZ_treatment, sep="")
+bubble_cycle9_BUBBLE_COLLATZ_data <- read.csv(bubble_cycle9_BUBBLE_COLLATZ_paths, header=T)
+bubble_cycle9_BUBBLE_COLLATZ_data$id <- 1:nrow(bubble_cycle9_BUBBLE_COLLATZ_data)
+bubble_cycle9_BUBBLE_COLLATZ_data$time <- anytime(bubble_cycle9_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+bubble_cycle9_BUBBLE_COLLATZ_data <- bubble_cycle9_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle9_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle9_BUBBLE_COLLATZ_data[1, 'time']), 0))
+bubble_cycle9_BUBBLE_COLLATZ_trapezoid_val <- trapz(bubble_cycle9_BUBBLE_COLLATZ_data$id, bubble_cycle9_BUBBLE_COLLATZ_data$power) 
+
+bubble_cycle10_BUBBLE_COLLATZ_paths <- paste(main_dir, bubble_cycle10_BUBBLE_COLLATZ_treatment, sep="")
+bubble_cycle10_BUBBLE_COLLATZ_data <- read.csv(bubble_cycle10_BUBBLE_COLLATZ_paths, header=T)
+bubble_cycle10_BUBBLE_COLLATZ_data$id <- 1:nrow(bubble_cycle10_BUBBLE_COLLATZ_data)
+bubble_cycle10_BUBBLE_COLLATZ_data$time <- anytime(bubble_cycle10_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+bubble_cycle10_BUBBLE_COLLATZ_data <- bubble_cycle10_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle10_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle10_BUBBLE_COLLATZ_data[1, 'time']), 0))
+bubble_cycle10_BUBBLE_COLLATZ_trapezoid_val <- trapz(bubble_cycle10_BUBBLE_COLLATZ_data$id, bubble_cycle10_BUBBLE_COLLATZ_data$power) 
+
+
+fibo_cycle1_BUBBLE_COLLATZ_paths <- paste(main_dir, fibo_cycle1_BUBBLE_COLLATZ_treatment, sep="")
+fibo_cycle1_BUBBLE_COLLATZ_data <- read.csv(fibo_cycle1_BUBBLE_COLLATZ_paths, header=T)
+fibo_cycle1_BUBBLE_COLLATZ_data$id <- 1:nrow(fibo_cycle1_BUBBLE_COLLATZ_data)
+fibo_cycle1_BUBBLE_COLLATZ_data$time <- anytime(fibo_cycle1_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+fibo_cycle1_BUBBLE_COLLATZ_data <- fibo_cycle1_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle1_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle1_BUBBLE_COLLATZ_data[1, 'time']), 0))
+fibo_cycle1_BUBBLE_COLLATZ_trapezoid_val <- trapz(fibo_cycle1_BUBBLE_COLLATZ_data$id, fibo_cycle1_BUBBLE_COLLATZ_data$power) 
+
+fibo_cycle2_BUBBLE_COLLATZ_paths <- paste(main_dir, fibo_cycle2_BUBBLE_COLLATZ_treatment, sep="")
+fibo_cycle2_BUBBLE_COLLATZ_data <- read.csv(fibo_cycle2_BUBBLE_COLLATZ_paths, header=T)
+fibo_cycle2_BUBBLE_COLLATZ_data$id <- 1:nrow(fibo_cycle2_BUBBLE_COLLATZ_data)
+fibo_cycle2_BUBBLE_COLLATZ_data$time <- anytime(fibo_cycle2_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+fibo_cycle2_BUBBLE_COLLATZ_data <- fibo_cycle2_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle2_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle2_BUBBLE_COLLATZ_data[1, 'time']), 0))
+fibo_cycle2_BUBBLE_COLLATZ_trapezoid_val <- trapz(fibo_cycle2_BUBBLE_COLLATZ_data$id, fibo_cycle2_BUBBLE_COLLATZ_data$power) 
+
+fibo_cycle3_BUBBLE_COLLATZ_paths <- paste(main_dir, fibo_cycle3_BUBBLE_COLLATZ_treatment, sep="")
+fibo_cycle3_BUBBLE_COLLATZ_data <- read.csv(fibo_cycle3_BUBBLE_COLLATZ_paths, header=T)
+fibo_cycle3_BUBBLE_COLLATZ_data$id <- 1:nrow(fibo_cycle3_BUBBLE_COLLATZ_data)
+fibo_cycle3_BUBBLE_COLLATZ_data$time <- anytime(fibo_cycle3_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+fibo_cycle3_BUBBLE_COLLATZ_data <- fibo_cycle3_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle3_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle3_BUBBLE_COLLATZ_data[1, 'time']), 0))
+fibo_cycle3_BUBBLE_COLLATZ_trapezoid_val <- trapz(fibo_cycle3_BUBBLE_COLLATZ_data$id, fibo_cycle3_BUBBLE_COLLATZ_data$power) 
+
+fibo_cycle4_BUBBLE_COLLATZ_paths <- paste(main_dir, fibo_cycle4_BUBBLE_COLLATZ_treatment, sep="")
+fibo_cycle4_BUBBLE_COLLATZ_data <- read.csv(fibo_cycle4_BUBBLE_COLLATZ_paths, header=T)
+fibo_cycle4_BUBBLE_COLLATZ_data$id <- 1:nrow(fibo_cycle4_BUBBLE_COLLATZ_data)
+fibo_cycle4_BUBBLE_COLLATZ_data$time <- anytime(fibo_cycle4_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+fibo_cycle4_BUBBLE_COLLATZ_data <- fibo_cycle4_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle4_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle4_BUBBLE_COLLATZ_data[1, 'time']), 0))
+fibo_cycle4_BUBBLE_COLLATZ_trapezoid_val <- trapz(fibo_cycle4_BUBBLE_COLLATZ_data$id, fibo_cycle4_BUBBLE_COLLATZ_data$power) 
+
+fibo_cycle5_BUBBLE_COLLATZ_paths <- paste(main_dir, fibo_cycle5_BUBBLE_COLLATZ_treatment, sep="")
+fibo_cycle5_BUBBLE_COLLATZ_data <- read.csv(fibo_cycle5_BUBBLE_COLLATZ_paths, header=T)
+fibo_cycle5_BUBBLE_COLLATZ_data$id <- 1:nrow(fibo_cycle5_BUBBLE_COLLATZ_data)
+fibo_cycle5_BUBBLE_COLLATZ_data$time <- anytime(fibo_cycle5_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+fibo_cycle5_BUBBLE_COLLATZ_data <- fibo_cycle5_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle5_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle5_BUBBLE_COLLATZ_data[1, 'time']), 0))
+fibo_cycle5_BUBBLE_COLLATZ_trapezoid_val <- trapz(fibo_cycle5_BUBBLE_COLLATZ_data$id, fibo_cycle5_BUBBLE_COLLATZ_data$power) 
+
+fibo_cycle6_BUBBLE_COLLATZ_paths <- paste(main_dir, fibo_cycle6_BUBBLE_COLLATZ_treatment, sep="")
+fibo_cycle6_BUBBLE_COLLATZ_data <- read.csv(fibo_cycle6_BUBBLE_COLLATZ_paths, header=T)
+fibo_cycle6_BUBBLE_COLLATZ_data$id <- 1:nrow(fibo_cycle6_BUBBLE_COLLATZ_data)
+fibo_cycle6_BUBBLE_COLLATZ_data$time <- anytime(fibo_cycle6_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+fibo_cycle6_BUBBLE_COLLATZ_data <- fibo_cycle6_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle6_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle6_BUBBLE_COLLATZ_data[1, 'time']), 0))
+fibo_cycle6_BUBBLE_COLLATZ_trapezoid_val <- trapz(fibo_cycle6_BUBBLE_COLLATZ_data$id, fibo_cycle6_BUBBLE_COLLATZ_data$power) 
+
+fibo_cycle7_BUBBLE_COLLATZ_paths <- paste(main_dir, fibo_cycle7_BUBBLE_COLLATZ_treatment, sep="")
+fibo_cycle7_BUBBLE_COLLATZ_data <- read.csv(fibo_cycle7_BUBBLE_COLLATZ_paths, header=T)
+fibo_cycle7_BUBBLE_COLLATZ_data$id <- 1:nrow(fibo_cycle7_BUBBLE_COLLATZ_data)
+fibo_cycle7_BUBBLE_COLLATZ_data$time <- anytime(fibo_cycle7_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+fibo_cycle7_BUBBLE_COLLATZ_data <- fibo_cycle7_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle7_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle7_BUBBLE_COLLATZ_data[1, 'time']), 0))
+fibo_cycle7_BUBBLE_COLLATZ_trapezoid_val <- trapz(fibo_cycle7_BUBBLE_COLLATZ_data$id, fibo_cycle7_BUBBLE_COLLATZ_data$power) 
+
+fibo_cycle8_BUBBLE_COLLATZ_paths <- paste(main_dir, fibo_cycle8_BUBBLE_COLLATZ_treatment, sep="")
+fibo_cycle8_BUBBLE_COLLATZ_data <- read.csv(fibo_cycle8_BUBBLE_COLLATZ_paths, header=T)
+fibo_cycle8_BUBBLE_COLLATZ_data$id <- 1:nrow(fibo_cycle8_BUBBLE_COLLATZ_data)
+fibo_cycle8_BUBBLE_COLLATZ_data$time <- anytime(fibo_cycle8_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+fibo_cycle8_BUBBLE_COLLATZ_data <- fibo_cycle8_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle8_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle8_BUBBLE_COLLATZ_data[1, 'time']), 0))
+fibo_cycle8_BUBBLE_COLLATZ_trapezoid_val <- trapz(fibo_cycle8_BUBBLE_COLLATZ_data$id, fibo_cycle8_BUBBLE_COLLATZ_data$power) 
+
+fibo_cycle9_BUBBLE_COLLATZ_paths <- paste(main_dir, fibo_cycle9_BUBBLE_COLLATZ_treatment, sep="")
+fibo_cycle9_BUBBLE_COLLATZ_data <- read.csv(fibo_cycle9_BUBBLE_COLLATZ_paths, header=T)
+fibo_cycle9_BUBBLE_COLLATZ_data$id <- 1:nrow(fibo_cycle9_BUBBLE_COLLATZ_data)
+fibo_cycle9_BUBBLE_COLLATZ_data$time <- anytime(fibo_cycle9_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+fibo_cycle9_BUBBLE_COLLATZ_data <- fibo_cycle9_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle9_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle9_BUBBLE_COLLATZ_data[1, 'time']), 0))
+fibo_cycle9_BUBBLE_COLLATZ_trapezoid_val <- trapz(fibo_cycle9_BUBBLE_COLLATZ_data$id, fibo_cycle9_BUBBLE_COLLATZ_data$power) 
+
+fibo_cycle10_BUBBLE_COLLATZ_paths <- paste(main_dir, fibo_cycle10_BUBBLE_COLLATZ_treatment, sep="")
+fibo_cycle10_BUBBLE_COLLATZ_data <- read.csv(fibo_cycle10_BUBBLE_COLLATZ_paths, header=T)
+fibo_cycle10_BUBBLE_COLLATZ_data$id <- 1:nrow(fibo_cycle10_BUBBLE_COLLATZ_data)
+fibo_cycle10_BUBBLE_COLLATZ_data$time <- anytime(fibo_cycle10_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+fibo_cycle10_BUBBLE_COLLATZ_data <- fibo_cycle10_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle10_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle10_BUBBLE_COLLATZ_data[1, 'time']), 0))
+fibo_cycle10_BUBBLE_COLLATZ_trapezoid_val <- trapz(fibo_cycle10_BUBBLE_COLLATZ_data$id, fibo_cycle10_BUBBLE_COLLATZ_data$power) 
+
+
+matrix_cycle1_BUBBLE_COLLATZ_paths <- paste(main_dir, matrix_cycle1_BUBBLE_COLLATZ_treatment, sep="")
+matrix_cycle1_BUBBLE_COLLATZ_data <- read.csv(matrix_cycle1_BUBBLE_COLLATZ_paths, header=T)
+matrix_cycle1_BUBBLE_COLLATZ_data$id <- 1:nrow(matrix_cycle1_BUBBLE_COLLATZ_data)
+matrix_cycle1_BUBBLE_COLLATZ_data$time <- anytime(matrix_cycle1_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+matrix_cycle1_BUBBLE_COLLATZ_data <- matrix_cycle1_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle1_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle1_BUBBLE_COLLATZ_data[1, 'time']), 0))
+matrix_cycle1_BUBBLE_COLLATZ_trapezoid_val <- trapz(matrix_cycle1_BUBBLE_COLLATZ_data$id, matrix_cycle1_BUBBLE_COLLATZ_data$power) 
+
+matrix_cycle2_BUBBLE_COLLATZ_paths <- paste(main_dir, matrix_cycle2_BUBBLE_COLLATZ_treatment, sep="")
+matrix_cycle2_BUBBLE_COLLATZ_data <- read.csv(matrix_cycle2_BUBBLE_COLLATZ_paths, header=T)
+matrix_cycle2_BUBBLE_COLLATZ_data$id <- 1:nrow(matrix_cycle2_BUBBLE_COLLATZ_data)
+matrix_cycle2_BUBBLE_COLLATZ_data$time <- anytime(matrix_cycle2_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+matrix_cycle2_BUBBLE_COLLATZ_data <- matrix_cycle2_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle2_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle2_BUBBLE_COLLATZ_data[1, 'time']), 0))
+matrix_cycle2_BUBBLE_COLLATZ_trapezoid_val <- trapz(matrix_cycle2_BUBBLE_COLLATZ_data$id, matrix_cycle2_BUBBLE_COLLATZ_data$power) 
+
+matrix_cycle3_BUBBLE_COLLATZ_paths <- paste(main_dir, matrix_cycle3_BUBBLE_COLLATZ_treatment, sep="")
+matrix_cycle3_BUBBLE_COLLATZ_data <- read.csv(matrix_cycle3_BUBBLE_COLLATZ_paths, header=T)
+matrix_cycle3_BUBBLE_COLLATZ_data$id <- 1:nrow(matrix_cycle3_BUBBLE_COLLATZ_data)
+matrix_cycle3_BUBBLE_COLLATZ_data$time <- anytime(matrix_cycle3_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+matrix_cycle3_BUBBLE_COLLATZ_data <- matrix_cycle3_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle3_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle3_BUBBLE_COLLATZ_data[1, 'time']), 0))
+matrix_cycle3_BUBBLE_COLLATZ_trapezoid_val <- trapz(matrix_cycle3_BUBBLE_COLLATZ_data$id, matrix_cycle3_BUBBLE_COLLATZ_data$power) 
+
+matrix_cycle4_BUBBLE_COLLATZ_paths <- paste(main_dir, matrix_cycle4_BUBBLE_COLLATZ_treatment, sep="")
+matrix_cycle4_BUBBLE_COLLATZ_data <- read.csv(matrix_cycle4_BUBBLE_COLLATZ_paths, header=T)
+matrix_cycle4_BUBBLE_COLLATZ_data$id <- 1:nrow(matrix_cycle4_BUBBLE_COLLATZ_data)
+matrix_cycle4_BUBBLE_COLLATZ_data$time <- anytime(matrix_cycle4_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+matrix_cycle4_BUBBLE_COLLATZ_data <- matrix_cycle4_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle4_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle4_BUBBLE_COLLATZ_data[1, 'time']), 0))
+matrix_cycle4_BUBBLE_COLLATZ_trapezoid_val <- trapz(matrix_cycle4_BUBBLE_COLLATZ_data$id, matrix_cycle4_BUBBLE_COLLATZ_data$power) 
+
+matrix_cycle5_BUBBLE_COLLATZ_paths <- paste(main_dir, matrix_cycle5_BUBBLE_COLLATZ_treatment, sep="")
+matrix_cycle5_BUBBLE_COLLATZ_data <- read.csv(matrix_cycle5_BUBBLE_COLLATZ_paths, header=T)
+matrix_cycle5_BUBBLE_COLLATZ_data$id <- 1:nrow(matrix_cycle5_BUBBLE_COLLATZ_data)
+matrix_cycle5_BUBBLE_COLLATZ_data$time <- anytime(matrix_cycle5_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+matrix_cycle5_BUBBLE_COLLATZ_data <- matrix_cycle5_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle5_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle5_BUBBLE_COLLATZ_data[1, 'time']), 0))
+matrix_cycle5_BUBBLE_COLLATZ_trapezoid_val <- trapz(matrix_cycle5_BUBBLE_COLLATZ_data$id, matrix_cycle5_BUBBLE_COLLATZ_data$power) 
+
+matrix_cycle6_BUBBLE_COLLATZ_paths <- paste(main_dir, matrix_cycle6_BUBBLE_COLLATZ_treatment, sep="")
+matrix_cycle6_BUBBLE_COLLATZ_data <- read.csv(matrix_cycle6_BUBBLE_COLLATZ_paths, header=T)
+matrix_cycle6_BUBBLE_COLLATZ_data$id <- 1:nrow(matrix_cycle6_BUBBLE_COLLATZ_data)
+matrix_cycle6_BUBBLE_COLLATZ_data$time <- anytime(matrix_cycle6_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+matrix_cycle6_BUBBLE_COLLATZ_data <- matrix_cycle6_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle6_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle6_BUBBLE_COLLATZ_data[1, 'time']), 0))
+matrix_cycle6_BUBBLE_COLLATZ_trapezoid_val <- trapz(matrix_cycle6_BUBBLE_COLLATZ_data$id, matrix_cycle6_BUBBLE_COLLATZ_data$power) 
+
+matrix_cycle7_BUBBLE_COLLATZ_paths <- paste(main_dir, matrix_cycle7_BUBBLE_COLLATZ_treatment, sep="")
+matrix_cycle7_BUBBLE_COLLATZ_data <- read.csv(matrix_cycle7_BUBBLE_COLLATZ_paths, header=T)
+matrix_cycle7_BUBBLE_COLLATZ_data$id <- 1:nrow(matrix_cycle7_BUBBLE_COLLATZ_data)
+matrix_cycle7_BUBBLE_COLLATZ_data$time <- anytime(matrix_cycle7_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+matrix_cycle7_BUBBLE_COLLATZ_data <- matrix_cycle7_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle7_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle7_BUBBLE_COLLATZ_data[1, 'time']), 0))
+matrix_cycle7_BUBBLE_COLLATZ_trapezoid_val <- trapz(matrix_cycle7_BUBBLE_COLLATZ_data$id, matrix_cycle7_BUBBLE_COLLATZ_data$power) 
+
+matrix_cycle8_BUBBLE_COLLATZ_paths <- paste(main_dir, matrix_cycle8_BUBBLE_COLLATZ_treatment, sep="")
+matrix_cycle8_BUBBLE_COLLATZ_data <- read.csv(matrix_cycle8_BUBBLE_COLLATZ_paths, header=T)
+matrix_cycle8_BUBBLE_COLLATZ_data$id <- 1:nrow(matrix_cycle8_BUBBLE_COLLATZ_data)
+matrix_cycle8_BUBBLE_COLLATZ_data$time <- anytime(matrix_cycle8_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+matrix_cycle8_BUBBLE_COLLATZ_data <- matrix_cycle8_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle8_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle8_BUBBLE_COLLATZ_data[1, 'time']), 0))
+matrix_cycle8_BUBBLE_COLLATZ_trapezoid_val <- trapz(matrix_cycle8_BUBBLE_COLLATZ_data$id, matrix_cycle8_BUBBLE_COLLATZ_data$power) 
+
+matrix_cycle9_BUBBLE_COLLATZ_paths <- paste(main_dir, matrix_cycle9_BUBBLE_COLLATZ_treatment, sep="")
+matrix_cycle9_BUBBLE_COLLATZ_data <- read.csv(matrix_cycle9_BUBBLE_COLLATZ_paths, header=T)
+matrix_cycle9_BUBBLE_COLLATZ_data$id <- 1:nrow(matrix_cycle9_BUBBLE_COLLATZ_data)
+matrix_cycle9_BUBBLE_COLLATZ_data$time <- anytime(matrix_cycle9_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+matrix_cycle9_BUBBLE_COLLATZ_data <- matrix_cycle9_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle9_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle9_BUBBLE_COLLATZ_data[1, 'time']),))
+matrix_cycle9_BUBBLE_COLLATZ_trapezoid_val <- trapz(matrix_cycle9_BUBBLE_COLLATZ_data$id, matrix_cycle9_BUBBLE_COLLATZ_data$power) 
+
+matrix_cycle10_BUBBLE_COLLATZ_paths <- paste(main_dir, matrix_cycle10_BUBBLE_COLLATZ_treatment, sep="")
+matrix_cycle10_BUBBLE_COLLATZ_data <- read.csv(matrix_cycle10_BUBBLE_COLLATZ_paths, header=T)
+matrix_cycle10_BUBBLE_COLLATZ_data$id <- 1:nrow(matrix_cycle10_BUBBLE_COLLATZ_data)
+matrix_cycle10_BUBBLE_COLLATZ_data$time <- anytime(matrix_cycle10_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+matrix_cycle10_BUBBLE_COLLATZ_data <- matrix_cycle10_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle10_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle10_BUBBLE_COLLATZ_data[1, 'time']), 0))
+matrix_cycle10_BUBBLE_COLLATZ_trapezoid_val <- trapz(matrix_cycle10_BUBBLE_COLLATZ_data$id, matrix_cycle10_BUBBLE_COLLATZ_data$power) 
+
+
+collatz_cycle1_BUBBLE_COLLATZ_paths <- paste(main_dir, collatz_cycle1_BUBBLE_COLLATZ_treatment, sep="")
+collatz_cycle1_BUBBLE_COLLATZ_data <- read.csv(collatz_cycle1_BUBBLE_COLLATZ_paths, header=T)
+collatz_cycle1_BUBBLE_COLLATZ_data$id <- 1:nrow(collatz_cycle1_BUBBLE_COLLATZ_data)
+collatz_cycle1_BUBBLE_COLLATZ_data$time <- anytime(collatz_cycle1_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+collatz_cycle1_BUBBLE_COLLATZ_data <- collatz_cycle1_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle1_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle1_BUBBLE_COLLATZ_data[1, 'time']), 0))
+collatz_cycle1_BUBBLE_COLLATZ_trapezoid_val <- trapz(collatz_cycle1_BUBBLE_COLLATZ_data$id, collatz_cycle1_BUBBLE_COLLATZ_data$power) 
+
+collatz_cycle2_BUBBLE_COLLATZ_paths <- paste(main_dir, collatz_cycle2_BUBBLE_COLLATZ_treatment, sep="")
+collatz_cycle2_BUBBLE_COLLATZ_data <- read.csv(collatz_cycle2_BUBBLE_COLLATZ_paths, header=T)
+collatz_cycle2_BUBBLE_COLLATZ_data$id <- 1:nrow(collatz_cycle2_BUBBLE_COLLATZ_data)
+collatz_cycle2_BUBBLE_COLLATZ_data$time <- anytime(collatz_cycle2_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+collatz_cycle2_BUBBLE_COLLATZ_data <- collatz_cycle2_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle2_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle2_BUBBLE_COLLATZ_data[1, 'time']), 0))
+collatz_cycle2_BUBBLE_COLLATZ_trapezoid_val <- trapz(collatz_cycle2_BUBBLE_COLLATZ_data$id, collatz_cycle2_BUBBLE_COLLATZ_data$power) 
+
+collatz_cycle3_BUBBLE_COLLATZ_paths <- paste(main_dir, collatz_cycle3_BUBBLE_COLLATZ_treatment, sep="")
+collatz_cycle3_BUBBLE_COLLATZ_data <- read.csv(collatz_cycle3_BUBBLE_COLLATZ_paths, header=T)
+collatz_cycle3_BUBBLE_COLLATZ_data$id <- 1:nrow(collatz_cycle3_BUBBLE_COLLATZ_data)
+collatz_cycle3_BUBBLE_COLLATZ_data$time <- anytime(collatz_cycle3_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+collatz_cycle3_BUBBLE_COLLATZ_data <- collatz_cycle3_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle3_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle3_BUBBLE_COLLATZ_data[1, 'time']), 0))
+collatz_cycle3_BUBBLE_COLLATZ_trapezoid_val <- trapz(collatz_cycle3_BUBBLE_COLLATZ_data$id, collatz_cycle3_BUBBLE_COLLATZ_data$power) 
+
+collatz_cycle4_BUBBLE_COLLATZ_paths <- paste(main_dir, collatz_cycle4_BUBBLE_COLLATZ_treatment, sep="")
+collatz_cycle4_BUBBLE_COLLATZ_data <- read.csv(collatz_cycle4_BUBBLE_COLLATZ_paths, header=T)
+collatz_cycle4_BUBBLE_COLLATZ_data$id <- 1:nrow(collatz_cycle4_BUBBLE_COLLATZ_data)
+collatz_cycle4_BUBBLE_COLLATZ_data$time <- anytime(collatz_cycle4_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+collatz_cycle4_BUBBLE_COLLATZ_data <- collatz_cycle4_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle4_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle4_BUBBLE_COLLATZ_data[1, 'time']), 0))
+collatz_cycle4_BUBBLE_COLLATZ_trapezoid_val <- trapz(collatz_cycle4_BUBBLE_COLLATZ_data$id, collatz_cycle4_BUBBLE_COLLATZ_data$power) 
+
+collatz_cycle5_BUBBLE_COLLATZ_paths <- paste(main_dir, collatz_cycle5_BUBBLE_COLLATZ_treatment, sep="")
+collatz_cycle5_BUBBLE_COLLATZ_data <- read.csv(collatz_cycle5_BUBBLE_COLLATZ_paths, header=T)
+collatz_cycle5_BUBBLE_COLLATZ_data$id <- 1:nrow(collatz_cycle5_BUBBLE_COLLATZ_data)
+collatz_cycle5_BUBBLE_COLLATZ_data$time <- anytime(collatz_cycle5_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+collatz_cycle5_BUBBLE_COLLATZ_data <- collatz_cycle5_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle5_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle5_BUBBLE_COLLATZ_data[1, 'time']), 0))
+collatz_cycle5_BUBBLE_COLLATZ_trapezoid_val <- trapz(collatz_cycle5_BUBBLE_COLLATZ_data$id, collatz_cycle5_BUBBLE_COLLATZ_data$power) 
+
+collatz_cycle6_BUBBLE_COLLATZ_paths <- paste(main_dir, collatz_cycle6_BUBBLE_COLLATZ_treatment, sep="")
+collatz_cycle6_BUBBLE_COLLATZ_data <- read.csv(collatz_cycle6_BUBBLE_COLLATZ_paths, header=T)
+collatz_cycle6_BUBBLE_COLLATZ_data$id <- 1:nrow(collatz_cycle6_BUBBLE_COLLATZ_data)
+collatz_cycle6_BUBBLE_COLLATZ_data$time <- anytime(collatz_cycle6_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+collatz_cycle6_BUBBLE_COLLATZ_data <- collatz_cycle6_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle6_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle6_BUBBLE_COLLATZ_data[1, 'time']), 0))
+collatz_cycle6_BUBBLE_COLLATZ_trapezoid_val <- trapz(collatz_cycle6_BUBBLE_COLLATZ_data$id, collatz_cycle6_BUBBLE_COLLATZ_data$power) 
+
+collatz_cycle7_BUBBLE_COLLATZ_paths <- paste(main_dir, collatz_cycle7_BUBBLE_COLLATZ_treatment, sep="")
+collatz_cycle7_BUBBLE_COLLATZ_data <- read.csv(collatz_cycle7_BUBBLE_COLLATZ_paths, header=T)
+collatz_cycle7_BUBBLE_COLLATZ_data$id <- 1:nrow(collatz_cycle7_BUBBLE_COLLATZ_data)
+collatz_cycle7_BUBBLE_COLLATZ_data$time <- anytime(collatz_cycle7_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+collatz_cycle7_BUBBLE_COLLATZ_data <- collatz_cycle7_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle7_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle7_BUBBLE_COLLATZ_data[1, 'time']), 0))
+collatz_cycle7_BUBBLE_COLLATZ_trapezoid_val <- trapz(collatz_cycle7_BUBBLE_COLLATZ_data$id, collatz_cycle7_BUBBLE_COLLATZ_data$power) 
+
+collatz_cycle8_BUBBLE_COLLATZ_paths <- paste(main_dir, collatz_cycle8_BUBBLE_COLLATZ_treatment, sep="")
+collatz_cycle8_BUBBLE_COLLATZ_data <- read.csv(collatz_cycle8_BUBBLE_COLLATZ_paths, header=T)
+collatz_cycle8_BUBBLE_COLLATZ_data$id <- 1:nrow(collatz_cycle8_BUBBLE_COLLATZ_data)
+collatz_cycle8_BUBBLE_COLLATZ_data$time <- anytime(collatz_cycle8_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+collatz_cycle8_BUBBLE_COLLATZ_data <- collatz_cycle8_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle8_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle8_BUBBLE_COLLATZ_data[1, 'time']), 0))
+collatz_cycle8_BUBBLE_COLLATZ_trapezoid_val <- trapz(collatz_cycle8_BUBBLE_COLLATZ_data$id, collatz_cycle8_BUBBLE_COLLATZ_data$power) 
+
+collatz_cycle9_BUBBLE_COLLATZ_paths <- paste(main_dir, collatz_cycle9_BUBBLE_COLLATZ_treatment, sep="")
+collatz_cycle9_BUBBLE_COLLATZ_data <- read.csv(collatz_cycle9_BUBBLE_COLLATZ_paths, header=T)
+collatz_cycle9_BUBBLE_COLLATZ_data$id <- 1:nrow(collatz_cycle9_BUBBLE_COLLATZ_data)
+collatz_cycle9_BUBBLE_COLLATZ_data$time <- anytime(collatz_cycle9_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+collatz_cycle9_BUBBLE_COLLATZ_data <- collatz_cycle9_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle9_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle9_BUBBLE_COLLATZ_data[1, 'time']), 0))
+collatz_cycle9_BUBBLE_COLLATZ_trapezoid_val <- trapz(collatz_cycle9_BUBBLE_COLLATZ_data$id, collatz_cycle9_BUBBLE_COLLATZ_data$power) 
+
+collatz_cycle10_BUBBLE_COLLATZ_paths <- paste(main_dir, collatz_cycle10_BUBBLE_COLLATZ_treatment, sep="")
+collatz_cycle10_BUBBLE_COLLATZ_data <- read.csv(collatz_cycle10_BUBBLE_COLLATZ_paths, header=T)
+collatz_cycle10_BUBBLE_COLLATZ_data$id <- 1:nrow(collatz_cycle10_BUBBLE_COLLATZ_data)
+collatz_cycle10_BUBBLE_COLLATZ_data$time <- anytime(collatz_cycle10_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+collatz_cycle10_BUBBLE_COLLATZ_data <- collatz_cycle10_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle1_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle1_BUBBLE_COLLATZ_data[1, 'time']), 0))
+collatz_cycle10_BUBBLE_COLLATZ_trapezoid_val <- trapz(collatz_cycle10_BUBBLE_COLLATZ_data$id, collatz_cycle10_BUBBLE_COLLATZ_data$power) 
+
+
+rapl_cycle1_BUBBLE_COLLATZ_paths <- paste(main_dir, rapl_cycle1_BUBBLE_COLLATZ_treatment, sep="")
+rapl_cycle1_BUBBLE_COLLATZ_data <- read.csv(rapl_cycle1_BUBBLE_COLLATZ_paths, header=T)
+rapl_cycle1_BUBBLE_COLLATZ_data$id <- 1:nrow(rapl_cycle1_BUBBLE_COLLATZ_data)
+rapl_cycle1_BUBBLE_COLLATZ_data$time <- anytime(rapl_cycle1_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+rapl_cycle1_BUBBLE_COLLATZ_data <- rapl_cycle1_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle1_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle1_BUBBLE_COLLATZ_data[1, 'time']), 0))
+rapl_cycle1_BUBBLE_COLLATZ_trapezoid_val <- trapz(rapl_cycle1_BUBBLE_COLLATZ_data$id, rapl_cycle1_BUBBLE_COLLATZ_data$power) 
+
+rapl_cycle2_BUBBLE_COLLATZ_paths <- paste(main_dir, rapl_cycle2_BUBBLE_COLLATZ_treatment, sep="")
+rapl_cycle2_BUBBLE_COLLATZ_data <- read.csv(rapl_cycle2_BUBBLE_COLLATZ_paths, header=T)
+rapl_cycle2_BUBBLE_COLLATZ_data$id <- 1:nrow(rapl_cycle2_BUBBLE_COLLATZ_data)
+rapl_cycle2_BUBBLE_COLLATZ_data$time <- anytime(rapl_cycle2_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+rapl_cycle2_BUBBLE_COLLATZ_data <- rapl_cycle2_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle2_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle2_BUBBLE_COLLATZ_data[1, 'time']), 0))
+rapl_cycle2_BUBBLE_COLLATZ_trapezoid_val <- trapz(rapl_cycle2_BUBBLE_COLLATZ_data$id, rapl_cycle2_BUBBLE_COLLATZ_data$power) 
+
+rapl_cycle3_BUBBLE_COLLATZ_paths <- paste(main_dir, rapl_cycle3_BUBBLE_COLLATZ_treatment, sep="")
+rapl_cycle3_BUBBLE_COLLATZ_data <- read.csv(rapl_cycle3_BUBBLE_COLLATZ_paths, header=T)
+rapl_cycle3_BUBBLE_COLLATZ_data$id <- 1:nrow(rapl_cycle3_BUBBLE_COLLATZ_data)
+rapl_cycle3_BUBBLE_COLLATZ_data$time <- anytime(rapl_cycle3_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+rapl_cycle3_BUBBLE_COLLATZ_data <- rapl_cycle3_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle3_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle3_BUBBLE_COLLATZ_data[1, 'time']), 0))
+rapl_cycle3_BUBBLE_COLLATZ_trapezoid_val <- trapz(rapl_cycle3_BUBBLE_COLLATZ_data$id, rapl_cycle3_BUBBLE_COLLATZ_data$power) 
+
+rapl_cycle4_BUBBLE_COLLATZ_paths <- paste(main_dir, rapl_cycle4_BUBBLE_COLLATZ_treatment, sep="")
+rapl_cycle4_BUBBLE_COLLATZ_data <- read.csv(rapl_cycle4_BUBBLE_COLLATZ_paths, header=T)
+rapl_cycle4_BUBBLE_COLLATZ_data$id <- 1:nrow(rapl_cycle4_BUBBLE_COLLATZ_data)
+rapl_cycle4_BUBBLE_COLLATZ_data$time <- anytime(rapl_cycle4_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+rapl_cycle4_BUBBLE_COLLATZ_data <- rapl_cycle4_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle4_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle4_BUBBLE_COLLATZ_data[1, 'time']), 0))
+rapl_cycle4_BUBBLE_COLLATZ_trapezoid_val <- trapz(rapl_cycle4_BUBBLE_COLLATZ_data$id, rapl_cycle4_BUBBLE_COLLATZ_data$power) 
+
+rapl_cycle5_BUBBLE_COLLATZ_paths <- paste(main_dir, rapl_cycle5_BUBBLE_COLLATZ_treatment, sep="")
+rapl_cycle5_BUBBLE_COLLATZ_data <- read.csv(rapl_cycle5_BUBBLE_COLLATZ_paths, header=T)
+rapl_cycle5_BUBBLE_COLLATZ_data$id <- 1:nrow(rapl_cycle5_BUBBLE_COLLATZ_data)
+rapl_cycle5_BUBBLE_COLLATZ_data$time <- anytime(rapl_cycle5_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+rapl_cycle5_BUBBLE_COLLATZ_data <- rapl_cycle5_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle5_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle5_BUBBLE_COLLATZ_data[1, 'time']), 0))
+rapl_cycle5_BUBBLE_COLLATZ_trapezoid_val <- trapz(rapl_cycle5_BUBBLE_COLLATZ_data$id, rapl_cycle5_BUBBLE_COLLATZ_data$power) 
+
+rapl_cycle6_BUBBLE_COLLATZ_paths <- paste(main_dir, rapl_cycle6_BUBBLE_COLLATZ_treatment, sep="")
+rapl_cycle6_BUBBLE_COLLATZ_data <- read.csv(rapl_cycle6_BUBBLE_COLLATZ_paths, header=T)
+rapl_cycle6_BUBBLE_COLLATZ_data$id <- 1:nrow(rapl_cycle6_BUBBLE_COLLATZ_data)
+rapl_cycle6_BUBBLE_COLLATZ_data$time <- anytime(rapl_cycle6_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+rapl_cycle6_BUBBLE_COLLATZ_data <- rapl_cycle6_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle6_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle6_BUBBLE_COLLATZ_data[1, 'time']), 0))
+rapl_cycle6_BUBBLE_COLLATZ_trapezoid_val <- trapz(rapl_cycle6_BUBBLE_COLLATZ_data$id, rapl_cycle6_BUBBLE_COLLATZ_data$power) 
+
+rapl_cycle7_BUBBLE_COLLATZ_paths <- paste(main_dir, rapl_cycle7_BUBBLE_COLLATZ_treatment, sep="")
+rapl_cycle7_BUBBLE_COLLATZ_data <- read.csv(rapl_cycle7_BUBBLE_COLLATZ_paths, header=T)
+rapl_cycle7_BUBBLE_COLLATZ_data$id <- 1:nrow(rapl_cycle7_BUBBLE_COLLATZ_data)
+rapl_cycle7_BUBBLE_COLLATZ_data$time <- anytime(rapl_cycle7_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+rapl_cycle7_BUBBLE_COLLATZ_data <- rapl_cycle7_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle7_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle7_BUBBLE_COLLATZ_data[1, 'time']), 0))
+rapl_cycle7_BUBBLE_COLLATZ_trapezoid_val <- trapz(rapl_cycle7_BUBBLE_COLLATZ_data$id, rapl_cycle7_BUBBLE_COLLATZ_data$power) 
+
+rapl_cycle8_BUBBLE_COLLATZ_paths <- paste(main_dir, rapl_cycle8_BUBBLE_COLLATZ_treatment, sep="")
+rapl_cycle8_BUBBLE_COLLATZ_data <- read.csv(rapl_cycle8_BUBBLE_COLLATZ_paths, header=T)
+rapl_cycle8_BUBBLE_COLLATZ_data$id <- 1:nrow(rapl_cycle8_BUBBLE_COLLATZ_data)
+rapl_cycle8_BUBBLE_COLLATZ_data$time <- anytime(rapl_cycle8_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+rapl_cycle8_BUBBLE_COLLATZ_data <- rapl_cycle8_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle8_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle8_BUBBLE_COLLATZ_data[1, 'time']), 0))
+rapl_cycle8_BUBBLE_COLLATZ_trapezoid_val <- trapz(rapl_cycle8_BUBBLE_COLLATZ_data$id, rapl_cycle8_BUBBLE_COLLATZ_data$power) 
+
+rapl_cycle9_BUBBLE_COLLATZ_paths <- paste(main_dir, rapl_cycle9_BUBBLE_COLLATZ_treatment, sep="")
+rapl_cycle9_BUBBLE_COLLATZ_data <- read.csv(rapl_cycle9_BUBBLE_COLLATZ_paths, header=T)
+rapl_cycle9_BUBBLE_COLLATZ_data$id <- 1:nrow(rapl_cycle9_BUBBLE_COLLATZ_data)
+rapl_cycle9_BUBBLE_COLLATZ_data$time <- anytime(rapl_cycle9_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+rapl_cycle9_BUBBLE_COLLATZ_data <- rapl_cycle9_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle9_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle9_BUBBLE_COLLATZ_data[1, 'time']), 0))
+rapl_cycle9_BUBBLE_COLLATZ_trapezoid_val <- trapz(rapl_cycle9_BUBBLE_COLLATZ_data$id, rapl_cycle9_BUBBLE_COLLATZ_data$power) 
+
+rapl_cycle10_BUBBLE_COLLATZ_paths <- paste(main_dir, rapl_cycle10_BUBBLE_COLLATZ_treatment, sep="")
+rapl_cycle10_BUBBLE_COLLATZ_data <- read.csv(rapl_cycle10_BUBBLE_COLLATZ_paths, header=T)
+rapl_cycle10_BUBBLE_COLLATZ_data$id <- 1:nrow(rapl_cycle10_BUBBLE_COLLATZ_data)
+rapl_cycle10_BUBBLE_COLLATZ_data$time <- anytime(rapl_cycle10_BUBBLE_COLLATZ_data$timestamp / 1000)
+
+rapl_cycle10_BUBBLE_COLLATZ_data <- rapl_cycle10_BUBBLE_COLLATZ_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle10_BUBBLE_COLLATZ_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle10_BUBBLE_COLLATZ_data[1, 'time']), 0))
+rapl_cycle10_BUBBLE_COLLATZ_trapezoid_val <- trapz(rapl_cycle10_BUBBLE_COLLATZ_data$id, rapl_cycle10_BUBBLE_COLLATZ_data$power) 
+
+#FIBO_MATRIX
+fibo_cycle1_FIBO_MATRIX_paths <- paste(main_dir, fibo_cycle1_FIBO_MATRIX_treatment, sep="")
+fibo_cycle1_FIBO_MATRIX_data <- read.csv(fibo_cycle1_FIBO_MATRIX_paths, header=T)
+fibo_cycle1_FIBO_MATRIX_data$id <- 1:nrow(fibo_cycle1_FIBO_MATRIX_data)
+fibo_cycle1_FIBO_MATRIX_data$time <- anytime(fibo_cycle1_FIBO_MATRIX_data$timestamp / 1000)
+
+fibo_cycle1_FIBO_MATRIX_data <- fibo_cycle1_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle1_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle1_FIBO_MATRIX_data[1, 'time']), 0))
+fibo_cycle1_FIBO_MATRIX_trapezoid_val <- trapz(fibo_cycle1_FIBO_MATRIX_data$id, fibo_cycle1_FIBO_MATRIX_data$power) 
+
+fibo_cycle2_FIBO_MATRIX_paths <- paste(main_dir, fibo_cycle2_FIBO_MATRIX_treatment, sep="")
+fibo_cycle2_FIBO_MATRIX_data <- read.csv(fibo_cycle2_FIBO_MATRIX_paths, header=T)
+fibo_cycle2_FIBO_MATRIX_data$id <- 1:nrow(fibo_cycle2_FIBO_MATRIX_data)
+fibo_cycle2_FIBO_MATRIX_data$time <- anytime(fibo_cycle2_FIBO_MATRIX_data$timestamp / 1000)
+
+fibo_cycle2_FIBO_MATRIX_data <- fibo_cycle2_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle2_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle2_FIBO_MATRIX_data[1, 'time']), 0))
+fibo_cycle2_FIBO_MATRIX_trapezoid_val <- trapz(fibo_cycle2_FIBO_MATRIX_data$id, fibo_cycle2_FIBO_MATRIX_data$power) 
+
+fibo_cycle3_FIBO_MATRIX_paths <- paste(main_dir, fibo_cycle3_FIBO_MATRIX_treatment, sep="")
+fibo_cycle3_FIBO_MATRIX_data <- read.csv(fibo_cycle3_FIBO_MATRIX_paths, header=T)
+fibo_cycle3_FIBO_MATRIX_data$id <- 1:nrow(fibo_cycle3_FIBO_MATRIX_data)
+fibo_cycle3_FIBO_MATRIX_data$time <- anytime(fibo_cycle3_FIBO_MATRIX_data$timestamp / 1000)
+
+fibo_cycle3_FIBO_MATRIX_data <- fibo_cycle3_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle3_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle3_FIBO_MATRIX_data[1, 'time']), 0))
+fibo_cycle3_FIBO_MATRIX_trapezoid_val <- trapz(fibo_cycle3_FIBO_MATRIX_data$id, fibo_cycle3_FIBO_MATRIX_data$power) 
+
+fibo_cycle4_FIBO_MATRIX_paths <- paste(main_dir, fibo_cycle4_FIBO_MATRIX_treatment, sep="")
+fibo_cycle4_FIBO_MATRIX_data <- read.csv(fibo_cycle4_FIBO_MATRIX_paths, header=T)
+fibo_cycle4_FIBO_MATRIX_data$id <- 1:nrow(fibo_cycle4_FIBO_MATRIX_data)
+fibo_cycle4_FIBO_MATRIX_data$time <- anytime(fibo_cycle4_FIBO_MATRIX_data$timestamp / 1000)
+
+fibo_cycle4_FIBO_MATRIX_data <- fibo_cycle4_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle4_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle4_FIBO_MATRIX_data[1, 'time']), 0))
+fibo_cycle4_FIBO_MATRIX_trapezoid_val <- trapz(fibo_cycle4_FIBO_MATRIX_data$id, fibo_cycle4_FIBO_MATRIX_data$power) 
+
+fibo_cycle5_FIBO_MATRIX_paths <- paste(main_dir, fibo_cycle5_FIBO_MATRIX_treatment, sep="")
+fibo_cycle5_FIBO_MATRIX_data <- read.csv(fibo_cycle5_FIBO_MATRIX_paths, header=T)
+fibo_cycle5_FIBO_MATRIX_data$id <- 1:nrow(fibo_cycle5_FIBO_MATRIX_data)
+fibo_cycle5_FIBO_MATRIX_data$time <- anytime(fibo_cycle5_FIBO_MATRIX_data$timestamp / 1000)
+
+fibo_cycle5_FIBO_MATRIX_data <- fibo_cycle5_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle5_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle5_FIBO_MATRIX_data[1, 'time']), 0))
+fibo_cycle5_FIBO_MATRIX_trapezoid_val <- trapz(fibo_cycle5_FIBO_MATRIX_data$id, fibo_cycle5_FIBO_MATRIX_data$power) 
+
+fibo_cycle6_FIBO_MATRIX_paths <- paste(main_dir, fibo_cycle6_FIBO_MATRIX_treatment, sep="")
+fibo_cycle6_FIBO_MATRIX_data <- read.csv(fibo_cycle6_FIBO_MATRIX_paths, header=T)
+fibo_cycle6_FIBO_MATRIX_data$id <- 1:nrow(fibo_cycle6_FIBO_MATRIX_data)
+fibo_cycle6_FIBO_MATRIX_data$time <- anytime(fibo_cycle6_FIBO_MATRIX_data$timestamp / 1000)
+
+fibo_cycle6_FIBO_MATRIX_data <- fibo_cycle6_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle6_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle6_FIBO_MATRIX_data[1, 'time']), 0))
+fibo_cycle6_FIBO_MATRIX_trapezoid_val <- trapz(fibo_cycle6_FIBO_MATRIX_data$id, fibo_cycle6_FIBO_MATRIX_data$power) 
+
+fibo_cycle7_FIBO_MATRIX_paths <- paste(main_dir, fibo_cycle7_FIBO_MATRIX_treatment, sep="")
+fibo_cycle7_FIBO_MATRIX_data <- read.csv(fibo_cycle7_FIBO_MATRIX_paths, header=T)
+fibo_cycle7_FIBO_MATRIX_data$id <- 1:nrow(fibo_cycle7_FIBO_MATRIX_data)
+fibo_cycle7_FIBO_MATRIX_data$time <- anytime(fibo_cycle7_FIBO_MATRIX_data$timestamp / 1000)
+
+fibo_cycle7_FIBO_MATRIX_data <- fibo_cycle7_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle7_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle7_FIBO_MATRIX_data[1, 'time']), 0))
+fibo_cycle7_FIBO_MATRIX_trapezoid_val <- trapz(fibo_cycle7_FIBO_MATRIX_data$id, fibo_cycle7_FIBO_MATRIX_data$power) 
+
+fibo_cycle8_FIBO_MATRIX_paths <- paste(main_dir, fibo_cycle8_FIBO_MATRIX_treatment, sep="")
+fibo_cycle8_FIBO_MATRIX_data <- read.csv(fibo_cycle8_FIBO_MATRIX_paths, header=T)
+fibo_cycle8_FIBO_MATRIX_data$id <- 1:nrow(fibo_cycle8_FIBO_MATRIX_data)
+fibo_cycle8_FIBO_MATRIX_data$time <- anytime(fibo_cycle8_FIBO_MATRIX_data$timestamp / 1000)
+
+fibo_cycle8_FIBO_MATRIX_data <- fibo_cycle8_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle8_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle8_FIBO_MATRIX_data[1, 'time']), 0))
+fibo_cycle8_FIBO_MATRIX_trapezoid_val <- trapz(fibo_cycle8_FIBO_MATRIX_data$id, fibo_cycle8_FIBO_MATRIX_data$power) 
+
+fibo_cycle9_FIBO_MATRIX_paths <- paste(main_dir, fibo_cycle9_FIBO_MATRIX_treatment, sep="")
+fibo_cycle9_FIBO_MATRIX_data <- read.csv(fibo_cycle9_FIBO_MATRIX_paths, header=T)
+fibo_cycle9_FIBO_MATRIX_data$id <- 1:nrow(fibo_cycle9_FIBO_MATRIX_data)
+fibo_cycle9_FIBO_MATRIX_data$time <- anytime(fibo_cycle9_FIBO_MATRIX_data$timestamp / 1000)
+
+fibo_cycle9_FIBO_MATRIX_data <- fibo_cycle9_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle9_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle9_FIBO_MATRIX_data[1, 'time']), 0))
+fibo_cycle9_FIBO_MATRIX_trapezoid_val <- trapz(fibo_cycle9_FIBO_MATRIX_data$id, fibo_cycle9_FIBO_MATRIX_data$power) 
+
+fibo_cycle10_FIBO_MATRIX_paths <- paste(main_dir, fibo_cycle10_FIBO_MATRIX_treatment, sep="")
+fibo_cycle10_FIBO_MATRIX_data <- read.csv(fibo_cycle10_FIBO_MATRIX_paths, header=T)
+fibo_cycle10_FIBO_MATRIX_data$id <- 1:nrow(fibo_cycle10_FIBO_MATRIX_data)
+fibo_cycle10_FIBO_MATRIX_data$time <- anytime(fibo_cycle10_FIBO_MATRIX_data$timestamp / 1000)
+
+fibo_cycle10_FIBO_MATRIX_data <- fibo_cycle10_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle10_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle10_FIBO_MATRIX_data[1, 'time']), 0))
+fibo_cycle10_FIBO_MATRIX_trapezoid_val <- trapz(fibo_cycle10_FIBO_MATRIX_data$id, fibo_cycle10_FIBO_MATRIX_data$power) 
+
+
+bubble_cycle1_FIBO_MATRIX_paths <- paste(main_dir, bubble_cycle1_FIBO_MATRIX_treatment, sep="")
+bubble_cycle1_FIBO_MATRIX_data <- read.csv(bubble_cycle1_FIBO_MATRIX_paths, header=T)
+bubble_cycle1_FIBO_MATRIX_data$id <- 1:nrow(bubble_cycle1_FIBO_MATRIX_data)
+bubble_cycle1_FIBO_MATRIX_data$time <- anytime(bubble_cycle1_FIBO_MATRIX_data$timestamp / 1000)
+
+bubble_cycle1_FIBO_MATRIX_data <- bubble_cycle1_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle1_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle1_FIBO_MATRIX_data[1, 'time']), 0))
+bubble_cycle1_FIBO_MATRIX_trapezoid_val <- trapz(bubble_cycle1_FIBO_MATRIX_data$id, bubble_cycle1_FIBO_MATRIX_data$power) 
+
+bubble_cycle2_FIBO_MATRIX_paths <- paste(main_dir, bubble_cycle2_FIBO_MATRIX_treatment, sep="")
+bubble_cycle2_FIBO_MATRIX_data <- read.csv(bubble_cycle2_FIBO_MATRIX_paths, header=T)
+bubble_cycle2_FIBO_MATRIX_data$id <- 1:nrow(bubble_cycle2_FIBO_MATRIX_data)
+bubble_cycle2_FIBO_MATRIX_data$time <- anytime(bubble_cycle2_FIBO_MATRIX_data$timestamp / 1000)
+
+bubble_cycle2_FIBO_MATRIX_data <- bubble_cycle2_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle2_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle2_FIBO_MATRIX_data[1, 'time']), 0))
+bubble_cycle2_FIBO_MATRIX_trapezoid_val <- trapz(bubble_cycle2_FIBO_MATRIX_data$id, bubble_cycle2_FIBO_MATRIX_data$power) 
+
+bubble_cycle3_FIBO_MATRIX_paths <- paste(main_dir, bubble_cycle3_FIBO_MATRIX_treatment, sep="")
+bubble_cycle3_FIBO_MATRIX_data <- read.csv(bubble_cycle3_FIBO_MATRIX_paths, header=T)
+bubble_cycle3_FIBO_MATRIX_data$id <- 1:nrow(bubble_cycle3_FIBO_MATRIX_data)
+bubble_cycle3_FIBO_MATRIX_data$time <- anytime(bubble_cycle3_FIBO_MATRIX_data$timestamp / 1000)
+
+bubble_cycle3_FIBO_MATRIX_data <- bubble_cycle3_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle3_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle3_FIBO_MATRIX_data[1, 'time']), 0))
+bubble_cycle3_FIBO_MATRIX_trapezoid_val <- trapz(bubble_cycle3_FIBO_MATRIX_data$id, bubble_cycle3_FIBO_MATRIX_data$power) 
+
+bubble_cycle4_FIBO_MATRIX_paths <- paste(main_dir, bubble_cycle4_FIBO_MATRIX_treatment, sep="")
+bubble_cycle4_FIBO_MATRIX_data <- read.csv(bubble_cycle4_FIBO_MATRIX_paths, header=T)
+bubble_cycle4_FIBO_MATRIX_data$id <- 1:nrow(bubble_cycle4_FIBO_MATRIX_data)
+bubble_cycle4_FIBO_MATRIX_data$time <- anytime(bubble_cycle4_FIBO_MATRIX_data$timestamp / 1000)
+
+bubble_cycle4_FIBO_MATRIX_data <- bubble_cycle4_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle4_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle4_FIBO_MATRIX_data[1, 'time']), 0))
+bubble_cycle4_FIBO_MATRIX_trapezoid_val <- trapz(bubble_cycle4_FIBO_MATRIX_data$id, bubble_cycle4_FIBO_MATRIX_data$power) 
+
+bubble_cycle5_FIBO_MATRIX_paths <- paste(main_dir, bubble_cycle5_FIBO_MATRIX_treatment, sep="")
+bubble_cycle5_FIBO_MATRIX_data <- read.csv(bubble_cycle5_FIBO_MATRIX_paths, header=T)
+bubble_cycle5_FIBO_MATRIX_data$id <- 1:nrow(bubble_cycle5_FIBO_MATRIX_data)
+bubble_cycle5_FIBO_MATRIX_data$time <- anytime(bubble_cycle5_FIBO_MATRIX_data$timestamp / 1000)
+
+bubble_cycle5_FIBO_MATRIX_data <- bubble_cycle5_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle5_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle5_FIBO_MATRIX_data[1, 'time']), 0))
+bubble_cycle5_FIBO_MATRIX_trapezoid_val <- trapz(bubble_cycle5_FIBO_MATRIX_data$id, bubble_cycle5_FIBO_MATRIX_data$power) 
+
+bubble_cycle6_FIBO_MATRIX_paths <- paste(main_dir, bubble_cycle6_FIBO_MATRIX_treatment, sep="")
+bubble_cycle6_FIBO_MATRIX_data <- read.csv(bubble_cycle6_FIBO_MATRIX_paths, header=T)
+bubble_cycle6_FIBO_MATRIX_data$id <- 1:nrow(bubble_cycle6_FIBO_MATRIX_data)
+bubble_cycle6_FIBO_MATRIX_data$time <- anytime(bubble_cycle6_FIBO_MATRIX_data$timestamp / 1000)
+
+bubble_cycle6_FIBO_MATRIX_data <- bubble_cycle6_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle6_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle6_FIBO_MATRIX_data[1, 'time']), 0))
+bubble_cycle6_FIBO_MATRIX_trapezoid_val <- trapz(bubble_cycle6_FIBO_MATRIX_data$id, bubble_cycle6_FIBO_MATRIX_data$power) 
+
+bubble_cycle7_FIBO_MATRIX_paths <- paste(main_dir, bubble_cycle7_FIBO_MATRIX_treatment, sep="")
+bubble_cycle7_FIBO_MATRIX_data <- read.csv(bubble_cycle7_FIBO_MATRIX_paths, header=T)
+bubble_cycle7_FIBO_MATRIX_data$id <- 1:nrow(bubble_cycle7_FIBO_MATRIX_data)
+bubble_cycle7_FIBO_MATRIX_data$time <- anytime(bubble_cycle7_FIBO_MATRIX_data$timestamp / 1000)
+
+bubble_cycle7_FIBO_MATRIX_data <- bubble_cycle7_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle7_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle7_FIBO_MATRIX_data[1, 'time']), 0))
+bubble_cycle7_FIBO_MATRIX_trapezoid_val <- trapz(bubble_cycle7_FIBO_MATRIX_data$id, bubble_cycle7_FIBO_MATRIX_data$power) 
+
+bubble_cycle8_FIBO_MATRIX_paths <- paste(main_dir, bubble_cycle8_FIBO_MATRIX_treatment, sep="")
+bubble_cycle8_FIBO_MATRIX_data <- read.csv(bubble_cycle8_FIBO_MATRIX_paths, header=T)
+bubble_cycle8_FIBO_MATRIX_data$id <- 1:nrow(bubble_cycle8_FIBO_MATRIX_data)
+bubble_cycle8_FIBO_MATRIX_data$time <- anytime(bubble_cycle8_FIBO_MATRIX_data$timestamp / 1000)
+
+bubble_cycle8_FIBO_MATRIX_data <- bubble_cycle8_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle8_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle8_FIBO_MATRIX_data[1, 'time']), 0))
+bubble_cycle8_FIBO_MATRIX_trapezoid_val <- trapz(bubble_cycle8_FIBO_MATRIX_data$id, bubble_cycle8_FIBO_MATRIX_data$power) 
+
+bubble_cycle9_FIBO_MATRIX_paths <- paste(main_dir, bubble_cycle9_FIBO_MATRIX_treatment, sep="")
+bubble_cycle9_FIBO_MATRIX_data <- read.csv(bubble_cycle9_FIBO_MATRIX_paths, header=T)
+bubble_cycle9_FIBO_MATRIX_data$id <- 1:nrow(bubble_cycle9_FIBO_MATRIX_data)
+bubble_cycle9_FIBO_MATRIX_data$time <- anytime(bubble_cycle9_FIBO_MATRIX_data$timestamp / 1000)
+
+bubble_cycle9_FIBO_MATRIX_data <- bubble_cycle9_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle9_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle9_FIBO_MATRIX_data[1, 'time']), 0))
+bubble_cycle9_FIBO_MATRIX_trapezoid_val <- trapz(bubble_cycle9_FIBO_MATRIX_data$id, bubble_cycle9_FIBO_MATRIX_data$power) 
+
+bubble_cycle10_FIBO_MATRIX_paths <- paste(main_dir, bubble_cycle10_FIBO_MATRIX_treatment, sep="")
+bubble_cycle10_FIBO_MATRIX_data <- read.csv(bubble_cycle10_FIBO_MATRIX_paths, header=T)
+bubble_cycle10_FIBO_MATRIX_data$id <- 1:nrow(bubble_cycle10_FIBO_MATRIX_data)
+bubble_cycle10_FIBO_MATRIX_data$time <- anytime(bubble_cycle10_FIBO_MATRIX_data$timestamp / 1000)
+
+bubble_cycle10_FIBO_MATRIX_data <- bubble_cycle10_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle10_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle10_FIBO_MATRIX_data[1, 'time']), 0))
+bubble_cycle10_FIBO_MATRIX_trapezoid_val <- trapz(bubble_cycle10_FIBO_MATRIX_data$id, bubble_cycle10_FIBO_MATRIX_data$power) 
+
+
+matrix_cycle1_FIBO_MATRIX_paths <- paste(main_dir, matrix_cycle1_FIBO_MATRIX_treatment, sep="")
+matrix_cycle1_FIBO_MATRIX_data <- read.csv(matrix_cycle1_FIBO_MATRIX_paths, header=T)
+matrix_cycle1_FIBO_MATRIX_data$id <- 1:nrow(matrix_cycle1_FIBO_MATRIX_data)
+matrix_cycle1_FIBO_MATRIX_data$time <- anytime(matrix_cycle1_FIBO_MATRIX_data$timestamp / 1000)
+
+matrix_cycle1_FIBO_MATRIX_data <- matrix_cycle1_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle1_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle1_FIBO_MATRIX_data[1, 'time']), 0))
+matrix_cycle1_FIBO_MATRIX_trapezoid_val <- trapz(matrix_cycle1_FIBO_MATRIX_data$id, matrix_cycle1_FIBO_MATRIX_data$power) 
+
+matrix_cycle2_FIBO_MATRIX_paths <- paste(main_dir, matrix_cycle2_FIBO_MATRIX_treatment, sep="")
+matrix_cycle2_FIBO_MATRIX_data <- read.csv(matrix_cycle2_FIBO_MATRIX_paths, header=T)
+matrix_cycle2_FIBO_MATRIX_data$id <- 1:nrow(matrix_cycle2_FIBO_MATRIX_data)
+matrix_cycle2_FIBO_MATRIX_data$time <- anytime(matrix_cycle2_FIBO_MATRIX_data$timestamp / 1000)
+
+matrix_cycle2_FIBO_MATRIX_data <- matrix_cycle2_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle2_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle2_FIBO_MATRIX_data[1, 'time']), 0))
+matrix_cycle2_FIBO_MATRIX_trapezoid_val <- trapz(matrix_cycle2_FIBO_MATRIX_data$id, matrix_cycle2_FIBO_MATRIX_data$power) 
+
+matrix_cycle3_FIBO_MATRIX_paths <- paste(main_dir, matrix_cycle3_FIBO_MATRIX_treatment, sep="")
+matrix_cycle3_FIBO_MATRIX_data <- read.csv(matrix_cycle3_FIBO_MATRIX_paths, header=T)
+matrix_cycle3_FIBO_MATRIX_data$id <- 1:nrow(matrix_cycle3_FIBO_MATRIX_data)
+matrix_cycle3_FIBO_MATRIX_data$time <- anytime(matrix_cycle3_FIBO_MATRIX_data$timestamp / 1000)
+
+matrix_cycle3_FIBO_MATRIX_data <- matrix_cycle3_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle3_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle3_FIBO_MATRIX_data[1, 'time']), 0))
+matrix_cycle3_FIBO_MATRIX_trapezoid_val <- trapz(matrix_cycle3_FIBO_MATRIX_data$id, matrix_cycle3_FIBO_MATRIX_data$power) 
+
+matrix_cycle4_FIBO_MATRIX_paths <- paste(main_dir, matrix_cycle4_FIBO_MATRIX_treatment, sep="")
+matrix_cycle4_FIBO_MATRIX_data <- read.csv(matrix_cycle4_FIBO_MATRIX_paths, header=T)
+matrix_cycle4_FIBO_MATRIX_data$id <- 1:nrow(matrix_cycle4_FIBO_MATRIX_data)
+matrix_cycle4_FIBO_MATRIX_data$time <- anytime(matrix_cycle4_FIBO_MATRIX_data$timestamp / 1000)
+
+matrix_cycle4_FIBO_MATRIX_data <- matrix_cycle4_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle4_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle4_FIBO_MATRIX_data[1, 'time']), 0))
+matrix_cycle4_FIBO_MATRIX_trapezoid_val <- trapz(matrix_cycle4_FIBO_MATRIX_data$id, matrix_cycle4_FIBO_MATRIX_data$power) 
+
+matrix_cycle5_FIBO_MATRIX_paths <- paste(main_dir, matrix_cycle5_FIBO_MATRIX_treatment, sep="")
+matrix_cycle5_FIBO_MATRIX_data <- read.csv(matrix_cycle5_FIBO_MATRIX_paths, header=T)
+matrix_cycle5_FIBO_MATRIX_data$id <- 1:nrow(matrix_cycle5_FIBO_MATRIX_data)
+matrix_cycle5_FIBO_MATRIX_data$time <- anytime(matrix_cycle5_FIBO_MATRIX_data$timestamp / 1000)
+
+matrix_cycle5_FIBO_MATRIX_data <- matrix_cycle5_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle5_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle5_FIBO_MATRIX_data[1, 'time']), 0))
+matrix_cycle5_FIBO_MATRIX_trapezoid_val <- trapz(matrix_cycle5_FIBO_MATRIX_data$id, matrix_cycle5_FIBO_MATRIX_data$power) 
+
+matrix_cycle6_FIBO_MATRIX_paths <- paste(main_dir, matrix_cycle6_FIBO_MATRIX_treatment, sep="")
+matrix_cycle6_FIBO_MATRIX_data <- read.csv(matrix_cycle6_FIBO_MATRIX_paths, header=T)
+matrix_cycle6_FIBO_MATRIX_data$id <- 1:nrow(matrix_cycle6_FIBO_MATRIX_data)
+matrix_cycle6_FIBO_MATRIX_data$time <- anytime(matrix_cycle6_FIBO_MATRIX_data$timestamp / 1000)
+
+matrix_cycle6_FIBO_MATRIX_data <- matrix_cycle6_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle6_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle6_FIBO_MATRIX_data[1, 'time']), 0))
+matrix_cycle6_FIBO_MATRIX_trapezoid_val <- trapz(matrix_cycle6_FIBO_MATRIX_data$id, matrix_cycle6_FIBO_MATRIX_data$power) 
+
+matrix_cycle7_FIBO_MATRIX_paths <- paste(main_dir, matrix_cycle7_FIBO_MATRIX_treatment, sep="")
+matrix_cycle7_FIBO_MATRIX_data <- read.csv(matrix_cycle7_FIBO_MATRIX_paths, header=T)
+matrix_cycle7_FIBO_MATRIX_data$id <- 1:nrow(matrix_cycle7_FIBO_MATRIX_data)
+matrix_cycle7_FIBO_MATRIX_data$time <- anytime(matrix_cycle7_FIBO_MATRIX_data$timestamp / 1000)
+
+matrix_cycle7_FIBO_MATRIX_data <- matrix_cycle7_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle7_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle7_FIBO_MATRIX_data[1, 'time']), 0))
+matrix_cycle7_FIBO_MATRIX_trapezoid_val <- trapz(matrix_cycle7_FIBO_MATRIX_data$id, matrix_cycle7_FIBO_MATRIX_data$power) 
+
+matrix_cycle8_FIBO_MATRIX_paths <- paste(main_dir, matrix_cycle8_FIBO_MATRIX_treatment, sep="")
+matrix_cycle8_FIBO_MATRIX_data <- read.csv(matrix_cycle8_FIBO_MATRIX_paths, header=T)
+matrix_cycle8_FIBO_MATRIX_data$id <- 1:nrow(matrix_cycle8_FIBO_MATRIX_data)
+matrix_cycle8_FIBO_MATRIX_data$time <- anytime(matrix_cycle8_FIBO_MATRIX_data$timestamp / 1000)
+
+matrix_cycle8_FIBO_MATRIX_data <- matrix_cycle8_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle8_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle8_FIBO_MATRIX_data[1, 'time']), 0))
+matrix_cycle8_FIBO_MATRIX_trapezoid_val <- trapz(matrix_cycle8_FIBO_MATRIX_data$id, matrix_cycle8_FIBO_MATRIX_data$power) 
+
+matrix_cycle9_FIBO_MATRIX_paths <- paste(main_dir, matrix_cycle9_FIBO_MATRIX_treatment, sep="")
+matrix_cycle9_FIBO_MATRIX_data <- read.csv(matrix_cycle9_FIBO_MATRIX_paths, header=T)
+matrix_cycle9_FIBO_MATRIX_data$id <- 1:nrow(matrix_cycle9_FIBO_MATRIX_data)
+matrix_cycle9_FIBO_MATRIX_data$time <- anytime(matrix_cycle9_FIBO_MATRIX_data$timestamp / 1000)
+
+matrix_cycle9_FIBO_MATRIX_data <- matrix_cycle9_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle9_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle9_FIBO_MATRIX_data[1, 'time']), 0))
+matrix_cycle9_FIBO_MATRIX_trapezoid_val <- trapz(matrix_cycle9_FIBO_MATRIX_data$id, matrix_cycle9_FIBO_MATRIX_data$power) 
+
+matrix_cycle10_FIBO_MATRIX_paths <- paste(main_dir, matrix_cycle10_FIBO_MATRIX_treatment, sep="")
+matrix_cycle10_FIBO_MATRIX_data <- read.csv(matrix_cycle10_FIBO_MATRIX_paths, header=T)
+matrix_cycle10_FIBO_MATRIX_data$id <- 1:nrow(matrix_cycle10_FIBO_MATRIX_data)
+matrix_cycle10_FIBO_MATRIX_data$time <- anytime(matrix_cycle10_FIBO_MATRIX_data$timestamp / 1000)
+
+matrix_cycle10_FIBO_MATRIX_data <- matrix_cycle10_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle10_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle10_FIBO_MATRIX_data[1, 'time']), 0))
+matrix_cycle10_FIBO_MATRIX_trapezoid_val <- trapz(matrix_cycle10_FIBO_MATRIX_data$id, matrix_cycle10_FIBO_MATRIX_data$power) 
+
+
+collatz_cycle1_FIBO_MATRIX_paths <- paste(main_dir, collatz_cycle1_FIBO_MATRIX_treatment, sep="")
+collatz_cycle1_FIBO_MATRIX_data <- read.csv(collatz_cycle1_FIBO_MATRIX_paths, header=T)
+collatz_cycle1_FIBO_MATRIX_data$id <- 1:nrow(collatz_cycle1_FIBO_MATRIX_data)
+collatz_cycle1_FIBO_MATRIX_data$time <- anytime(collatz_cycle1_FIBO_MATRIX_data$timestamp / 1000)
+
+collatz_cycle1_FIBO_MATRIX_data <- collatz_cycle1_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle1_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle1_FIBO_MATRIX_data[1, 'time']), 0))
+collatz_cycle1_FIBO_MATRIX_trapezoid_val <- trapz(collatz_cycle1_FIBO_MATRIX_data$id, collatz_cycle1_FIBO_MATRIX_data$power) 
+
+collatz_cycle2_FIBO_MATRIX_paths <- paste(main_dir, collatz_cycle2_FIBO_MATRIX_treatment, sep="")
+collatz_cycle2_FIBO_MATRIX_data <- read.csv(collatz_cycle2_FIBO_MATRIX_paths, header=T)
+collatz_cycle2_FIBO_MATRIX_data$id <- 1:nrow(collatz_cycle2_FIBO_MATRIX_data)
+collatz_cycle2_FIBO_MATRIX_data$time <- anytime(collatz_cycle2_FIBO_MATRIX_data$timestamp / 1000)
+
+collatz_cycle2_FIBO_MATRIX_data <- collatz_cycle2_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle2_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle2_FIBO_MATRIX_data[1, 'time']), 0))
+collatz_cycle2_FIBO_MATRIX_trapezoid_val <- trapz(collatz_cycle2_FIBO_MATRIX_data$id, collatz_cycle2_FIBO_MATRIX_data$power) 
+
+collatz_cycle3_FIBO_MATRIX_paths <- paste(main_dir, collatz_cycle3_FIBO_MATRIX_treatment, sep="")
+collatz_cycle3_FIBO_MATRIX_data <- read.csv(collatz_cycle3_FIBO_MATRIX_paths, header=T)
+collatz_cycle3_FIBO_MATRIX_data$id <- 1:nrow(collatz_cycle3_FIBO_MATRIX_data)
+collatz_cycle3_FIBO_MATRIX_data$time <- anytime(collatz_cycle3_FIBO_MATRIX_data$timestamp / 1000)
+
+collatz_cycle3_FIBO_MATRIX_data <- collatz_cycle3_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle3_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle3_FIBO_MATRIX_data[1, 'time']), 0))
+collatz_cycle3_FIBO_MATRIX_trapezoid_val <- trapz(collatz_cycle3_FIBO_MATRIX_data$id, collatz_cycle3_FIBO_MATRIX_data$power) 
+
+collatz_cycle4_FIBO_MATRIX_paths <- paste(main_dir, collatz_cycle4_FIBO_MATRIX_treatment, sep="")
+collatz_cycle4_FIBO_MATRIX_data <- read.csv(collatz_cycle4_FIBO_MATRIX_paths, header=T)
+collatz_cycle4_FIBO_MATRIX_data$id <- 1:nrow(collatz_cycle4_FIBO_MATRIX_data)
+collatz_cycle4_FIBO_MATRIX_data$time <- anytime(collatz_cycle4_FIBO_MATRIX_data$timestamp / 1000)
+
+collatz_cycle4_FIBO_MATRIX_data <- collatz_cycle4_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle4_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle4_FIBO_MATRIX_data[1, 'time']), 0))
+collatz_cycle4_FIBO_MATRIX_trapezoid_val <- trapz(collatz_cycle4_FIBO_MATRIX_data$id, collatz_cycle4_FIBO_MATRIX_data$power) 
+
+collatz_cycle5_FIBO_MATRIX_paths <- paste(main_dir, collatz_cycle5_FIBO_MATRIX_treatment, sep="")
+collatz_cycle5_FIBO_MATRIX_data <- read.csv(collatz_cycle5_FIBO_MATRIX_paths, header=T)
+collatz_cycle5_FIBO_MATRIX_data$id <- 1:nrow(collatz_cycle5_FIBO_MATRIX_data)
+collatz_cycle5_FIBO_MATRIX_data$time <- anytime(collatz_cycle5_FIBO_MATRIX_data$timestamp / 1000)
+
+collatz_cycle5_FIBO_MATRIX_data <- collatz_cycle5_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle5_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle5_FIBO_MATRIX_data[1, 'time']), 0))
+collatz_cycle5_FIBO_MATRIX_trapezoid_val <- trapz(collatz_cycle5_FIBO_MATRIX_data$id, collatz_cycle5_FIBO_MATRIX_data$power) 
+
+collatz_cycle6_FIBO_MATRIX_paths <- paste(main_dir, collatz_cycle6_FIBO_MATRIX_treatment, sep="")
+collatz_cycle6_FIBO_MATRIX_data <- read.csv(collatz_cycle6_FIBO_MATRIX_paths, header=T)
+collatz_cycle6_FIBO_MATRIX_data$id <- 1:nrow(collatz_cycle6_FIBO_MATRIX_data)
+collatz_cycle6_FIBO_MATRIX_data$time <- anytime(collatz_cycle6_FIBO_MATRIX_data$timestamp / 1000)
+
+collatz_cycle6_FIBO_MATRIX_data <- collatz_cycle6_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle6_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle6_FIBO_MATRIX_data[1, 'time']), 0))
+collatz_cycle6_FIBO_MATRIX_trapezoid_val <- trapz(collatz_cycle6_FIBO_MATRIX_data$id, collatz_cycle6_FIBO_MATRIX_data$power) 
+
+collatz_cycle7_FIBO_MATRIX_paths <- paste(main_dir, collatz_cycle7_FIBO_MATRIX_treatment, sep="")
+collatz_cycle7_FIBO_MATRIX_data <- read.csv(collatz_cycle7_FIBO_MATRIX_paths, header=T)
+collatz_cycle7_FIBO_MATRIX_data$id <- 1:nrow(collatz_cycle7_FIBO_MATRIX_data)
+collatz_cycle7_FIBO_MATRIX_data$time <- anytime(collatz_cycle7_FIBO_MATRIX_data$timestamp / 1000)
+
+collatz_cycle7_FIBO_MATRIX_data <- collatz_cycle7_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle7_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle7_FIBO_MATRIX_data[1, 'time']), 0))
+collatz_cycle7_FIBO_MATRIX_trapezoid_val <- trapz(collatz_cycle7_FIBO_MATRIX_data$id, collatz_cycle7_FIBO_MATRIX_data$power) 
+
+collatz_cycle8_FIBO_MATRIX_paths <- paste(main_dir, collatz_cycle8_FIBO_MATRIX_treatment, sep="")
+collatz_cycle8_FIBO_MATRIX_data <- read.csv(collatz_cycle8_FIBO_MATRIX_paths, header=T)
+collatz_cycle8_FIBO_MATRIX_data$id <- 1:nrow(collatz_cycle8_FIBO_MATRIX_data)
+collatz_cycle8_FIBO_MATRIX_data$time <- anytime(collatz_cycle8_FIBO_MATRIX_data$timestamp / 1000)
+
+collatz_cycle8_FIBO_MATRIX_data <- collatz_cycle8_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle8_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle8_FIBO_MATRIX_data[1, 'time']), 0))
+collatz_cycle8_FIBO_MATRIX_trapezoid_val <- trapz(collatz_cycle8_FIBO_MATRIX_data$id, collatz_cycle8_FIBO_MATRIX_data$power) 
+
+collatz_cycle9_FIBO_MATRIX_paths <- paste(main_dir, collatz_cycle9_FIBO_MATRIX_treatment, sep="")
+collatz_cycle9_FIBO_MATRIX_data <- read.csv(collatz_cycle9_FIBO_MATRIX_paths, header=T)
+collatz_cycle9_FIBO_MATRIX_data$id <- 1:nrow(collatz_cycle9_FIBO_MATRIX_data)
+collatz_cycle9_FIBO_MATRIX_data$time <- anytime(collatz_cycle9_FIBO_MATRIX_data$timestamp / 1000)
+
+collatz_cycle9_FIBO_MATRIX_data <- collatz_cycle9_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle9_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle9_FIBO_MATRIX_data[1, 'time']), 0))
+collatz_cycle9_FIBO_MATRIX_trapezoid_val <- trapz(collatz_cycle9_FIBO_MATRIX_data$id, collatz_cycle9_FIBO_MATRIX_data$power) 
+
+collatz_cycle10_FIBO_MATRIX_paths <- paste(main_dir, collatz_cycle10_FIBO_MATRIX_treatment, sep="")
+collatz_cycle10_FIBO_MATRIX_data <- read.csv(collatz_cycle10_FIBO_MATRIX_paths, header=T)
+collatz_cycle10_FIBO_MATRIX_data$id <- 1:nrow(collatz_cycle10_FIBO_MATRIX_data)
+collatz_cycle10_FIBO_MATRIX_data$time <- anytime(collatz_cycle10_FIBO_MATRIX_data$timestamp / 1000)
+
+collatz_cycle10_FIBO_MATRIX_data <- collatz_cycle10_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle10_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle10_FIBO_MATRIX_data[1, 'time']), 0))
+collatz_cycle10_FIBO_MATRIX_trapezoid_val <- trapz(collatz_cycle10_FIBO_MATRIX_data$id, collatz_cycle10_FIBO_MATRIX_data$power) 
+
+
+rapl_cycle1_FIBO_MATRIX_paths <- paste(main_dir, rapl_cycle1_FIBO_MATRIX_treatment, sep="")
+rapl_cycle1_FIBO_MATRIX_data <- read.csv(rapl_cycle1_FIBO_MATRIX_paths, header=T)
+rapl_cycle1_FIBO_MATRIX_data$id <- 1:nrow(rapl_cycle1_FIBO_MATRIX_data)
+rapl_cycle1_FIBO_MATRIX_data$time <- anytime(rapl_cycle1_FIBO_MATRIX_data$timestamp / 1000)
+
+rapl_cycle1_FIBO_MATRIX_data <- rapl_cycle1_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle1_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle1_FIBO_MATRIX_data[1, 'time']), 0))
+rapl_cycle1_FIBO_MATRIX_trapezoid_val <- trapz(rapl_cycle1_FIBO_MATRIX_data$id, rapl_cycle1_FIBO_MATRIX_data$power) 
+
+rapl_cycle2_FIBO_MATRIX_paths <- paste(main_dir, rapl_cycle2_FIBO_MATRIX_treatment, sep="")
+rapl_cycle2_FIBO_MATRIX_data <- read.csv(rapl_cycle2_FIBO_MATRIX_paths, header=T)
+rapl_cycle2_FIBO_MATRIX_data$id <- 1:nrow(rapl_cycle2_FIBO_MATRIX_data)
+rapl_cycle2_FIBO_MATRIX_data$time <- anytime(rapl_cycle2_FIBO_MATRIX_data$timestamp / 1000)
+
+rapl_cycle2_FIBO_MATRIX_data <- rapl_cycle2_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle2_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle2_FIBO_MATRIX_data[1, 'time']), 0))
+rapl_cycle2_FIBO_MATRIX_trapezoid_val <- trapz(rapl_cycle2_FIBO_MATRIX_data$id, rapl_cycle2_FIBO_MATRIX_data$power) 
+
+rapl_cycle3_FIBO_MATRIX_paths <- paste(main_dir, rapl_cycle3_FIBO_MATRIX_treatment, sep="")
+rapl_cycle3_FIBO_MATRIX_data <- read.csv(rapl_cycle3_FIBO_MATRIX_paths, header=T)
+rapl_cycle3_FIBO_MATRIX_data$id <- 1:nrow(rapl_cycle3_FIBO_MATRIX_data)
+rapl_cycle3_FIBO_MATRIX_data$time <- anytime(rapl_cycle3_FIBO_MATRIX_data$timestamp / 1000)
+
+rapl_cycle3_FIBO_MATRIX_data <- rapl_cycle3_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle3_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle3_FIBO_MATRIX_data[1, 'time']), 0))
+rapl_cycle3_FIBO_MATRIX_trapezoid_val <- trapz(rapl_cycle3_FIBO_MATRIX_data$id, rapl_cycle3_FIBO_MATRIX_data$power) 
+
+rapl_cycle4_FIBO_MATRIX_paths <- paste(main_dir, rapl_cycle4_FIBO_MATRIX_treatment, sep="")
+rapl_cycle4_FIBO_MATRIX_data <- read.csv(rapl_cycle4_FIBO_MATRIX_paths, header=T)
+rapl_cycle4_FIBO_MATRIX_data$id <- 1:nrow(rapl_cycle4_FIBO_MATRIX_data)
+rapl_cycle4_FIBO_MATRIX_data$time <- anytime(rapl_cycle4_FIBO_MATRIX_data$timestamp / 1000)
+
+rapl_cycle4_FIBO_MATRIX_data <- rapl_cycle4_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle4_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle4_FIBO_MATRIX_data[1, 'time']), 0))
+rapl_cycle4_FIBO_MATRIX_trapezoid_val <- trapz(rapl_cycle4_FIBO_MATRIX_data$id, rapl_cycle4_FIBO_MATRIX_data$power) 
+
+rapl_cycle5_FIBO_MATRIX_paths <- paste(main_dir, rapl_cycle5_FIBO_MATRIX_treatment, sep="")
+rapl_cycle5_FIBO_MATRIX_data <- read.csv(rapl_cycle5_FIBO_MATRIX_paths, header=T)
+rapl_cycle5_FIBO_MATRIX_data$id <- 1:nrow(rapl_cycle5_FIBO_MATRIX_data)
+rapl_cycle5_FIBO_MATRIX_data$time <- anytime(rapl_cycle5_FIBO_MATRIX_data$timestamp / 1000)
+
+rapl_cycle5_FIBO_MATRIX_data <- rapl_cycle5_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle5_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle5_FIBO_MATRIX_data[1, 'time']), 0))
+rapl_cycle5_FIBO_MATRIX_trapezoid_val <- trapz(rapl_cycle5_FIBO_MATRIX_data$id, rapl_cycle5_FIBO_MATRIX_data$power) 
+
+rapl_cycle6_FIBO_MATRIX_paths <- paste(main_dir, rapl_cycle6_FIBO_MATRIX_treatment, sep="")
+rapl_cycle6_FIBO_MATRIX_data <- read.csv(rapl_cycle6_FIBO_MATRIX_paths, header=T)
+rapl_cycle6_FIBO_MATRIX_data$id <- 1:nrow(rapl_cycle6_FIBO_MATRIX_data)
+rapl_cycle6_FIBO_MATRIX_data$time <- anytime(rapl_cycle6_FIBO_MATRIX_data$timestamp / 1000)
+
+rapl_cycle6_FIBO_MATRIX_data <- rapl_cycle6_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle6_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle6_FIBO_MATRIX_data[1, 'time']), 0))
+rapl_cycle6_FIBO_MATRIX_trapezoid_val <- trapz(rapl_cycle6_FIBO_MATRIX_data$id, rapl_cycle6_FIBO_MATRIX_data$power) 
+
+rapl_cycle7_FIBO_MATRIX_paths <- paste(main_dir, rapl_cycle7_FIBO_MATRIX_treatment, sep="")
+rapl_cycle7_FIBO_MATRIX_data <- read.csv(rapl_cycle7_FIBO_MATRIX_paths, header=T)
+rapl_cycle7_FIBO_MATRIX_data$id <- 1:nrow(rapl_cycle7_FIBO_MATRIX_data)
+rapl_cycle7_FIBO_MATRIX_data$time <- anytime(rapl_cycle7_FIBO_MATRIX_data$timestamp / 1000)
+
+rapl_cycle7_FIBO_MATRIX_data <- rapl_cycle7_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle7_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle7_FIBO_MATRIX_data[1, 'time']), 0))
+rapl_cycle7_FIBO_MATRIX_trapezoid_val <- trapz(rapl_cycle7_FIBO_MATRIX_data$id, rapl_cycle7_FIBO_MATRIX_data$power) 
+
+rapl_cycle8_FIBO_MATRIX_paths <- paste(main_dir, rapl_cycle8_FIBO_MATRIX_treatment, sep="")
+rapl_cycle8_FIBO_MATRIX_data <- read.csv(rapl_cycle8_FIBO_MATRIX_paths, header=T)
+rapl_cycle8_FIBO_MATRIX_data$id <- 1:nrow(rapl_cycle8_FIBO_MATRIX_data)
+rapl_cycle8_FIBO_MATRIX_data$time <- anytime(rapl_cycle8_FIBO_MATRIX_data$timestamp / 1000)
+
+rapl_cycle8_FIBO_MATRIX_data <- rapl_cycle8_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle8_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle8_FIBO_MATRIX_data[1, 'time']), 0))
+rapl_cycle8_FIBO_MATRIX_trapezoid_val <- trapz(rapl_cycle8_FIBO_MATRIX_data$id, rapl_cycle8_FIBO_MATRIX_data$power) 
+
+rapl_cycle9_FIBO_MATRIX_paths <- paste(main_dir, rapl_cycle9_FIBO_MATRIX_treatment, sep="")
+rapl_cycle9_FIBO_MATRIX_data <- read.csv(rapl_cycle9_FIBO_MATRIX_paths, header=T)
+rapl_cycle9_FIBO_MATRIX_data$id <- 1:nrow(rapl_cycle9_FIBO_MATRIX_data)
+rapl_cycle9_FIBO_MATRIX_data$time <- anytime(rapl_cycle9_FIBO_MATRIX_data$timestamp / 1000)
+
+rapl_cycle9_FIBO_MATRIX_data <- rapl_cycle9_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle9_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle9_FIBO_MATRIX_data[1, 'time']), 0))
+rapl_cycle9_FIBO_MATRIX_trapezoid_val <- trapz(rapl_cycle9_FIBO_MATRIX_data$id, rapl_cycle9_FIBO_MATRIX_data$power) 
+
+rapl_cycle10_FIBO_MATRIX_paths <- paste(main_dir, rapl_cycle10_FIBO_MATRIX_treatment, sep="")
+rapl_cycle10_FIBO_MATRIX_data <- read.csv(rapl_cycle10_FIBO_MATRIX_paths, header=T)
+rapl_cycle10_FIBO_MATRIX_data$id <- 1:nrow(rapl_cycle10_FIBO_MATRIX_data)
+rapl_cycle10_FIBO_MATRIX_data$time <- anytime(rapl_cycle10_FIBO_MATRIX_data$timestamp / 1000)
+
+rapl_cycle10_FIBO_MATRIX_data <- rapl_cycle10_FIBO_MATRIX_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle10_FIBO_MATRIX_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle10_FIBO_MATRIX_data[1, 'time']), 0))
+rapl_cycle10_FIBO_MATRIX_trapezoid_val <- trapz(rapl_cycle10_FIBO_MATRIX_data$id, rapl_cycle10_FIBO_MATRIX_data$power) 
+
+
+#ALL
+fibo_cycle1_ALL_paths <- paste(main_dir, fibo_cycle1_ALL_treatment, sep="")
+fibo_cycle1_ALL_data <- read.csv(fibo_cycle1_ALL_paths, header=T)
+fibo_cycle1_ALL_data$time <- anytime(fibo_cycle1_ALL_data$timestamp / 1000)
+fibo_cycle1_ALL_data$id <- 1:nrow(fibo_cycle1_ALL_data)
+fibo_cycle1_ALL_data <- fibo_cycle1_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle1_ALL_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle1_ALL_data[1, 'time']), 0))
+fibo_cycle1_ALL_trapezoid_val <- trapz(fibo_cycle1_ALL_data$id, fibo_cycle1_ALL_data$power) 
+
+fibo_cycle2_ALL_paths <- paste(main_dir, fibo_cycle2_ALL_treatment, sep="")
+fibo_cycle2_ALL_data <- read.csv(fibo_cycle2_ALL_paths, header=T)
+fibo_cycle2_ALL_data$time <- anytime(fibo_cycle2_ALL_data$timestamp / 1000)
+fibo_cycle2_ALL_data$id <- 1:nrow(fibo_cycle2_ALL_data)
+fibo_cycle2_ALL_data <- fibo_cycle2_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle2_ALL_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle2_ALL_data[1, 'time']), 0))
+fibo_cycle2_ALL_trapezoid_val <- trapz(fibo_cycle2_ALL_data$id, fibo_cycle2_ALL_data$power) 
+
+fibo_cycle3_ALL_paths <- paste(main_dir, fibo_cycle3_ALL_treatment, sep="")
+fibo_cycle3_ALL_data <- read.csv(fibo_cycle3_ALL_paths, header=T)
+fibo_cycle3_ALL_data$time <- anytime(fibo_cycle3_ALL_data$timestamp / 1000)
+fibo_cycle3_ALL_data$id <- 1:nrow(fibo_cycle3_ALL_data)
+fibo_cycle3_ALL_data <- fibo_cycle3_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle3_ALL_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle3_ALL_data[1, 'time']), 0))
+fibo_cycle3_ALL_trapezoid_val <- trapz(fibo_cycle3_ALL_data$id, fibo_cycle3_ALL_data$power) 
+
+fibo_cycle4_ALL_paths <- paste(main_dir, fibo_cycle4_ALL_treatment, sep="")
+fibo_cycle4_ALL_data <- read.csv(fibo_cycle4_ALL_paths, header=T)
+fibo_cycle4_ALL_data$time <- anytime(fibo_cycle4_ALL_data$timestamp / 1000)
+fibo_cycle4_ALL_data$id <- 1:nrow(fibo_cycle4_ALL_data)
+fibo_cycle4_ALL_data <- fibo_cycle4_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle4_ALL_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle4_ALL_data[1, 'time']), 0))
+fibo_cycle4_ALL_trapezoid_val <- trapz(fibo_cycle4_ALL_data$id, fibo_cycle4_ALL_data$power) 
+
+fibo_cycle5_ALL_paths <- paste(main_dir, fibo_cycle5_ALL_treatment, sep="")
+fibo_cycle5_ALL_data <- read.csv(fibo_cycle5_ALL_paths, header=T)
+fibo_cycle5_ALL_data$time <- anytime(fibo_cycle5_ALL_data$timestamp / 1000)
+fibo_cycle5_ALL_data$id <- 1:nrow(fibo_cycle5_ALL_data)
+fibo_cycle5_ALL_data <- fibo_cycle5_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle5_ALL_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle5_ALL_data[1, 'time']), 0))
+fibo_cycle5_ALL_trapezoid_val <- trapz(fibo_cycle5_ALL_data$id, fibo_cycle5_ALL_data$power) 
+
+fibo_cycle6_ALL_paths <- paste(main_dir, fibo_cycle6_ALL_treatment, sep="")
+fibo_cycle6_ALL_data <- read.csv(fibo_cycle6_ALL_paths, header=T)
+fibo_cycle6_ALL_data$time <- anytime(fibo_cycle6_ALL_data$timestamp / 1000)
+fibo_cycle6_ALL_data$id <- 1:nrow(fibo_cycle6_ALL_data)
+fibo_cycle6_ALL_data <- fibo_cycle6_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle6_ALL_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle6_ALL_data[1, 'time']), 0))
+fibo_cycle6_ALL_trapezoid_val <- trapz(fibo_cycle6_ALL_data$id, fibo_cycle6_ALL_data$power) 
+
+fibo_cycle7_ALL_paths <- paste(main_dir, fibo_cycle7_ALL_treatment, sep="")
+fibo_cycle7_ALL_data <- read.csv(fibo_cycle7_ALL_paths, header=T)
+fibo_cycle7_ALL_data$time <- anytime(fibo_cycle7_ALL_data$timestamp / 1000)
+fibo_cycle7_ALL_data$id <- 1:nrow(fibo_cycle7_ALL_data)
+fibo_cycle7_ALL_data <- fibo_cycle7_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle7_ALL_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle7_ALL_data[1, 'time']), 0))
+fibo_cycle7_ALL_trapezoid_val <- trapz(fibo_cycle7_ALL_data$id, fibo_cycle7_ALL_data$power) 
+
+fibo_cycle8_ALL_paths <- paste(main_dir, fibo_cycle8_ALL_treatment, sep="")
+fibo_cycle8_ALL_data <- read.csv(fibo_cycle8_ALL_paths, header=T)
+fibo_cycle8_ALL_data$time <- anytime(fibo_cycle8_ALL_data$timestamp / 1000)
+fibo_cycle8_ALL_data$id <- 1:nrow(fibo_cycle8_ALL_data)
+fibo_cycle8_ALL_data <- fibo_cycle8_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle8_ALL_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle8_ALL_data[1, 'time']), 0))
+fibo_cycle8_ALL_trapezoid_val <- trapz(fibo_cycle8_ALL_data$id, fibo_cycle8_ALL_data$power) 
+
+fibo_cycle9_ALL_paths <- paste(main_dir, fibo_cycle9_ALL_treatment, sep="")
+fibo_cycle9_ALL_data <- read.csv(fibo_cycle9_ALL_paths, header=T)
+fibo_cycle9_ALL_data$time <- anytime(fibo_cycle9_ALL_data$timestamp / 1000)
+fibo_cycle9_ALL_data$id <- 1:nrow(fibo_cycle9_ALL_data)
+fibo_cycle9_ALL_data <- fibo_cycle9_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle9_ALL_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle9_ALL_data[1, 'time']), 0))
+fibo_cycle9_ALL_trapezoid_val <- trapz(fibo_cycle9_ALL_data$id, fibo_cycle9_ALL_data$power) 
+
+fibo_cycle10_ALL_paths <- paste(main_dir, fibo_cycle10_ALL_treatment, sep="")
+fibo_cycle10_ALL_data <- read.csv(fibo_cycle10_ALL_paths, header=T)
+fibo_cycle10_ALL_data$id <- 1:nrow(fibo_cycle10_ALL_data)
+fibo_cycle10_ALL_data$time <- anytime(fibo_cycle10_ALL_data$timestamp / 1000)
+
+fibo_cycle10_ALL_data <- fibo_cycle10_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle10_ALL_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle10_ALL_data[1, 'time']), 0))
+fibo_cycle10_ALL_trapezoid_val <- trapz(fibo_cycle10_ALL_data$id, fibo_cycle10_ALL_data$power) 
+
+
+bubble_cycle1_ALL_paths <- paste(main_dir, bubble_cycle1_ALL_treatment, sep="")
+bubble_cycle1_ALL_data <- read.csv(bubble_cycle1_ALL_paths, header=T)
+bubble_cycle1_ALL_data$id <- 1:nrow(bubble_cycle1_ALL_data)
+bubble_cycle1_ALL_data$time <- anytime(bubble_cycle1_ALL_data$timestamp / 1000)
+
+bubble_cycle1_ALL_data <- bubble_cycle1_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle1_ALL_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle1_ALL_data[1, 'time']), 0))
+bubble_cycle1_ALL_trapezoid_val <- trapz(bubble_cycle1_ALL_data$id, bubble_cycle1_ALL_data$power) 
+
+bubble_cycle2_ALL_paths <- paste(main_dir, bubble_cycle2_ALL_treatment, sep="")
+bubble_cycle2_ALL_data <- read.csv(bubble_cycle2_ALL_paths, header=T)
+bubble_cycle2_ALL_data$id <- 1:nrow(bubble_cycle2_ALL_data)
+bubble_cycle2_ALL_data$time <- anytime(bubble_cycle2_ALL_data$timestamp / 1000)
+
+bubble_cycle2_ALL_data <- bubble_cycle2_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle2_ALL_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle2_ALL_data[1, 'time']), 0))
+bubble_cycle2_ALL_trapezoid_val <- trapz(bubble_cycle2_ALL_data$id, bubble_cycle2_ALL_data$power) 
+
+bubble_cycle3_ALL_paths <- paste(main_dir, bubble_cycle3_ALL_treatment, sep="")
+bubble_cycle3_ALL_data <- read.csv(bubble_cycle3_ALL_paths, header=T)
+bubble_cycle3_ALL_data$id <- 1:nrow(bubble_cycle3_ALL_data)
+bubble_cycle3_ALL_data$time <- anytime(bubble_cycle3_ALL_data$timestamp / 1000)
+
+bubble_cycle3_ALL_data <- bubble_cycle3_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle3_ALL_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle3_ALL_data[1, 'time']), 0))
+bubble_cycle3_ALL_trapezoid_val <- trapz(bubble_cycle3_ALL_data$id, bubble_cycle3_ALL_data$power) 
+
+bubble_cycle4_ALL_paths <- paste(main_dir, bubble_cycle4_ALL_treatment, sep="")
+bubble_cycle4_ALL_data <- read.csv(bubble_cycle4_ALL_paths, header=T)
+bubble_cycle4_ALL_data$id <- 1:nrow(bubble_cycle4_ALL_data)
+bubble_cycle4_ALL_data$time <- anytime(bubble_cycle4_ALL_data$timestamp / 1000)
+
+bubble_cycle4_ALL_data <- bubble_cycle4_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle4_ALL_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle4_ALL_data[1, 'time']), 0))
+bubble_cycle4_ALL_trapezoid_val <- trapz(bubble_cycle4_ALL_data$id, bubble_cycle4_ALL_data$power) 
+
+bubble_cycle5_ALL_paths <- paste(main_dir, bubble_cycle5_ALL_treatment, sep="")
+bubble_cycle5_ALL_data <- read.csv(bubble_cycle5_ALL_paths, header=T)
+bubble_cycle5_ALL_data$id <- 1:nrow(bubble_cycle5_ALL_data)
+bubble_cycle5_ALL_data$time <- anytime(bubble_cycle5_ALL_data$timestamp / 1000)
+
+bubble_cycle5_ALL_data <- bubble_cycle5_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle5_ALL_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle5_ALL_data[1, 'time']), 0))
+bubble_cycle5_ALL_trapezoid_val <- trapz(bubble_cycle5_ALL_data$id, bubble_cycle5_ALL_data$power) 
+
+bubble_cycle6_ALL_paths <- paste(main_dir, bubble_cycle6_ALL_treatment, sep="")
+bubble_cycle6_ALL_data <- read.csv(bubble_cycle6_ALL_paths, header=T)
+bubble_cycle6_ALL_data$id <- 1:nrow(bubble_cycle6_ALL_data)
+bubble_cycle6_ALL_data$time <- anytime(bubble_cycle6_ALL_data$timestamp / 1000)
+
+bubble_cycle6_ALL_data <- bubble_cycle6_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle6_ALL_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle6_ALL_data[1, 'time']), 0))
+bubble_cycle6_ALL_trapezoid_val <- trapz(bubble_cycle6_ALL_data$id, bubble_cycle6_ALL_data$power) 
+
+bubble_cycle7_ALL_paths <- paste(main_dir, bubble_cycle7_ALL_treatment, sep="")
+bubble_cycle7_ALL_data <- read.csv(bubble_cycle7_ALL_paths, header=T)
+bubble_cycle7_ALL_data$id <- 1:nrow(bubble_cycle7_ALL_data)
+bubble_cycle7_ALL_data$time <- anytime(bubble_cycle7_ALL_data$timestamp / 1000)
+
+bubble_cycle7_ALL_data <- bubble_cycle7_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle7_ALL_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle7_ALL_data[1, 'time']), 0))
+bubble_cycle7_ALL_trapezoid_val <- trapz(bubble_cycle7_ALL_data$id, bubble_cycle7_ALL_data$power) 
+
+bubble_cycle8_ALL_paths <- paste(main_dir, bubble_cycle8_ALL_treatment, sep="")
+bubble_cycle8_ALL_data <- read.csv(bubble_cycle8_ALL_paths, header=T)
+bubble_cycle8_ALL_data$id <- 1:nrow(bubble_cycle8_ALL_data)
+bubble_cycle8_ALL_data$time <- anytime(bubble_cycle8_ALL_data$timestamp / 1000)
+
+bubble_cycle8_ALL_data <- bubble_cycle8_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle8_ALL_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle8_ALL_data[1, 'time']), 0))
+bubble_cycle8_ALL_trapezoid_val <- trapz(bubble_cycle8_ALL_data$id, bubble_cycle8_ALL_data$power) 
+
+bubble_cycle9_ALL_paths <- paste(main_dir, bubble_cycle9_ALL_treatment, sep="")
+bubble_cycle9_ALL_data <- read.csv(bubble_cycle9_ALL_paths, header=T)
+bubble_cycle9_ALL_data$id <- 1:nrow(bubble_cycle9_ALL_data)
+bubble_cycle9_ALL_data$time <- anytime(bubble_cycle9_ALL_data$timestamp / 1000)
+
+bubble_cycle9_ALL_data <- bubble_cycle9_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle9_ALL_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle9_ALL_data[1, 'time']), 0))
+bubble_cycle9_ALL_trapezoid_val <- trapz(bubble_cycle9_ALL_data$id, bubble_cycle9_ALL_data$power) 
+
+bubble_cycle10_ALL_paths <- paste(main_dir, bubble_cycle10_ALL_treatment, sep="")
+bubble_cycle10_ALL_data <- read.csv(bubble_cycle10_ALL_paths, header=T)
+bubble_cycle10_ALL_data$id <- 1:nrow(bubble_cycle10_ALL_data)
+bubble_cycle10_ALL_data$time <- anytime(bubble_cycle10_ALL_data$timestamp / 1000)
+
+bubble_cycle10_ALL_data <- bubble_cycle10_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle10_ALL_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle10_ALL_data[1, 'time']), 0))
+bubble_cycle10_ALL_trapezoid_val <- trapz(bubble_cycle10_ALL_data$id, bubble_cycle10_ALL_data$power) 
+
+
+matrix_cycle1_ALL_paths <- paste(main_dir, matrix_cycle1_ALL_treatment, sep="")
+matrix_cycle1_ALL_data <- read.csv(matrix_cycle1_ALL_paths, header=T)
+matrix_cycle1_ALL_data$id <- 1:nrow(matrix_cycle1_ALL_data)
+matrix_cycle1_ALL_data$time <- anytime(matrix_cycle1_ALL_data$timestamp / 1000)
+
+matrix_cycle1_ALL_data <- matrix_cycle1_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle1_ALL_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle1_ALL_data[1, 'time']), 0))
+matrix_cycle1_ALL_trapezoid_val <- trapz(matrix_cycle1_ALL_data$id, matrix_cycle1_ALL_data$power) 
+
+matrix_cycle2_ALL_paths <- paste(main_dir, matrix_cycle2_ALL_treatment, sep="")
+matrix_cycle2_ALL_data <- read.csv(matrix_cycle2_ALL_paths, header=T)
+matrix_cycle2_ALL_data$id <- 1:nrow(matrix_cycle2_ALL_data)
+matrix_cycle2_ALL_data$time <- anytime(matrix_cycle2_ALL_data$timestamp / 1000)
+
+matrix_cycle2_ALL_data <- matrix_cycle2_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle2_ALL_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle2_ALL_data[1, 'time']), 0))
+matrix_cycle2_ALL_trapezoid_val <- trapz(matrix_cycle2_ALL_data$id, matrix_cycle2_ALL_data$power) 
+
+matrix_cycle3_ALL_paths <- paste(main_dir, matrix_cycle3_ALL_treatment, sep="")
+matrix_cycle3_ALL_data <- read.csv(matrix_cycle3_ALL_paths, header=T)
+matrix_cycle3_ALL_data$id <- 1:nrow(matrix_cycle3_ALL_data)
+matrix_cycle3_ALL_data$time <- anytime(matrix_cycle3_ALL_data$timestamp / 1000)
+
+matrix_cycle3_ALL_data <- matrix_cycle3_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle3_ALL_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle3_ALL_data[1, 'time']), 0))
+matrix_cycle3_ALL_trapezoid_val <- trapz(matrix_cycle3_ALL_data$id, matrix_cycle3_ALL_data$power) 
+
+matrix_cycle4_ALL_paths <- paste(main_dir, matrix_cycle4_ALL_treatment, sep="")
+matrix_cycle4_ALL_data <- read.csv(matrix_cycle4_ALL_paths, header=T)
+matrix_cycle4_ALL_data$id <- 1:nrow(matrix_cycle4_ALL_data)
+matrix_cycle4_ALL_data$time <- anytime(matrix_cycle4_ALL_data$timestamp / 1000)
+
+matrix_cycle4_ALL_data <- matrix_cycle4_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle4_ALL_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle4_ALL_data[1, 'time']), 0))
+matrix_cycle4_ALL_trapezoid_val <- trapz(matrix_cycle4_ALL_data$id, matrix_cycle4_ALL_data$power) 
+
+matrix_cycle5_ALL_paths <- paste(main_dir, matrix_cycle5_ALL_treatment, sep="")
+matrix_cycle5_ALL_data <- read.csv(matrix_cycle5_ALL_paths, header=T)
+matrix_cycle5_ALL_data$id <- 1:nrow(matrix_cycle5_ALL_data)
+matrix_cycle5_ALL_data$time <- anytime(matrix_cycle5_ALL_data$timestamp / 1000)
+
+matrix_cycle5_ALL_data <- matrix_cycle5_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle5_ALL_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle5_ALL_data[1, 'time']), 0))
+matrix_cycle5_ALL_trapezoid_val <- trapz(matrix_cycle5_ALL_data$id, matrix_cycle5_ALL_data$power) 
+
+matrix_cycle6_ALL_paths <- paste(main_dir, matrix_cycle6_ALL_treatment, sep="")
+matrix_cycle6_ALL_data <- read.csv(matrix_cycle6_ALL_paths, header=T)
+matrix_cycle6_ALL_data$id <- 1:nrow(matrix_cycle6_ALL_data)
+matrix_cycle6_ALL_data$time <- anytime(matrix_cycle6_ALL_data$timestamp / 1000)
+
+matrix_cycle6_ALL_data <- matrix_cycle6_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle6_ALL_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle6_ALL_data[1, 'time']), 0))
+matrix_cycle6_ALL_trapezoid_val <- trapz(matrix_cycle6_ALL_data$id, matrix_cycle6_ALL_data$power) 
+
+matrix_cycle7_ALL_paths <- paste(main_dir, matrix_cycle7_ALL_treatment, sep="")
+matrix_cycle7_ALL_data <- read.csv(matrix_cycle7_ALL_paths, header=T)
+matrix_cycle7_ALL_data$id <- 1:nrow(matrix_cycle7_ALL_data)
+matrix_cycle7_ALL_data$time <- anytime(matrix_cycle7_ALL_data$timestamp / 1000)
+
+matrix_cycle7_ALL_data <- matrix_cycle7_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle7_ALL_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle7_ALL_data[1, 'time']), 0))
+matrix_cycle7_ALL_trapezoid_val <- trapz(matrix_cycle7_ALL_data$id, matrix_cycle7_ALL_data$power) 
+
+matrix_cycle8_ALL_paths <- paste(main_dir, matrix_cycle8_ALL_treatment, sep="")
+matrix_cycle8_ALL_data <- read.csv(matrix_cycle8_ALL_paths, header=T)
+matrix_cycle8_ALL_data$id <- 1:nrow(matrix_cycle8_ALL_data)
+matrix_cycle8_ALL_data$time <- anytime(matrix_cycle8_ALL_data$timestamp / 1000)
+
+matrix_cycle8_ALL_data <- matrix_cycle8_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle8_ALL_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle8_ALL_data[1, 'time']), 0))
+matrix_cycle8_ALL_trapezoid_val <- trapz(matrix_cycle8_ALL_data$id, matrix_cycle8_ALL_data$power) 
+
+matrix_cycle9_ALL_paths <- paste(main_dir, matrix_cycle9_ALL_treatment, sep="")
+matrix_cycle9_ALL_data <- read.csv(matrix_cycle9_ALL_paths, header=T)
+matrix_cycle9_ALL_data$id <- 1:nrow(matrix_cycle9_ALL_data)
+matrix_cycle9_ALL_data$time <- anytime(matrix_cycle9_ALL_data$timestamp / 1000)
+
+matrix_cycle9_ALL_data <- matrix_cycle9_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle9_ALL_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle9_ALL_data[1, 'time']), 0))
+matrix_cycle9_ALL_trapezoid_val <- trapz(matrix_cycle9_ALL_data$id, matrix_cycle9_ALL_data$power) 
+
+matrix_cycle10_ALL_paths <- paste(main_dir, matrix_cycle10_ALL_treatment, sep="")
+matrix_cycle10_ALL_data <- read.csv(matrix_cycle10_ALL_paths, header=T)
+matrix_cycle10_ALL_data$id <- 1:nrow(matrix_cycle10_ALL_data)
+matrix_cycle10_ALL_data$time <- anytime(matrix_cycle10_ALL_data$timestamp / 1000)
+
+matrix_cycle10_ALL_data <- matrix_cycle10_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle10_ALL_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle10_ALL_data[1, 'time']), 0))
+matrix_cycle10_ALL_trapezoid_val <- trapz(matrix_cycle10_ALL_data$id, matrix_cycle10_ALL_data$power) 
+
+
+collatz_cycle1_ALL_paths <- paste(main_dir, collatz_cycle1_ALL_treatment, sep="")
+collatz_cycle1_ALL_data <- read.csv(collatz_cycle1_ALL_paths, header=T)
+collatz_cycle1_ALL_data$id <- 1:nrow(collatz_cycle1_ALL_data)
+collatz_cycle1_ALL_data$time <- anytime(collatz_cycle1_ALL_data$timestamp / 1000)
+
+collatz_cycle1_ALL_data <- collatz_cycle1_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle1_ALL_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle1_ALL_data[1, 'time']), 0))
+collatz_cycle1_ALL_trapezoid_val <- trapz(collatz_cycle1_ALL_data$id, collatz_cycle1_ALL_data$power) 
+
+collatz_cycle2_ALL_paths <- paste(main_dir, collatz_cycle2_ALL_treatment, sep="")
+collatz_cycle2_ALL_data <- read.csv(collatz_cycle2_ALL_paths, header=T)
+collatz_cycle2_ALL_data$id <- 1:nrow(collatz_cycle2_ALL_data)
+collatz_cycle2_ALL_data$time <- anytime(collatz_cycle2_ALL_data$timestamp / 1000)
+
+collatz_cycle2_ALL_data <- collatz_cycle2_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle2_ALL_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle2_ALL_data[1, 'time']), 0))
+collatz_cycle2_ALL_trapezoid_val <- trapz(collatz_cycle2_ALL_data$id, collatz_cycle2_ALL_data$power) 
+
+collatz_cycle3_ALL_paths <- paste(main_dir, collatz_cycle3_ALL_treatment, sep="")
+collatz_cycle3_ALL_data <- read.csv(collatz_cycle3_ALL_paths, header=T)
+collatz_cycle3_ALL_data$id <- 1:nrow(collatz_cycle3_ALL_data)
+collatz_cycle3_ALL_data$time <- anytime(collatz_cycle3_ALL_data$timestamp / 1000)
+
+collatz_cycle3_ALL_data <- collatz_cycle3_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle3_ALL_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle3_ALL_data[1, 'time']), 0))
+collatz_cycle3_ALL_trapezoid_val <- trapz(collatz_cycle3_ALL_data$id, collatz_cycle3_ALL_data$power) 
+
+collatz_cycle4_ALL_paths <- paste(main_dir, collatz_cycle4_ALL_treatment, sep="")
+collatz_cycle4_ALL_data <- read.csv(collatz_cycle4_ALL_paths, header=T)
+collatz_cycle4_ALL_data$id <- 1:nrow(collatz_cycle4_ALL_data)
+collatz_cycle4_ALL_data$time <- anytime(collatz_cycle4_ALL_data$timestamp / 1000)
+
+collatz_cycle4_ALL_data <- collatz_cycle4_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle4_ALL_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle4_ALL_data[1, 'time']), 0))
+collatz_cycle4_ALL_trapezoid_val <- trapz(collatz_cycle4_ALL_data$id, collatz_cycle4_ALL_data$power) 
+
+collatz_cycle5_ALL_paths <- paste(main_dir, collatz_cycle5_ALL_treatment, sep="")
+collatz_cycle5_ALL_data <- read.csv(collatz_cycle5_ALL_paths, header=T)
+collatz_cycle5_ALL_data$id <- 1:nrow(collatz_cycle5_ALL_data)
+collatz_cycle5_ALL_data$time <- anytime(collatz_cycle5_ALL_data$timestamp / 1000)
+
+collatz_cycle5_ALL_data <- collatz_cycle5_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle5_ALL_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle5_ALL_data[1, 'time']), 0))
+collatz_cycle5_ALL_trapezoid_val <- trapz(collatz_cycle5_ALL_data$id, collatz_cycle5_ALL_data$power) 
+
+collatz_cycle6_ALL_paths <- paste(main_dir, collatz_cycle6_ALL_treatment, sep="")
+collatz_cycle6_ALL_data <- read.csv(collatz_cycle6_ALL_paths, header=T)
+collatz_cycle6_ALL_data$id <- 1:nrow(collatz_cycle6_ALL_data)
+collatz_cycle6_ALL_data$time <- anytime(collatz_cycle6_ALL_data$timestamp / 1000)
+
+collatz_cycle6_ALL_data <- collatz_cycle6_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle6_ALL_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle6_ALL_data[1, 'time']), 0))
+collatz_cycle6_ALL_trapezoid_val <- trapz(collatz_cycle6_ALL_data$id, collatz_cycle6_ALL_data$power) 
+
+collatz_cycle7_ALL_paths <- paste(main_dir, collatz_cycle7_ALL_treatment, sep="")
+collatz_cycle7_ALL_data <- read.csv(collatz_cycle7_ALL_paths, header=T)
+collatz_cycle7_ALL_data$id <- 1:nrow(collatz_cycle7_ALL_data)
+collatz_cycle7_ALL_data$time <- anytime(collatz_cycle7_ALL_data$timestamp / 1000)
+
+collatz_cycle7_ALL_data <- collatz_cycle7_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle7_ALL_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle7_ALL_data[1, 'time']), 0))
+collatz_cycle7_ALL_trapezoid_val <- trapz(collatz_cycle7_ALL_data$id, collatz_cycle7_ALL_data$power) 
+
+collatz_cycle8_ALL_paths <- paste(main_dir, collatz_cycle8_ALL_treatment, sep="")
+collatz_cycle8_ALL_data <- read.csv(collatz_cycle8_ALL_paths, header=T)
+collatz_cycle8_ALL_data$id <- 1:nrow(collatz_cycle8_ALL_data)
+collatz_cycle8_ALL_data$time <- anytime(collatz_cycle8_ALL_data$timestamp / 1000)
+
+collatz_cycle8_ALL_data <- collatz_cycle8_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle8_ALL_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle8_ALL_data[1, 'time']), 0))
+collatz_cycle8_ALL_trapezoid_val <- trapz(collatz_cycle8_ALL_data$id, collatz_cycle8_ALL_data$power) 
+
+collatz_cycle9_ALL_paths <- paste(main_dir, collatz_cycle9_ALL_treatment, sep="")
+collatz_cycle9_ALL_data <- read.csv(collatz_cycle9_ALL_paths, header=T)
+collatz_cycle9_ALL_data$id <- 1:nrow(collatz_cycle9_ALL_data)
+collatz_cycle9_ALL_data$time <- anytime(collatz_cycle9_ALL_data$timestamp / 1000)
+
+collatz_cycle9_ALL_data <- collatz_cycle9_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle9_ALL_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle9_ALL_data[1, 'time']), 0))
+collatz_cycle9_ALL_trapezoid_val <- trapz(collatz_cycle9_ALL_data$id, collatz_cycle9_ALL_data$power) 
+
+collatz_cycle10_ALL_paths <- paste(main_dir, collatz_cycle10_ALL_treatment, sep="")
+collatz_cycle10_ALL_data <- read.csv(collatz_cycle10_ALL_paths, header=T)
+collatz_cycle10_ALL_data$id <- 1:nrow(collatz_cycle10_ALL_data)
+collatz_cycle10_ALL_data$time <- anytime(collatz_cycle10_ALL_data$timestamp / 1000)
+
+collatz_cycle10_ALL_data <- collatz_cycle10_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle10_ALL_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle10_ALL_data[1, 'time']), 0))
+collatz_cycle10_ALL_trapezoid_val <- trapz(collatz_cycle10_ALL_data$id, collatz_cycle10_ALL_data$power) 
+
+
+rapl_cycle1_ALL_paths <- paste(main_dir, rapl_cycle1_ALL_treatment, sep="")
+rapl_cycle1_ALL_data <- read.csv(rapl_cycle1_ALL_paths, header=T)
+rapl_cycle1_ALL_data$time <- anytime(rapl_cycle1_ALL_data$timestamp / 1000)
+rapl_cycle1_ALL_data$id <- 1:nrow(rapl_cycle1_ALL_data)
+rapl_cycle1_ALL_data <- rapl_cycle1_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle1_ALL_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle1_ALL_data[1, 'time']), 0))
+rapl_cycle1_ALL_trapezoid_val <- trapz(rapl_cycle1_ALL_data$id, rapl_cycle1_ALL_data$power) 
+
+rapl_cycle2_ALL_paths <- paste(main_dir, rapl_cycle2_ALL_treatment, sep="")
+rapl_cycle2_ALL_data <- read.csv(rapl_cycle2_ALL_paths, header=T)
+rapl_cycle2_ALL_data$time <- anytime(rapl_cycle2_ALL_data$timestamp / 1000)
+rapl_cycle2_ALL_data$id <- 1:nrow(rapl_cycle2_ALL_data)
+rapl_cycle2_ALL_data <- rapl_cycle2_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle2_ALL_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle2_ALL_data[1, 'time']), 0))
+rapl_cycle2_ALL_trapezoid_val <- trapz(rapl_cycle2_ALL_data$id, rapl_cycle2_ALL_data$power) 
+
+rapl_cycle3_ALL_paths <- paste(main_dir, rapl_cycle3_ALL_treatment, sep="")
+rapl_cycle3_ALL_data <- read.csv(rapl_cycle3_ALL_paths, header=T)
+rapl_cycle3_ALL_data$time <- anytime(rapl_cycle3_ALL_data$timestamp / 1000)
+rapl_cycle3_ALL_data$id <- 1:nrow(rapl_cycle3_ALL_data)
+rapl_cycle3_ALL_data <- rapl_cycle3_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle3_ALL_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle3_ALL_data[1, 'time']), 0))
+rapl_cycle3_ALL_trapezoid_val <- trapz(rapl_cycle3_ALL_data$id, rapl_cycle3_ALL_data$power) 
+
+rapl_cycle4_ALL_paths <- paste(main_dir, rapl_cycle4_ALL_treatment, sep="")
+rapl_cycle4_ALL_data <- read.csv(rapl_cycle4_ALL_paths, header=T)
+rapl_cycle4_ALL_data$time <- anytime(rapl_cycle4_ALL_data$timestamp / 1000)
+rapl_cycle4_ALL_data$id <- 1:nrow(rapl_cycle4_ALL_data)
+rapl_cycle4_ALL_data <- rapl_cycle4_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle4_ALL_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle4_ALL_data[1, 'time']), 0))
+rapl_cycle4_ALL_trapezoid_val <- trapz(rapl_cycle4_ALL_data$id, rapl_cycle4_ALL_data$power) 
+
+rapl_cycle5_ALL_paths <- paste(main_dir, rapl_cycle5_ALL_treatment, sep="")
+rapl_cycle5_ALL_data <- read.csv(rapl_cycle5_ALL_paths, header=T)
+rapl_cycle5_ALL_data$time <- anytime(rapl_cycle5_ALL_data$timestamp / 1000)
+rapl_cycle5_ALL_data$id <- 1:nrow(rapl_cycle5_ALL_data)
+rapl_cycle5_ALL_data <- rapl_cycle5_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle5_ALL_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle5_ALL_data[1, 'time']), 0))
+rapl_cycle5_ALL_trapezoid_val <- trapz(rapl_cycle5_ALL_data$id, rapl_cycle5_ALL_data$power) 
+
+rapl_cycle6_ALL_paths <- paste(main_dir, rapl_cycle6_ALL_treatment, sep="")
+rapl_cycle6_ALL_data <- read.csv(rapl_cycle6_ALL_paths, header=T)
+rapl_cycle6_ALL_data$time <- anytime(rapl_cycle6_ALL_data$timestamp / 1000)
+rapl_cycle6_ALL_data$id <- 1:nrow(rapl_cycle6_ALL_data)
+rapl_cycle6_ALL_data <- rapl_cycle6_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle6_ALL_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle6_ALL_data[1, 'time']), 0))
+rapl_cycle6_ALL_trapezoid_val <- trapz(rapl_cycle6_ALL_data$id, rapl_cycle6_ALL_data$power) 
+
+rapl_cycle7_ALL_paths <- paste(main_dir, rapl_cycle7_ALL_treatment, sep="")
+rapl_cycle7_ALL_data <- read.csv(rapl_cycle7_ALL_paths, header=T)
+rapl_cycle7_ALL_data$time <- anytime(rapl_cycle7_ALL_data$timestamp / 1000)
+rapl_cycle7_ALL_data$id <- 1:nrow(rapl_cycle7_ALL_data)
+rapl_cycle7_ALL_data <- rapl_cycle7_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle7_ALL_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle7_ALL_data[1, 'time']), 0))
+rapl_cycle7_ALL_trapezoid_val <- trapz(rapl_cycle7_ALL_data$id, rapl_cycle7_ALL_data$power) 
+
+rapl_cycle8_ALL_paths <- paste(main_dir, rapl_cycle8_ALL_treatment, sep="")
+rapl_cycle8_ALL_data <- read.csv(rapl_cycle8_ALL_paths, header=T)
+rapl_cycle8_ALL_data$time <- anytime(rapl_cycle8_ALL_data$timestamp / 1000)
+rapl_cycle8_ALL_data$id <- 1:nrow(rapl_cycle8_ALL_data)
+rapl_cycle8_ALL_data <- rapl_cycle8_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle8_ALL_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle8_ALL_data[1, 'time']), 0))
+rapl_cycle8_ALL_trapezoid_val <- trapz(rapl_cycle8_ALL_data$id, rapl_cycle8_ALL_data$power) 
+
+rapl_cycle9_ALL_paths <- paste(main_dir, rapl_cycle9_ALL_treatment, sep="")
+rapl_cycle9_ALL_data <- read.csv(rapl_cycle9_ALL_paths, header=T)
+rapl_cycle9_ALL_data$time <- anytime(rapl_cycle9_ALL_data$timestamp / 1000)
+rapl_cycle9_ALL_data$id <- 1:nrow(rapl_cycle9_ALL_data)
+rapl_cycle9_ALL_data <- rapl_cycle9_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle9_ALL_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle9_ALL_data[1, 'time']), 0))
+rapl_cycle9_ALL_trapezoid_val <- trapz(rapl_cycle9_ALL_data$id, rapl_cycle9_ALL_data$power) 
+
+rapl_cycle10_ALL_paths <- paste(main_dir, rapl_cycle10_ALL_treatment, sep="")
+rapl_cycle10_ALL_data <- read.csv(rapl_cycle10_ALL_paths, header=T)
+rapl_cycle10_ALL_data$id <- 1:nrow(rapl_cycle10_ALL_data)
+rapl_cycle10_ALL_data$time <- anytime(rapl_cycle10_ALL_data$timestamp / 1000)
+
+rapl_cycle10_ALL_data <- rapl_cycle10_ALL_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle10_ALL_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle10_ALL_data[1, 'time']), 0))
+rapl_cycle10_ALL_trapezoid_val <- trapz(rapl_cycle10_ALL_data$id, rapl_cycle10_ALL_data$power) 
+
+#UP_IDLE
+fibo_cycle1_UP_IDLE_paths <- paste(main_dir, fibo_cycle1_UP_IDLE_treatment, sep="")
+fibo_cycle1_UP_IDLE_data <- read.csv(fibo_cycle1_UP_IDLE_paths, header=T)
+fibo_cycle1_UP_IDLE_data$id <- 1:nrow(fibo_cycle1_UP_IDLE_data)
+fibo_cycle1_UP_IDLE_data$time <- anytime(fibo_cycle1_UP_IDLE_data$timestamp / 1000)
+
+fibo_cycle1_UP_IDLE_data <- fibo_cycle1_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle1_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle1_UP_IDLE_data[1, 'time']), 0))
+fibo_cycle1_UP_IDLE_trapezoid_val <- trapz(fibo_cycle1_UP_IDLE_data$id, fibo_cycle1_UP_IDLE_data$power) 
+
+fibo_cycle2_UP_IDLE_paths <- paste(main_dir, fibo_cycle2_UP_IDLE_treatment, sep="")
+fibo_cycle2_UP_IDLE_data <- read.csv(fibo_cycle2_UP_IDLE_paths, header=T)
+fibo_cycle2_UP_IDLE_data$id <- 1:nrow(fibo_cycle2_UP_IDLE_data)
+fibo_cycle2_UP_IDLE_data$time <- anytime(fibo_cycle2_UP_IDLE_data$timestamp / 1000)
+
+fibo_cycle2_UP_IDLE_data <- fibo_cycle2_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle2_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle2_UP_IDLE_data[1, 'time']), 0))
+fibo_cycle2_UP_IDLE_trapezoid_val <- trapz(fibo_cycle2_UP_IDLE_data$id, fibo_cycle2_UP_IDLE_data$power) 
+
+fibo_cycle3_UP_IDLE_paths <- paste(main_dir, fibo_cycle3_UP_IDLE_treatment, sep="")
+fibo_cycle3_UP_IDLE_data <- read.csv(fibo_cycle3_UP_IDLE_paths, header=T)
+fibo_cycle3_UP_IDLE_data$id <- 1:nrow(fibo_cycle3_UP_IDLE_data)
+fibo_cycle3_UP_IDLE_data$time <- anytime(fibo_cycle3_UP_IDLE_data$timestamp / 1000)
+
+fibo_cycle3_UP_IDLE_data <- fibo_cycle3_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle3_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle3_UP_IDLE_data[1, 'time']), 0))
+fibo_cycle3_UP_IDLE_trapezoid_val <- trapz(fibo_cycle3_UP_IDLE_data$id, fibo_cycle3_UP_IDLE_data$power) 
+
+fibo_cycle4_UP_IDLE_paths <- paste(main_dir, fibo_cycle4_UP_IDLE_treatment, sep="")
+fibo_cycle4_UP_IDLE_data <- read.csv(fibo_cycle4_UP_IDLE_paths, header=T)
+fibo_cycle4_UP_IDLE_data$id <- 1:nrow(fibo_cycle4_UP_IDLE_data)
+fibo_cycle4_UP_IDLE_data$time <- anytime(fibo_cycle4_UP_IDLE_data$timestamp / 1000)
+
+fibo_cycle4_UP_IDLE_data <- fibo_cycle4_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle4_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle4_UP_IDLE_data[1, 'time']), 0))
+fibo_cycle4_UP_IDLE_trapezoid_val <- trapz(fibo_cycle4_UP_IDLE_data$id, fibo_cycle4_UP_IDLE_data$power) 
+
+fibo_cycle5_UP_IDLE_paths <- paste(main_dir, fibo_cycle5_UP_IDLE_treatment, sep="")
+fibo_cycle5_UP_IDLE_data <- read.csv(fibo_cycle5_UP_IDLE_paths, header=T)
+fibo_cycle5_UP_IDLE_data$id <- 1:nrow(fibo_cycle5_UP_IDLE_data)
+fibo_cycle5_UP_IDLE_data$time <- anytime(fibo_cycle5_UP_IDLE_data$timestamp / 1000)
+
+fibo_cycle5_UP_IDLE_data <- fibo_cycle5_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle5_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle5_UP_IDLE_data[1, 'time']), 0))
+fibo_cycle5_UP_IDLE_trapezoid_val <- trapz(fibo_cycle5_UP_IDLE_data$id, fibo_cycle5_UP_IDLE_data$power) 
+
+fibo_cycle6_UP_IDLE_paths <- paste(main_dir, fibo_cycle6_UP_IDLE_treatment, sep="")
+fibo_cycle6_UP_IDLE_data <- read.csv(fibo_cycle6_UP_IDLE_paths, header=T)
+fibo_cycle6_UP_IDLE_data$id <- 1:nrow(fibo_cycle6_UP_IDLE_data)
+fibo_cycle6_UP_IDLE_data$time <- anytime(fibo_cycle6_UP_IDLE_data$timestamp / 1000)
+
+fibo_cycle6_UP_IDLE_data <- fibo_cycle6_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle6_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle6_UP_IDLE_data[1, 'time']), 0))
+fibo_cycle6_UP_IDLE_trapezoid_val <- trapz(fibo_cycle6_UP_IDLE_data$id, fibo_cycle6_UP_IDLE_data$power) 
+
+fibo_cycle7_UP_IDLE_paths <- paste(main_dir, fibo_cycle7_UP_IDLE_treatment, sep="")
+fibo_cycle7_UP_IDLE_data <- read.csv(fibo_cycle7_UP_IDLE_paths, header=T)
+fibo_cycle7_UP_IDLE_data$id <- 1:nrow(fibo_cycle7_UP_IDLE_data)
+fibo_cycle7_UP_IDLE_data$time <- anytime(fibo_cycle7_UP_IDLE_data$timestamp / 1000)
+
+fibo_cycle7_UP_IDLE_data <- fibo_cycle7_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle7_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle7_UP_IDLE_data[1, 'time']), 0))
+fibo_cycle7_UP_IDLE_trapezoid_val <- trapz(fibo_cycle7_UP_IDLE_data$id, fibo_cycle7_UP_IDLE_data$power) 
+
+fibo_cycle8_UP_IDLE_paths <- paste(main_dir, fibo_cycle8_UP_IDLE_treatment, sep="")
+fibo_cycle8_UP_IDLE_data <- read.csv(fibo_cycle8_UP_IDLE_paths, header=T)
+fibo_cycle8_UP_IDLE_data$id <- 1:nrow(fibo_cycle8_UP_IDLE_data)
+fibo_cycle8_UP_IDLE_data$time <- anytime(fibo_cycle8_UP_IDLE_data$timestamp / 1000)
+
+fibo_cycle8_UP_IDLE_data <- fibo_cycle8_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle8_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle8_UP_IDLE_data[1, 'time']), 0))
+fibo_cycle8_UP_IDLE_trapezoid_val <- trapz(fibo_cycle8_UP_IDLE_data$id, fibo_cycle8_UP_IDLE_data$power) 
+
+fibo_cycle9_UP_IDLE_paths <- paste(main_dir, fibo_cycle9_UP_IDLE_treatment, sep="")
+fibo_cycle9_UP_IDLE_data <- read.csv(fibo_cycle9_UP_IDLE_paths, header=T)
+fibo_cycle9_UP_IDLE_data$id <- 1:nrow(fibo_cycle9_UP_IDLE_data)
+fibo_cycle9_UP_IDLE_data$time <- anytime(fibo_cycle9_UP_IDLE_data$timestamp / 1000)
+
+fibo_cycle9_UP_IDLE_data <- fibo_cycle9_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle9_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle9_UP_IDLE_data[1, 'time']), 0))
+fibo_cycle9_UP_IDLE_trapezoid_val <- trapz(fibo_cycle9_UP_IDLE_data$id, fibo_cycle9_UP_IDLE_data$power) 
+
+fibo_cycle10_UP_IDLE_paths <- paste(main_dir, fibo_cycle10_UP_IDLE_treatment, sep="")
+fibo_cycle10_UP_IDLE_data <- read.csv(fibo_cycle10_UP_IDLE_paths, header=T)
+fibo_cycle10_UP_IDLE_data$id <- 1:nrow(fibo_cycle10_UP_IDLE_data)
+fibo_cycle10_UP_IDLE_data$time <- anytime(fibo_cycle10_UP_IDLE_data$timestamp / 1000)
+
+fibo_cycle10_UP_IDLE_data <- fibo_cycle10_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(fibo_cycle10_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(fibo_cycle10_UP_IDLE_data[1, 'time']), 0))
+fibo_cycle10_UP_IDLE_trapezoid_val <- trapz(fibo_cycle10_UP_IDLE_data$id, fibo_cycle10_UP_IDLE_data$power) 
+
+
+bubble_cycle1_UP_IDLE_paths <- paste(main_dir, bubble_cycle1_UP_IDLE_treatment, sep="")
+bubble_cycle1_UP_IDLE_data <- read.csv(bubble_cycle1_UP_IDLE_paths, header=T)
+bubble_cycle1_UP_IDLE_data$id <- 1:nrow(bubble_cycle1_UP_IDLE_data)
+bubble_cycle1_UP_IDLE_data$time <- anytime(bubble_cycle1_UP_IDLE_data$timestamp / 1000)
+
+bubble_cycle1_UP_IDLE_data <- bubble_cycle1_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle1_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle1_UP_IDLE_data[1, 'time']), 0))
+bubble_cycle1_UP_IDLE_trapezoid_val <- trapz(bubble_cycle1_UP_IDLE_data$id, bubble_cycle1_UP_IDLE_data$power) 
+
+bubble_cycle2_UP_IDLE_paths <- paste(main_dir, bubble_cycle2_UP_IDLE_treatment, sep="")
+bubble_cycle2_UP_IDLE_data <- read.csv(bubble_cycle2_UP_IDLE_paths, header=T)
+bubble_cycle2_UP_IDLE_data$id <- 1:nrow(bubble_cycle2_UP_IDLE_data)
+bubble_cycle2_UP_IDLE_data$time <- anytime(bubble_cycle2_UP_IDLE_data$timestamp / 1000)
+
+bubble_cycle2_UP_IDLE_data <- bubble_cycle2_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle2_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle2_UP_IDLE_data[1, 'time']), 0))
+bubble_cycle2_UP_IDLE_trapezoid_val <- trapz(bubble_cycle2_UP_IDLE_data$id, bubble_cycle2_UP_IDLE_data$power) 
+
+bubble_cycle3_UP_IDLE_paths <- paste(main_dir, bubble_cycle3_UP_IDLE_treatment, sep="")
+bubble_cycle3_UP_IDLE_data <- read.csv(bubble_cycle3_UP_IDLE_paths, header=T)
+bubble_cycle3_UP_IDLE_data$id <- 1:nrow(bubble_cycle3_UP_IDLE_data)
+bubble_cycle3_UP_IDLE_data$time <- anytime(bubble_cycle3_UP_IDLE_data$timestamp / 1000)
+
+bubble_cycle3_UP_IDLE_data <- bubble_cycle3_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle3_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle3_UP_IDLE_data[1, 'time']), 0))
+bubble_cycle3_UP_IDLE_trapezoid_val <- trapz(bubble_cycle3_UP_IDLE_data$id, bubble_cycle3_UP_IDLE_data$power) 
+
+bubble_cycle4_UP_IDLE_paths <- paste(main_dir, bubble_cycle4_UP_IDLE_treatment, sep="")
+bubble_cycle4_UP_IDLE_data <- read.csv(bubble_cycle4_UP_IDLE_paths, header=T)
+bubble_cycle4_UP_IDLE_data$id <- 1:nrow(bubble_cycle4_UP_IDLE_data)
+bubble_cycle4_UP_IDLE_data$time <- anytime(bubble_cycle4_UP_IDLE_data$timestamp / 1000)
+
+bubble_cycle4_UP_IDLE_data <- bubble_cycle4_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle4_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle4_UP_IDLE_data[1, 'time']), 0))
+bubble_cycle4_UP_IDLE_trapezoid_val <- trapz(bubble_cycle4_UP_IDLE_data$id, bubble_cycle4_UP_IDLE_data$power) 
+
+bubble_cycle5_UP_IDLE_paths <- paste(main_dir, bubble_cycle5_UP_IDLE_treatment, sep="")
+bubble_cycle5_UP_IDLE_data <- read.csv(bubble_cycle5_UP_IDLE_paths, header=T)
+bubble_cycle5_UP_IDLE_data$id <- 1:nrow(bubble_cycle5_UP_IDLE_data)
+bubble_cycle5_UP_IDLE_data$time <- anytime(bubble_cycle5_UP_IDLE_data$timestamp / 1000)
+
+bubble_cycle5_UP_IDLE_data <- bubble_cycle5_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle5_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle5_UP_IDLE_data[1, 'time']), 0))
+bubble_cycle5_UP_IDLE_trapezoid_val <- trapz(bubble_cycle5_UP_IDLE_data$id, bubble_cycle5_UP_IDLE_data$power) 
+
+bubble_cycle6_UP_IDLE_paths <- paste(main_dir, bubble_cycle6_UP_IDLE_treatment, sep="")
+bubble_cycle6_UP_IDLE_data <- read.csv(bubble_cycle6_UP_IDLE_paths, header=T)
+bubble_cycle6_UP_IDLE_data$id <- 1:nrow(bubble_cycle6_UP_IDLE_data)
+bubble_cycle6_UP_IDLE_data$time <- anytime(bubble_cycle6_UP_IDLE_data$timestamp / 1000)
+
+bubble_cycle6_UP_IDLE_data <- bubble_cycle6_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle6_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle6_UP_IDLE_data[1, 'time']), 0))
+bubble_cycle6_UP_IDLE_trapezoid_val <- trapz(bubble_cycle6_UP_IDLE_data$id, bubble_cycle6_UP_IDLE_data$power) 
+
+bubble_cycle7_UP_IDLE_paths <- paste(main_dir, bubble_cycle7_UP_IDLE_treatment, sep="")
+bubble_cycle7_UP_IDLE_data <- read.csv(bubble_cycle7_UP_IDLE_paths, header=T)
+bubble_cycle7_UP_IDLE_data$id <- 1:nrow(bubble_cycle7_UP_IDLE_data)
+bubble_cycle7_UP_IDLE_data$time <- anytime(bubble_cycle7_UP_IDLE_data$timestamp / 1000)
+
+bubble_cycle7_UP_IDLE_data <- bubble_cycle7_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle7_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle7_UP_IDLE_data[1, 'time']), 0))
+bubble_cycle7_UP_IDLE_trapezoid_val <- trapz(bubble_cycle7_UP_IDLE_data$id, bubble_cycle7_UP_IDLE_data$power) 
+
+bubble_cycle8_UP_IDLE_paths <- paste(main_dir, bubble_cycle8_UP_IDLE_treatment, sep="")
+bubble_cycle8_UP_IDLE_data <- read.csv(bubble_cycle8_UP_IDLE_paths, header=T)
+bubble_cycle8_UP_IDLE_data$id <- 1:nrow(bubble_cycle8_UP_IDLE_data)
+bubble_cycle8_UP_IDLE_data$time <- anytime(bubble_cycle8_UP_IDLE_data$timestamp / 1000)
+
+bubble_cycle8_UP_IDLE_data <- bubble_cycle8_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle8_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle8_UP_IDLE_data[1, 'time']), 0))
+bubble_cycle8_UP_IDLE_trapezoid_val <- trapz(bubble_cycle8_UP_IDLE_data$id, bubble_cycle8_UP_IDLE_data$power) 
+
+bubble_cycle9_UP_IDLE_paths <- paste(main_dir, bubble_cycle9_UP_IDLE_treatment, sep="")
+bubble_cycle9_UP_IDLE_data <- read.csv(bubble_cycle9_UP_IDLE_paths, header=T)
+bubble_cycle9_UP_IDLE_data$id <- 1:nrow(bubble_cycle9_UP_IDLE_data)
+bubble_cycle9_UP_IDLE_data$time <- anytime(bubble_cycle9_UP_IDLE_data$timestamp / 1000)
+
+bubble_cycle9_UP_IDLE_data <- bubble_cycle9_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle9_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle9_UP_IDLE_data[1, 'time']), 0))
+bubble_cycle9_UP_IDLE_trapezoid_val <- trapz(bubble_cycle9_UP_IDLE_data$id, bubble_cycle9_UP_IDLE_data$power) 
+
+bubble_cycle10_UP_IDLE_paths <- paste(main_dir, bubble_cycle10_UP_IDLE_treatment, sep="")
+bubble_cycle10_UP_IDLE_data <- read.csv(bubble_cycle10_UP_IDLE_paths, header=T)
+bubble_cycle10_UP_IDLE_data$id <- 1:nrow(bubble_cycle10_UP_IDLE_data)
+bubble_cycle10_UP_IDLE_data$time <- anytime(bubble_cycle10_UP_IDLE_data$timestamp / 1000)
+
+bubble_cycle10_UP_IDLE_data <- bubble_cycle10_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(bubble_cycle10_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(bubble_cycle10_UP_IDLE_data[1, 'time']), 0))
+bubble_cycle10_UP_IDLE_trapezoid_val <- trapz(bubble_cycle10_UP_IDLE_data$id, bubble_cycle10_UP_IDLE_data$power) 
+
+
+matrix_cycle1_UP_IDLE_paths <- paste(main_dir, matrix_cycle1_UP_IDLE_treatment, sep="")
+matrix_cycle1_UP_IDLE_data <- read.csv(matrix_cycle1_UP_IDLE_paths, header=T)
+matrix_cycle1_UP_IDLE_data$id <- 1:nrow(matrix_cycle1_UP_IDLE_data)
+matrix_cycle1_UP_IDLE_data$time <- anytime(matrix_cycle1_UP_IDLE_data$timestamp / 1000)
+
+matrix_cycle1_UP_IDLE_data <- matrix_cycle1_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle1_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle1_UP_IDLE_data[1, 'time']), 0))
+matrix_cycle1_UP_IDLE_trapezoid_val <- trapz(matrix_cycle1_UP_IDLE_data$id, matrix_cycle1_UP_IDLE_data$power) 
+
+matrix_cycle2_UP_IDLE_paths <- paste(main_dir, matrix_cycle2_UP_IDLE_treatment, sep="")
+matrix_cycle2_UP_IDLE_data <- read.csv(matrix_cycle2_UP_IDLE_paths, header=T)
+matrix_cycle2_UP_IDLE_data$id <- 1:nrow(matrix_cycle2_UP_IDLE_data)
+matrix_cycle2_UP_IDLE_data$time <- anytime(matrix_cycle2_UP_IDLE_data$timestamp / 1000)
+
+matrix_cycle2_UP_IDLE_data <- matrix_cycle2_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle2_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle2_UP_IDLE_data[1, 'time']), 0))
+matrix_cycle2_UP_IDLE_trapezoid_val <- trapz(matrix_cycle2_UP_IDLE_data$id, matrix_cycle2_UP_IDLE_data$power) 
+
+matrix_cycle3_UP_IDLE_paths <- paste(main_dir, matrix_cycle3_UP_IDLE_treatment, sep="")
+matrix_cycle3_UP_IDLE_data <- read.csv(matrix_cycle3_UP_IDLE_paths, header=T)
+matrix_cycle3_UP_IDLE_data$id <- 1:nrow(matrix_cycle3_UP_IDLE_data)
+matrix_cycle3_UP_IDLE_data$time <- anytime(matrix_cycle3_UP_IDLE_data$timestamp / 1000)
+
+matrix_cycle3_UP_IDLE_data <- matrix_cycle3_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle3_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle3_UP_IDLE_data[1, 'time']), 0))
+matrix_cycle3_UP_IDLE_trapezoid_val <- trapz(matrix_cycle3_UP_IDLE_data$id, matrix_cycle3_UP_IDLE_data$power) 
+
+matrix_cycle4_UP_IDLE_paths <- paste(main_dir, matrix_cycle4_UP_IDLE_treatment, sep="")
+matrix_cycle4_UP_IDLE_data <- read.csv(matrix_cycle4_UP_IDLE_paths, header=T)
+matrix_cycle4_UP_IDLE_data$id <- 1:nrow(matrix_cycle4_UP_IDLE_data)
+matrix_cycle4_UP_IDLE_data$time <- anytime(matrix_cycle4_UP_IDLE_data$timestamp / 1000)
+
+matrix_cycle4_UP_IDLE_data <- matrix_cycle4_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle4_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle4_UP_IDLE_data[1, 'time']), 0))
+matrix_cycle4_UP_IDLE_trapezoid_val <- trapz(matrix_cycle4_UP_IDLE_data$id, matrix_cycle4_UP_IDLE_data$power) 
+
+matrix_cycle5_UP_IDLE_paths <- paste(main_dir, matrix_cycle5_UP_IDLE_treatment, sep="")
+matrix_cycle5_UP_IDLE_data <- read.csv(matrix_cycle5_UP_IDLE_paths, header=T)
+matrix_cycle5_UP_IDLE_data$id <- 1:nrow(matrix_cycle5_UP_IDLE_data)
+matrix_cycle5_UP_IDLE_data$time <- anytime(matrix_cycle5_UP_IDLE_data$timestamp / 1000)
+
+matrix_cycle5_UP_IDLE_data <- matrix_cycle5_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle5_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle5_UP_IDLE_data[1, 'time']), 0))
+matrix_cycle5_UP_IDLE_trapezoid_val <- trapz(matrix_cycle5_UP_IDLE_data$id, matrix_cycle5_UP_IDLE_data$power) 
+
+matrix_cycle6_UP_IDLE_paths <- paste(main_dir, matrix_cycle6_UP_IDLE_treatment, sep="")
+matrix_cycle6_UP_IDLE_data <- read.csv(matrix_cycle6_UP_IDLE_paths, header=T)
+matrix_cycle6_UP_IDLE_data$id <- 1:nrow(matrix_cycle6_UP_IDLE_data)
+matrix_cycle6_UP_IDLE_data$time <- anytime(matrix_cycle6_UP_IDLE_data$timestamp / 1000)
+
+matrix_cycle6_UP_IDLE_data <- matrix_cycle6_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle6_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle6_UP_IDLE_data[1, 'time']), 0))
+matrix_cycle6_UP_IDLE_trapezoid_val <- trapz(matrix_cycle6_UP_IDLE_data$id, matrix_cycle6_UP_IDLE_data$power) 
+
+matrix_cycle7_UP_IDLE_paths <- paste(main_dir, matrix_cycle7_UP_IDLE_treatment, sep="")
+matrix_cycle7_UP_IDLE_data <- read.csv(matrix_cycle7_UP_IDLE_paths, header=T)
+matrix_cycle7_UP_IDLE_data$id <- 1:nrow(matrix_cycle7_UP_IDLE_data)
+matrix_cycle7_UP_IDLE_data$time <- anytime(matrix_cycle7_UP_IDLE_data$timestamp / 1000)
+
+matrix_cycle7_UP_IDLE_data <- matrix_cycle7_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle7_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle7_UP_IDLE_data[1, 'time']), 0))
+matrix_cycle7_UP_IDLE_trapezoid_val <- trapz(matrix_cycle7_UP_IDLE_data$id, matrix_cycle7_UP_IDLE_data$power) 
+
+matrix_cycle8_UP_IDLE_paths <- paste(main_dir, matrix_cycle8_UP_IDLE_treatment, sep="")
+matrix_cycle8_UP_IDLE_data <- read.csv(matrix_cycle8_UP_IDLE_paths, header=T)
+matrix_cycle8_UP_IDLE_data$id <- 1:nrow(matrix_cycle8_UP_IDLE_data)
+matrix_cycle8_UP_IDLE_data$time <- anytime(matrix_cycle8_UP_IDLE_data$timestamp / 1000)
+
+matrix_cycle8_UP_IDLE_data <- matrix_cycle8_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle8_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle8_UP_IDLE_data[1, 'time']), 0))
+matrix_cycle8_UP_IDLE_trapezoid_val <- trapz(matrix_cycle8_UP_IDLE_data$id, matrix_cycle8_UP_IDLE_data$power) 
+
+matrix_cycle9_UP_IDLE_paths <- paste(main_dir, matrix_cycle9_UP_IDLE_treatment, sep="")
+matrix_cycle9_UP_IDLE_data <- read.csv(matrix_cycle9_UP_IDLE_paths, header=T)
+matrix_cycle9_UP_IDLE_data$id <- 1:nrow(matrix_cycle9_UP_IDLE_data)
+matrix_cycle9_UP_IDLE_data$time <- anytime(matrix_cycle9_UP_IDLE_data$timestamp / 1000)
+
+matrix_cycle9_UP_IDLE_data <- matrix_cycle9_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle9_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle9_UP_IDLE_data[1, 'time']), 0))
+matrix_cycle9_UP_IDLE_trapezoid_val <- trapz(matrix_cycle9_UP_IDLE_data$id, matrix_cycle9_UP_IDLE_data$power) 
+
+matrix_cycle10_UP_IDLE_paths <- paste(main_dir, matrix_cycle10_UP_IDLE_treatment, sep="")
+matrix_cycle10_UP_IDLE_data <- read.csv(matrix_cycle10_UP_IDLE_paths, header=T)
+matrix_cycle10_UP_IDLE_data$id <- 1:nrow(matrix_cycle10_UP_IDLE_data)
+matrix_cycle10_UP_IDLE_data$time <- anytime(matrix_cycle10_UP_IDLE_data$timestamp / 1000)
+
+matrix_cycle10_UP_IDLE_data <- matrix_cycle10_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(matrix_cycle10_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(matrix_cycle10_UP_IDLE_data[1, 'time']), 0))
+matrix_cycle10_UP_IDLE_trapezoid_val <- trapz(matrix_cycle10_UP_IDLE_data$id, matrix_cycle10_UP_IDLE_data$power) 
+
+
+collatz_cycle1_UP_IDLE_paths <- paste(main_dir, collatz_cycle1_UP_IDLE_treatment, sep="")
+collatz_cycle1_UP_IDLE_data <- read.csv(collatz_cycle1_UP_IDLE_paths, header=T)
+collatz_cycle1_UP_IDLE_data$id <- 1:nrow(collatz_cycle1_UP_IDLE_data)
+collatz_cycle1_UP_IDLE_data$time <- anytime(collatz_cycle1_UP_IDLE_data$timestamp / 1000)
+
+collatz_cycle1_UP_IDLE_data <- collatz_cycle1_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle1_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle1_UP_IDLE_data[1, 'time']), 0))
+collatz_cycle1_UP_IDLE_trapezoid_val <- trapz(collatz_cycle1_UP_IDLE_data$id, collatz_cycle1_UP_IDLE_data$power) 
+
+collatz_cycle2_UP_IDLE_paths <- paste(main_dir, collatz_cycle2_UP_IDLE_treatment, sep="")
+collatz_cycle2_UP_IDLE_data <- read.csv(collatz_cycle2_UP_IDLE_paths, header=T)
+collatz_cycle2_UP_IDLE_data$id <- 1:nrow(collatz_cycle2_UP_IDLE_data)
+collatz_cycle2_UP_IDLE_data$time <- anytime(collatz_cycle2_UP_IDLE_data$timestamp / 1000)
+
+collatz_cycle2_UP_IDLE_data <- collatz_cycle2_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle2_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle2_UP_IDLE_data[1, 'time']), 0))
+collatz_cycle2_UP_IDLE_trapezoid_val <- trapz(collatz_cycle2_UP_IDLE_data$id, collatz_cycle2_UP_IDLE_data$power) 
+
+collatz_cycle3_UP_IDLE_paths <- paste(main_dir, collatz_cycle3_UP_IDLE_treatment, sep="")
+collatz_cycle3_UP_IDLE_data <- read.csv(collatz_cycle3_UP_IDLE_paths, header=T)
+collatz_cycle3_UP_IDLE_data$id <- 1:nrow(collatz_cycle3_UP_IDLE_data)
+collatz_cycle3_UP_IDLE_data$time <- anytime(collatz_cycle3_UP_IDLE_data$timestamp / 1000)
+
+collatz_cycle3_UP_IDLE_data <- collatz_cycle3_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle3_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle3_UP_IDLE_data[1, 'time']), 0))
+collatz_cycle3_UP_IDLE_trapezoid_val <- trapz(collatz_cycle3_UP_IDLE_data$id, collatz_cycle3_UP_IDLE_data$power) 
+
+collatz_cycle4_UP_IDLE_paths <- paste(main_dir, collatz_cycle4_UP_IDLE_treatment, sep="")
+collatz_cycle4_UP_IDLE_data <- read.csv(collatz_cycle4_UP_IDLE_paths, header=T)
+collatz_cycle4_UP_IDLE_data$id <- 1:nrow(collatz_cycle4_UP_IDLE_data)
+collatz_cycle4_UP_IDLE_data$time <- anytime(collatz_cycle4_UP_IDLE_data$timestamp / 1000)
+
+collatz_cycle4_UP_IDLE_data <- collatz_cycle4_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle4_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle4_UP_IDLE_data[1, 'time']), 0))
+collatz_cycle4_UP_IDLE_trapezoid_val <- trapz(collatz_cycle4_UP_IDLE_data$id, collatz_cycle4_UP_IDLE_data$power) 
+
+collatz_cycle5_UP_IDLE_paths <- paste(main_dir, collatz_cycle5_UP_IDLE_treatment, sep="")
+collatz_cycle5_UP_IDLE_data <- read.csv(collatz_cycle5_UP_IDLE_paths, header=T)
+collatz_cycle5_UP_IDLE_data$id <- 1:nrow(collatz_cycle5_UP_IDLE_data)
+collatz_cycle5_UP_IDLE_data$time <- anytime(collatz_cycle5_UP_IDLE_data$timestamp / 1000)
+
+collatz_cycle5_UP_IDLE_data <- collatz_cycle5_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle5_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle5_UP_IDLE_data[1, 'time']), 0))
+collatz_cycle5_UP_IDLE_trapezoid_val <- trapz(collatz_cycle5_UP_IDLE_data$id, collatz_cycle5_UP_IDLE_data$power) 
+
+collatz_cycle6_UP_IDLE_paths <- paste(main_dir, collatz_cycle6_UP_IDLE_treatment, sep="")
+collatz_cycle6_UP_IDLE_data <- read.csv(collatz_cycle6_UP_IDLE_paths, header=T)
+collatz_cycle6_UP_IDLE_data$id <- 1:nrow(collatz_cycle6_UP_IDLE_data)
+collatz_cycle6_UP_IDLE_data$time <- anytime(collatz_cycle6_UP_IDLE_data$timestamp / 1000)
+
+collatz_cycle6_UP_IDLE_data <- collatz_cycle6_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle6_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle6_UP_IDLE_data[1, 'time']), 0))
+collatz_cycle6_UP_IDLE_trapezoid_val <- trapz(collatz_cycle6_UP_IDLE_data$id, collatz_cycle6_UP_IDLE_data$power) 
+
+collatz_cycle7_UP_IDLE_paths <- paste(main_dir, collatz_cycle7_UP_IDLE_treatment, sep="")
+collatz_cycle7_UP_IDLE_data <- read.csv(collatz_cycle7_UP_IDLE_paths, header=T)
+collatz_cycle7_UP_IDLE_data$id <- 1:nrow(collatz_cycle7_UP_IDLE_data)
+collatz_cycle7_UP_IDLE_data$time <- anytime(collatz_cycle7_UP_IDLE_data$timestamp / 1000)
+
+collatz_cycle7_UP_IDLE_data <- collatz_cycle7_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle7_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle7_UP_IDLE_data[1, 'time']), 0))
+collatz_cycle7_UP_IDLE_trapezoid_val <- trapz(collatz_cycle7_UP_IDLE_data$id, collatz_cycle7_UP_IDLE_data$power) 
+
+collatz_cycle8_UP_IDLE_paths <- paste(main_dir, collatz_cycle8_UP_IDLE_treatment, sep="")
+collatz_cycle8_UP_IDLE_data <- read.csv(collatz_cycle8_UP_IDLE_paths, header=T)
+collatz_cycle8_UP_IDLE_data$id <- 1:nrow(collatz_cycle8_UP_IDLE_data)
+collatz_cycle8_UP_IDLE_data$time <- anytime(collatz_cycle8_UP_IDLE_data$timestamp / 1000)
+
+collatz_cycle8_UP_IDLE_data <- collatz_cycle8_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle8_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle8_UP_IDLE_data[1, 'time']), 0))
+collatz_cycle8_UP_IDLE_trapezoid_val <- trapz(collatz_cycle8_UP_IDLE_data$id, collatz_cycle8_UP_IDLE_data$power) 
+
+collatz_cycle9_UP_IDLE_paths <- paste(main_dir, collatz_cycle9_UP_IDLE_treatment, sep="")
+collatz_cycle9_UP_IDLE_data <- read.csv(collatz_cycle9_UP_IDLE_paths, header=T)
+collatz_cycle9_UP_IDLE_data$id <- 1:nrow(collatz_cycle9_UP_IDLE_data)
+collatz_cycle9_UP_IDLE_data$time <- anytime(collatz_cycle9_UP_IDLE_data$timestamp / 1000)
+
+collatz_cycle9_UP_IDLE_data <- collatz_cycle9_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle9_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle9_UP_IDLE_data[1, 'time']), 0))
+collatz_cycle9_UP_IDLE_trapezoid_val <- trapz(collatz_cycle9_UP_IDLE_data$id, collatz_cycle9_UP_IDLE_data$power) 
+
+collatz_cycle10_UP_IDLE_paths <- paste(main_dir, collatz_cycle10_UP_IDLE_treatment, sep="")
+collatz_cycle10_UP_IDLE_data <- read.csv(collatz_cycle10_UP_IDLE_paths, header=T)
+collatz_cycle10_UP_IDLE_data$id <- 1:nrow(collatz_cycle10_UP_IDLE_data)
+collatz_cycle10_UP_IDLE_data$time <- anytime(collatz_cycle10_UP_IDLE_data$timestamp / 1000)
+
+collatz_cycle10_UP_IDLE_data <- collatz_cycle10_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(collatz_cycle10_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(collatz_cycle10_UP_IDLE_data[1, 'time']), 0))
+collatz_cycle10_UP_IDLE_trapezoid_val <- trapz(collatz_cycle10_UP_IDLE_data$id, collatz_cycle10_UP_IDLE_data$power) 
+
+
+rapl_cycle1_UP_IDLE_paths <- paste(main_dir, rapl_cycle1_UP_IDLE_treatment, sep="")
+rapl_cycle1_UP_IDLE_data <- read.csv(rapl_cycle1_UP_IDLE_paths, header=T)
+rapl_cycle1_UP_IDLE_data$id <- 1:nrow(rapl_cycle1_UP_IDLE_data)
+rapl_cycle1_UP_IDLE_data$time <- anytime(rapl_cycle1_UP_IDLE_data$timestamp / 1000)
+
+rapl_cycle1_UP_IDLE_data <- rapl_cycle1_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle1_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle1_UP_IDLE_data[1, 'time']), 0))
+rapl_cycle1_UP_IDLE_trapezoid_val <- trapz(rapl_cycle1_UP_IDLE_data$id, rapl_cycle1_UP_IDLE_data$power) 
+
+rapl_cycle2_UP_IDLE_paths <- paste(main_dir, rapl_cycle2_UP_IDLE_treatment, sep="")
+rapl_cycle2_UP_IDLE_data <- read.csv(rapl_cycle2_UP_IDLE_paths, header=T)
+rapl_cycle2_UP_IDLE_data$id <- 1:nrow(rapl_cycle2_UP_IDLE_data)
+rapl_cycle2_UP_IDLE_data$time <- anytime(rapl_cycle2_UP_IDLE_data$timestamp / 1000)
+
+rapl_cycle2_UP_IDLE_data <- rapl_cycle2_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle2_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle2_UP_IDLE_data[1, 'time']), 0))
+rapl_cycle2_UP_IDLE_trapezoid_val <- trapz(rapl_cycle2_UP_IDLE_data$id, rapl_cycle2_UP_IDLE_data$power) 
+
+rapl_cycle3_UP_IDLE_paths <- paste(main_dir, rapl_cycle3_UP_IDLE_treatment, sep="")
+rapl_cycle3_UP_IDLE_data <- read.csv(rapl_cycle3_UP_IDLE_paths, header=T)
+rapl_cycle3_UP_IDLE_data$id <- 1:nrow(rapl_cycle3_UP_IDLE_data)
+rapl_cycle3_UP_IDLE_data$time <- anytime(rapl_cycle3_UP_IDLE_data$timestamp / 1000)
+
+rapl_cycle3_UP_IDLE_data <- rapl_cycle3_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle3_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle3_UP_IDLE_data[1, 'time']), 0))
+rapl_cycle3_UP_IDLE_trapezoid_val <- trapz(rapl_cycle3_UP_IDLE_data$id, rapl_cycle3_UP_IDLE_data$power) 
+
+rapl_cycle4_UP_IDLE_paths <- paste(main_dir, rapl_cycle4_UP_IDLE_treatment, sep="")
+rapl_cycle4_UP_IDLE_data <- read.csv(rapl_cycle4_UP_IDLE_paths, header=T)
+rapl_cycle4_UP_IDLE_data$id <- 1:nrow(rapl_cycle4_UP_IDLE_data)
+rapl_cycle4_UP_IDLE_data$time <- anytime(rapl_cycle4_UP_IDLE_data$timestamp / 1000)
+
+rapl_cycle4_UP_IDLE_data <- rapl_cycle4_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle4_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle4_UP_IDLE_data[1, 'time']), 0))
+rapl_cycle4_UP_IDLE_trapezoid_val <- trapz(rapl_cycle4_UP_IDLE_data$id, rapl_cycle4_UP_IDLE_data$power) 
+
+rapl_cycle5_UP_IDLE_paths <- paste(main_dir, rapl_cycle5_UP_IDLE_treatment, sep="")
+rapl_cycle5_UP_IDLE_data <- read.csv(rapl_cycle5_UP_IDLE_paths, header=T)
+rapl_cycle5_UP_IDLE_data$id <- 1:nrow(rapl_cycle5_UP_IDLE_data)
+rapl_cycle5_UP_IDLE_data$time <- anytime(rapl_cycle5_UP_IDLE_data$timestamp / 1000)
+
+rapl_cycle5_UP_IDLE_data <- rapl_cycle5_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle5_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle5_UP_IDLE_data[1, 'time']), 0))
+rapl_cycle5_UP_IDLE_trapezoid_val <- trapz(rapl_cycle5_UP_IDLE_data$id, rapl_cycle5_UP_IDLE_data$power) 
+
+rapl_cycle6_UP_IDLE_paths <- paste(main_dir, rapl_cycle6_UP_IDLE_treatment, sep="")
+rapl_cycle6_UP_IDLE_data <- read.csv(rapl_cycle6_UP_IDLE_paths, header=T)
+rapl_cycle6_UP_IDLE_data$id <- 1:nrow(rapl_cycle6_UP_IDLE_data)
+rapl_cycle6_UP_IDLE_data$time <- anytime(rapl_cycle6_UP_IDLE_data$timestamp / 1000)
+
+rapl_cycle6_UP_IDLE_data <- rapl_cycle6_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle6_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle6_UP_IDLE_data[1, 'time']), 0))
+rapl_cycle6_UP_IDLE_trapezoid_val <- trapz(rapl_cycle6_UP_IDLE_data$id, rapl_cycle6_UP_IDLE_data$power) 
+
+rapl_cycle7_UP_IDLE_paths <- paste(main_dir, rapl_cycle7_UP_IDLE_treatment, sep="")
+rapl_cycle7_UP_IDLE_data <- read.csv(rapl_cycle7_UP_IDLE_paths, header=T)
+rapl_cycle7_UP_IDLE_data$id <- 1:nrow(rapl_cycle7_UP_IDLE_data)
+rapl_cycle7_UP_IDLE_data$time <- anytime(rapl_cycle7_UP_IDLE_data$timestamp / 1000)
+
+rapl_cycle7_UP_IDLE_data <- rapl_cycle7_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle7_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle7_UP_IDLE_data[1, 'time']), 0))
+rapl_cycle7_UP_IDLE_trapezoid_val <- trapz(rapl_cycle7_UP_IDLE_data$id, rapl_cycle7_UP_IDLE_data$power) 
+
+rapl_cycle8_UP_IDLE_paths <- paste(main_dir, rapl_cycle8_UP_IDLE_treatment, sep="")
+rapl_cycle8_UP_IDLE_data <- read.csv(rapl_cycle8_UP_IDLE_paths, header=T)
+rapl_cycle8_UP_IDLE_data$id <- 1:nrow(rapl_cycle8_UP_IDLE_data)
+rapl_cycle8_UP_IDLE_data$time <- anytime(rapl_cycle8_UP_IDLE_data$timestamp / 1000)
+
+rapl_cycle8_UP_IDLE_data <- rapl_cycle8_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle8_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle8_UP_IDLE_data[1, 'time']), 0))
+rapl_cycle8_UP_IDLE_trapezoid_val <- trapz(rapl_cycle8_UP_IDLE_data$id, rapl_cycle8_UP_IDLE_data$power) 
+
+rapl_cycle9_UP_IDLE_paths <- paste(main_dir, rapl_cycle9_UP_IDLE_treatment, sep="")
+rapl_cycle9_UP_IDLE_data <- read.csv(rapl_cycle9_UP_IDLE_paths, header=T)
+rapl_cycle9_UP_IDLE_data$id <- 1:nrow(rapl_cycle9_UP_IDLE_data)
+rapl_cycle9_UP_IDLE_data$time <- anytime(rapl_cycle9_UP_IDLE_data$timestamp / 1000)
+
+rapl_cycle9_UP_IDLE_data <- rapl_cycle9_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle9_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle9_UP_IDLE_data[1, 'time']), 0))
+rapl_cycle9_UP_IDLE_trapezoid_val <- trapz(rapl_cycle9_UP_IDLE_data$id, rapl_cycle9_UP_IDLE_data$power) 
+
+rapl_cycle10_UP_IDLE_paths <- paste(main_dir, rapl_cycle10_UP_IDLE_treatment, sep="")
+rapl_cycle10_UP_IDLE_data <- read.csv(rapl_cycle10_UP_IDLE_paths, header=T)
+rapl_cycle10_UP_IDLE_data$id <- 1:nrow(rapl_cycle10_UP_IDLE_data)
+rapl_cycle10_UP_IDLE_data$time <- anytime(rapl_cycle10_UP_IDLE_data$timestamp / 1000)
+
+rapl_cycle10_UP_IDLE_data <- rapl_cycle10_UP_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle10_UP_IDLE_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle10_UP_IDLE_data[1, 'time']), 0))
+rapl_cycle10_UP_IDLE_trapezoid_val <- trapz(rapl_cycle10_UP_IDLE_data$id, rapl_cycle10_UP_IDLE_data$power)
+
+
+#Remove unnecessary variables
+rm(bubble_cycle1_BUBBLE_COLLATZ_treatment,bubble_cycle2_BUBBLE_COLLATZ_treatment,bubble_cycle3_BUBBLE_COLLATZ_treatment,bubble_cycle4_BUBBLE_COLLATZ_treatment,bubble_cycle5_BUBBLE_COLLATZ_treatment,bubble_cycle6_BUBBLE_COLLATZ_treatment,bubble_cycle7_BUBBLE_COLLATZ_treatment,bubble_cycle8_BUBBLE_COLLATZ_treatment,bubble_cycle9_BUBBLE_COLLATZ_treatment,bubble_cycle10_BUBBLE_COLLATZ_treatment,fibo_cycle1_BUBBLE_COLLATZ_treatment,fibo_cycle2_BUBBLE_COLLATZ_treatment,fibo_cycle3_BUBBLE_COLLATZ_treatment,fibo_cycle4_BUBBLE_COLLATZ_treatment,fibo_cycle5_BUBBLE_COLLATZ_treatment,fibo_cycle6_BUBBLE_COLLATZ_treatment,fibo_cycle7_BUBBLE_COLLATZ_treatment,fibo_cycle8_BUBBLE_COLLATZ_treatment,fibo_cycle9_BUBBLE_COLLATZ_treatment,fibo_cycle10_BUBBLE_COLLATZ_treatment,matrix_cycle1_BUBBLE_COLLATZ_treatment,matrix_cycle2_BUBBLE_COLLATZ_treatment,matrix_cycle3_BUBBLE_COLLATZ_treatment,matrix_cycle4_BUBBLE_COLLATZ_treatment,matrix_cycle5_BUBBLE_COLLATZ_treatment,matrix_cycle6_BUBBLE_COLLATZ_treatment,matrix_cycle7_BUBBLE_COLLATZ_treatment,matrix_cycle8_BUBBLE_COLLATZ_treatment,matrix_cycle9_BUBBLE_COLLATZ_treatment,matrix_cycle10_BUBBLE_COLLATZ_treatment,collatz_cycle1_BUBBLE_COLLATZ_treatment,collatz_cycle2_BUBBLE_COLLATZ_treatment,collatz_cycle3_BUBBLE_COLLATZ_treatment,collatz_cycle4_BUBBLE_COLLATZ_treatment,collatz_cycle5_BUBBLE_COLLATZ_treatment,collatz_cycle6_BUBBLE_COLLATZ_treatment,collatz_cycle7_BUBBLE_COLLATZ_treatment,collatz_cycle8_BUBBLE_COLLATZ_treatment,collatz_cycle9_BUBBLE_COLLATZ_treatment,collatz_cycle10_BUBBLE_COLLATZ_treatment,rapl_cycle1_BUBBLE_COLLATZ_treatment,rapl_cycle2_BUBBLE_COLLATZ_treatment,rapl_cycle3_BUBBLE_COLLATZ_treatment,rapl_cycle4_BUBBLE_COLLATZ_treatment,rapl_cycle5_BUBBLE_COLLATZ_treatment,rapl_cycle6_BUBBLE_COLLATZ_treatment,rapl_cycle7_BUBBLE_COLLATZ_treatment,rapl_cycle8_BUBBLE_COLLATZ_treatment,rapl_cycle9_BUBBLE_COLLATZ_treatment,rapl_cycle10_BUBBLE_COLLATZ_treatment,fibo_cycle1_FIBO_MATRIX_treatment,fibo_cycle2_FIBO_MATRIX_treatment,fibo_cycle3_FIBO_MATRIX_treatment,fibo_cycle4_FIBO_MATRIX_treatment,fibo_cycle5_FIBO_MATRIX_treatment,fibo_cycle6_FIBO_MATRIX_treatment,fibo_cycle7_FIBO_MATRIX_treatment,fibo_cycle8_FIBO_MATRIX_treatment,fibo_cycle9_FIBO_MATRIX_treatment,fibo_cycle10_FIBO_MATRIX_treatment,bubble_cycle1_FIBO_MATRIX_treatment,bubble_cycle2_FIBO_MATRIX_treatment,bubble_cycle3_FIBO_MATRIX_treatment,bubble_cycle4_FIBO_MATRIX_treatment,bubble_cycle5_FIBO_MATRIX_treatment,bubble_cycle6_FIBO_MATRIX_treatment,bubble_cycle7_FIBO_MATRIX_treatment,bubble_cycle8_FIBO_MATRIX_treatment,bubble_cycle9_FIBO_MATRIX_treatment,bubble_cycle10_FIBO_MATRIX_treatment,matrix_cycle1_FIBO_MATRIX_treatment,matrix_cycle2_FIBO_MATRIX_treatment,matrix_cycle3_FIBO_MATRIX_treatment,matrix_cycle4_FIBO_MATRIX_treatment,matrix_cycle5_FIBO_MATRIX_treatment,matrix_cycle6_FIBO_MATRIX_treatment,matrix_cycle7_FIBO_MATRIX_treatment,matrix_cycle8_FIBO_MATRIX_treatment,matrix_cycle9_FIBO_MATRIX_treatment,matrix_cycle10_FIBO_MATRIX_treatment)
+rm(collatz_cycle1_FIBO_MATRIX_treatment,collatz_cycle2_FIBO_MATRIX_treatment,collatz_cycle3_FIBO_MATRIX_treatment,collatz_cycle4_FIBO_MATRIX_treatment,collatz_cycle5_FIBO_MATRIX_treatment,collatz_cycle6_FIBO_MATRIX_treatment,collatz_cycle7_FIBO_MATRIX_treatment,collatz_cycle8_FIBO_MATRIX_treatment,collatz_cycle9_FIBO_MATRIX_treatment,collatz_cycle10_FIBO_MATRIX_treatment,rapl_cycle1_FIBO_MATRIX_treatment,rapl_cycle2_FIBO_MATRIX_treatment,rapl_cycle3_FIBO_MATRIX_treatment,rapl_cycle4_FIBO_MATRIX_treatment,rapl_cycle5_FIBO_MATRIX_treatment,rapl_cycle6_FIBO_MATRIX_treatment,rapl_cycle7_FIBO_MATRIX_treatment,rapl_cycle8_FIBO_MATRIX_treatment,rapl_cycle9_FIBO_MATRIX_treatment,rapl_cycle10_FIBO_MATRIX_treatment,fibo_cycle1_ALL_treatment,fibo_cycle2_ALL_treatment,fibo_cycle3_ALL_treatment,fibo_cycle4_ALL_treatment,fibo_cycle5_ALL_treatment,fibo_cycle6_ALL_treatment,fibo_cycle7_ALL_treatment,fibo_cycle8_ALL_treatment,fibo_cycle9_ALL_treatment,fibo_cycle10_ALL_treatment,bubble_cycle1_ALL_treatment,bubble_cycle2_ALL_treatment,bubble_cycle3_ALL_treatment,bubble_cycle4_ALL_treatment,bubble_cycle5_ALL_treatment,bubble_cycle6_ALL_treatment,bubble_cycle7_ALL_treatment,bubble_cycle8_ALL_treatment,bubble_cycle9_ALL_treatment,bubble_cycle10_ALL_treatment,matrix_cycle1_ALL_treatment,matrix_cycle2_ALL_treatment,matrix_cycle3_ALL_treatment,matrix_cycle4_ALL_treatment,matrix_cycle5_ALL_treatment,matrix_cycle6_ALL_treatment,matrix_cycle7_ALL_treatment,matrix_cycle8_ALL_treatment,matrix_cycle9_ALL_treatment,matrix_cycle10_ALL_treatment,collatz_cycle1_ALL_treatment,collatz_cycle2_ALL_treatment,collatz_cycle3_ALL_treatment,collatz_cycle4_ALL_treatment,collatz_cycle5_ALL_treatment,collatz_cycle6_ALL_treatment,collatz_cycle7_ALL_treatment,collatz_cycle8_ALL_treatment,collatz_cycle9_ALL_treatment,collatz_cycle10_ALL_treatment,rapl_cycle1_ALL_treatment,rapl_cycle2_ALL_treatment,rapl_cycle3_ALL_treatment,rapl_cycle4_ALL_treatment,rapl_cycle5_ALL_treatment,rapl_cycle6_ALL_treatment,rapl_cycle7_ALL_treatment,rapl_cycle8_ALL_treatment,rapl_cycle9_ALL_treatment)
+rm(rapl_cycle10_ALL_treatment,fibo_cycle1_UP_IDLE_treatment,fibo_cycle2_UP_IDLE_treatment,fibo_cycle3_UP_IDLE_treatment,fibo_cycle4_UP_IDLE_treatment,fibo_cycle5_UP_IDLE_treatment,fibo_cycle6_UP_IDLE_treatment,fibo_cycle7_UP_IDLE_treatment,fibo_cycle8_UP_IDLE_treatment,fibo_cycle9_UP_IDLE_treatment,fibo_cycle10_UP_IDLE_treatment,bubble_cycle1_UP_IDLE_treatment,bubble_cycle2_UP_IDLE_treatment,bubble_cycle3_UP_IDLE_treatment,bubble_cycle4_UP_IDLE_treatment,bubble_cycle5_UP_IDLE_treatment,bubble_cycle6_UP_IDLE_treatment,bubble_cycle7_UP_IDLE_treatment,bubble_cycle8_UP_IDLE_treatment,bubble_cycle9_UP_IDLE_treatment,bubble_cycle10_UP_IDLE_treatment,matrix_cycle1_UP_IDLE_treatment,matrix_cycle2_UP_IDLE_treatment,matrix_cycle3_UP_IDLE_treatment,matrix_cycle4_UP_IDLE_treatment,matrix_cycle5_UP_IDLE_treatment,matrix_cycle6_UP_IDLE_treatment,matrix_cycle7_UP_IDLE_treatment,matrix_cycle8_UP_IDLE_treatment,matrix_cycle9_UP_IDLE_treatment,matrix_cycle10_UP_IDLE_treatment,collatz_cycle1_UP_IDLE_treatment,collatz_cycle2_UP_IDLE_treatment,collatz_cycle3_UP_IDLE_treatment,collatz_cycle4_UP_IDLE_treatment,collatz_cycle5_UP_IDLE_treatment,collatz_cycle6_UP_IDLE_treatment,collatz_cycle7_UP_IDLE_treatment,collatz_cycle8_UP_IDLE_treatment,collatz_cycle9_UP_IDLE_treatment,collatz_cycle10_UP_IDLE_treatment,rapl_cycle1_UP_IDLE_treatment,rapl_cycle2_UP_IDLE_treatment,rapl_cycle3_UP_IDLE_treatment,rapl_cycle4_UP_IDLE_treatment,rapl_cycle5_UP_IDLE_treatment,rapl_cycle6_UP_IDLE_treatment,rapl_cycle7_UP_IDLE_treatment,rapl_cycle8_UP_IDLE_treatment,rapl_cycle9_UP_IDLE_treatment,rapl_cycle10_UP_IDLE_treatment)
+rm(bubble_cycle1_BUBBLE_COLLATZ_paths,bubble_cycle2_BUBBLE_COLLATZ_paths,bubble_cycle3_BUBBLE_COLLATZ_paths,bubble_cycle4_BUBBLE_COLLATZ_paths,bubble_cycle5_BUBBLE_COLLATZ_paths,bubble_cycle6_BUBBLE_COLLATZ_paths,bubble_cycle7_BUBBLE_COLLATZ_paths,bubble_cycle8_BUBBLE_COLLATZ_paths,bubble_cycle9_BUBBLE_COLLATZ_paths,bubble_cycle10_BUBBLE_COLLATZ_paths,fibo_cycle1_BUBBLE_COLLATZ_paths,fibo_cycle2_BUBBLE_COLLATZ_paths,fibo_cycle3_BUBBLE_COLLATZ_paths,fibo_cycle4_BUBBLE_COLLATZ_paths,fibo_cycle5_BUBBLE_COLLATZ_paths,fibo_cycle6_BUBBLE_COLLATZ_paths,fibo_cycle7_BUBBLE_COLLATZ_paths,fibo_cycle8_BUBBLE_COLLATZ_paths,fibo_cycle9_BUBBLE_COLLATZ_paths,fibo_cycle10_BUBBLE_COLLATZ_paths,matrix_cycle1_BUBBLE_COLLATZ_paths,matrix_cycle2_BUBBLE_COLLATZ_paths,matrix_cycle3_BUBBLE_COLLATZ_paths,matrix_cycle4_BUBBLE_COLLATZ_paths,matrix_cycle5_BUBBLE_COLLATZ_paths,matrix_cycle6_BUBBLE_COLLATZ_paths,matrix_cycle7_BUBBLE_COLLATZ_paths,matrix_cycle8_BUBBLE_COLLATZ_paths,matrix_cycle9_BUBBLE_COLLATZ_paths,matrix_cycle10_BUBBLE_COLLATZ_paths,collatz_cycle1_BUBBLE_COLLATZ_paths,collatz_cycle2_BUBBLE_COLLATZ_paths,collatz_cycle3_BUBBLE_COLLATZ_paths,collatz_cycle4_BUBBLE_COLLATZ_paths,collatz_cycle5_BUBBLE_COLLATZ_paths,collatz_cycle6_BUBBLE_COLLATZ_paths,collatz_cycle7_BUBBLE_COLLATZ_paths,collatz_cycle8_BUBBLE_COLLATZ_paths,collatz_cycle9_BUBBLE_COLLATZ_paths,collatz_cycle10_BUBBLE_COLLATZ_paths,rapl_cycle1_BUBBLE_COLLATZ_paths,rapl_cycle2_BUBBLE_COLLATZ_paths,rapl_cycle3_BUBBLE_COLLATZ_paths,rapl_cycle4_BUBBLE_COLLATZ_paths,rapl_cycle5_BUBBLE_COLLATZ_paths,rapl_cycle6_BUBBLE_COLLATZ_paths,rapl_cycle7_BUBBLE_COLLATZ_paths,rapl_cycle8_BUBBLE_COLLATZ_paths,rapl_cycle9_BUBBLE_COLLATZ_paths,rapl_cycle10_BUBBLE_COLLATZ_paths,fibo_cycle1_FIBO_MATRIX_paths,fibo_cycle2_FIBO_MATRIX_paths,fibo_cycle3_FIBO_MATRIX_paths,fibo_cycle4_FIBO_MATRIX_paths,fibo_cycle5_FIBO_MATRIX_paths,fibo_cycle6_FIBO_MATRIX_paths,fibo_cycle7_FIBO_MATRIX_paths,fibo_cycle8_FIBO_MATRIX_paths,fibo_cycle9_FIBO_MATRIX_paths,fibo_cycle10_FIBO_MATRIX_paths,bubble_cycle1_FIBO_MATRIX_paths,bubble_cycle2_FIBO_MATRIX_paths,bubble_cycle3_FIBO_MATRIX_paths,bubble_cycle4_FIBO_MATRIX_paths,bubble_cycle5_FIBO_MATRIX_paths,bubble_cycle6_FIBO_MATRIX_paths,bubble_cycle7_FIBO_MATRIX_paths,bubble_cycle8_FIBO_MATRIX_paths,bubble_cycle9_FIBO_MATRIX_paths,bubble_cycle10_FIBO_MATRIX_paths,matrix_cycle1_FIBO_MATRIX_paths,matrix_cycle2_FIBO_MATRIX_paths,matrix_cycle3_FIBO_MATRIX_paths,matrix_cycle4_FIBO_MATRIX_paths,matrix_cycle5_FIBO_MATRIX_paths,matrix_cycle6_FIBO_MATRIX_paths,matrix_cycle7_FIBO_MATRIX_paths,matrix_cycle8_FIBO_MATRIX_paths,matrix_cycle9_FIBO_MATRIX_paths,matrix_cycle10_FIBO_MATRIX_paths)
+rm(collatz_cycle1_FIBO_MATRIX_paths,collatz_cycle2_FIBO_MATRIX_paths,collatz_cycle3_FIBO_MATRIX_paths,collatz_cycle4_FIBO_MATRIX_paths,collatz_cycle5_FIBO_MATRIX_paths,collatz_cycle6_FIBO_MATRIX_paths,collatz_cycle7_FIBO_MATRIX_paths,collatz_cycle8_FIBO_MATRIX_paths,collatz_cycle9_FIBO_MATRIX_paths,collatz_cycle10_FIBO_MATRIX_paths,rapl_cycle1_FIBO_MATRIX_paths,rapl_cycle2_FIBO_MATRIX_paths,rapl_cycle3_FIBO_MATRIX_paths,rapl_cycle4_FIBO_MATRIX_paths,rapl_cycle5_FIBO_MATRIX_paths,rapl_cycle6_FIBO_MATRIX_paths,rapl_cycle7_FIBO_MATRIX_paths,rapl_cycle8_FIBO_MATRIX_paths,rapl_cycle9_FIBO_MATRIX_paths,rapl_cycle10_FIBO_MATRIX_paths,fibo_cycle1_ALL_paths,fibo_cycle2_ALL_paths,fibo_cycle3_ALL_paths,fibo_cycle4_ALL_paths,fibo_cycle5_ALL_paths,fibo_cycle6_ALL_paths,fibo_cycle7_ALL_paths,fibo_cycle8_ALL_paths,fibo_cycle9_ALL_paths,fibo_cycle10_ALL_paths,bubble_cycle1_ALL_paths,bubble_cycle2_ALL_paths,bubble_cycle3_ALL_paths,bubble_cycle4_ALL_paths,bubble_cycle5_ALL_paths,bubble_cycle6_ALL_paths,bubble_cycle7_ALL_paths,bubble_cycle8_ALL_paths,bubble_cycle9_ALL_paths,bubble_cycle10_ALL_paths,matrix_cycle1_ALL_paths,matrix_cycle2_ALL_paths,matrix_cycle3_ALL_paths,matrix_cycle4_ALL_paths,matrix_cycle5_ALL_paths,matrix_cycle6_ALL_paths,matrix_cycle7_ALL_paths,matrix_cycle8_ALL_paths,matrix_cycle9_ALL_paths,matrix_cycle10_ALL_paths,collatz_cycle1_ALL_paths,collatz_cycle2_ALL_paths,collatz_cycle3_ALL_paths,collatz_cycle4_ALL_paths,collatz_cycle5_ALL_paths,collatz_cycle6_ALL_paths,collatz_cycle7_ALL_paths,collatz_cycle8_ALL_paths,collatz_cycle9_ALL_paths,collatz_cycle10_ALL_paths,rapl_cycle1_ALL_paths,rapl_cycle2_ALL_paths,rapl_cycle3_ALL_paths,rapl_cycle4_ALL_paths,rapl_cycle5_ALL_paths,rapl_cycle6_ALL_paths,rapl_cycle7_ALL_paths,rapl_cycle8_ALL_paths,rapl_cycle9_ALL_paths)
+rm(rapl_cycle10_ALL_paths,fibo_cycle1_UP_IDLE_paths,fibo_cycle2_UP_IDLE_paths,fibo_cycle3_UP_IDLE_paths,fibo_cycle4_UP_IDLE_paths,fibo_cycle5_UP_IDLE_paths,fibo_cycle6_UP_IDLE_paths,fibo_cycle7_UP_IDLE_paths,fibo_cycle8_UP_IDLE_paths,fibo_cycle9_UP_IDLE_paths,fibo_cycle10_UP_IDLE_paths,bubble_cycle1_UP_IDLE_paths,bubble_cycle2_UP_IDLE_paths,bubble_cycle3_UP_IDLE_paths,bubble_cycle4_UP_IDLE_paths,bubble_cycle5_UP_IDLE_paths,bubble_cycle6_UP_IDLE_paths,bubble_cycle7_UP_IDLE_paths,bubble_cycle8_UP_IDLE_paths,bubble_cycle9_UP_IDLE_paths,bubble_cycle10_UP_IDLE_paths,matrix_cycle1_UP_IDLE_paths,matrix_cycle2_UP_IDLE_paths,matrix_cycle3_UP_IDLE_paths,matrix_cycle4_UP_IDLE_paths,matrix_cycle5_UP_IDLE_paths,matrix_cycle6_UP_IDLE_paths,matrix_cycle7_UP_IDLE_paths,matrix_cycle8_UP_IDLE_paths,matrix_cycle9_UP_IDLE_paths,matrix_cycle10_UP_IDLE_paths,collatz_cycle1_UP_IDLE_paths,collatz_cycle2_UP_IDLE_paths,collatz_cycle3_UP_IDLE_paths,collatz_cycle4_UP_IDLE_paths,collatz_cycle5_UP_IDLE_paths,collatz_cycle6_UP_IDLE_paths,collatz_cycle7_UP_IDLE_paths,collatz_cycle8_UP_IDLE_paths,collatz_cycle9_UP_IDLE_paths,collatz_cycle10_UP_IDLE_paths,rapl_cycle1_UP_IDLE_paths,rapl_cycle2_UP_IDLE_paths,rapl_cycle3_UP_IDLE_paths,rapl_cycle4_UP_IDLE_paths,rapl_cycle5_UP_IDLE_paths,rapl_cycle6_UP_IDLE_paths,rapl_cycle7_UP_IDLE_paths,rapl_cycle8_UP_IDLE_paths,rapl_cycle9_UP_IDLE_paths,rapl_cycle10_UP_IDLE_paths)
+
+
+#Sum up the energy usage over the 4 microservices / treatment / cycle
+
+#BUBBLE_COLLATZ
+bc_cycle1 <- bubble_cycle1_BUBBLE_COLLATZ_trapezoid_val + fibo_cycle1_BUBBLE_COLLATZ_trapezoid_val + collatz_cycle1_BUBBLE_COLLATZ_trapezoid_val + matrix_cycle1_BUBBLE_COLLATZ_trapezoid_val
+bc_cycle2 <- bubble_cycle2_BUBBLE_COLLATZ_trapezoid_val + fibo_cycle2_BUBBLE_COLLATZ_trapezoid_val + collatz_cycle2_BUBBLE_COLLATZ_trapezoid_val + matrix_cycle2_BUBBLE_COLLATZ_trapezoid_val
+bc_cycle3 <- bubble_cycle3_BUBBLE_COLLATZ_trapezoid_val + fibo_cycle3_BUBBLE_COLLATZ_trapezoid_val + collatz_cycle3_BUBBLE_COLLATZ_trapezoid_val + matrix_cycle3_BUBBLE_COLLATZ_trapezoid_val
+bc_cycle4 <- bubble_cycle4_BUBBLE_COLLATZ_trapezoid_val + fibo_cycle4_BUBBLE_COLLATZ_trapezoid_val + collatz_cycle4_BUBBLE_COLLATZ_trapezoid_val + matrix_cycle4_BUBBLE_COLLATZ_trapezoid_val
+bc_cycle5 <- bubble_cycle5_BUBBLE_COLLATZ_trapezoid_val + fibo_cycle5_BUBBLE_COLLATZ_trapezoid_val + collatz_cycle5_BUBBLE_COLLATZ_trapezoid_val + matrix_cycle5_BUBBLE_COLLATZ_trapezoid_val
+bc_cycle6 <- bubble_cycle6_BUBBLE_COLLATZ_trapezoid_val + fibo_cycle6_BUBBLE_COLLATZ_trapezoid_val + collatz_cycle6_BUBBLE_COLLATZ_trapezoid_val + matrix_cycle6_BUBBLE_COLLATZ_trapezoid_val
+bc_cycle7 <- bubble_cycle7_BUBBLE_COLLATZ_trapezoid_val + fibo_cycle7_BUBBLE_COLLATZ_trapezoid_val + collatz_cycle7_BUBBLE_COLLATZ_trapezoid_val + matrix_cycle7_BUBBLE_COLLATZ_trapezoid_val
+bc_cycle8 <- bubble_cycle8_BUBBLE_COLLATZ_trapezoid_val + fibo_cycle8_BUBBLE_COLLATZ_trapezoid_val + collatz_cycle8_BUBBLE_COLLATZ_trapezoid_val + matrix_cycle8_BUBBLE_COLLATZ_trapezoid_val
+bc_cycle9 <- bubble_cycle9_BUBBLE_COLLATZ_trapezoid_val + fibo_cycle9_BUBBLE_COLLATZ_trapezoid_val + collatz_cycle9_BUBBLE_COLLATZ_trapezoid_val + matrix_cycle9_BUBBLE_COLLATZ_trapezoid_val
+#FIBO_MATRIX
+bc_cycle10 <- bubble_cycle10_BUBBLE_COLLATZ_trapezoid_val + fibo_cycle10_BUBBLE_COLLATZ_trapezoid_val + collatz_cycle10_BUBBLE_COLLATZ_trapezoid_val + matrix_cycle10_BUBBLE_COLLATZ_trapezoid_val 
+fm_cycle1 <-bubble_cycle1_FIBO_MATRIX_trapezoid_val + fibo_cycle1_FIBO_MATRIX_trapezoid_val + collatz_cycle1_FIBO_MATRIX_trapezoid_val + matrix_cycle1_FIBO_MATRIX_trapezoid_val
+fm_cycle2 <-bubble_cycle2_FIBO_MATRIX_trapezoid_val + fibo_cycle2_FIBO_MATRIX_trapezoid_val + collatz_cycle2_FIBO_MATRIX_trapezoid_val + matrix_cycle2_FIBO_MATRIX_trapezoid_val
+fm_cycle3 <-bubble_cycle3_FIBO_MATRIX_trapezoid_val + fibo_cycle3_FIBO_MATRIX_trapezoid_val + collatz_cycle3_FIBO_MATRIX_trapezoid_val + matrix_cycle3_FIBO_MATRIX_trapezoid_val
+fm_cycle4 <-bubble_cycle4_FIBO_MATRIX_trapezoid_val + fibo_cycle4_FIBO_MATRIX_trapezoid_val + collatz_cycle4_FIBO_MATRIX_trapezoid_val + matrix_cycle4_FIBO_MATRIX_trapezoid_val
+fm_cycle5 <-bubble_cycle5_FIBO_MATRIX_trapezoid_val + fibo_cycle5_FIBO_MATRIX_trapezoid_val + collatz_cycle5_FIBO_MATRIX_trapezoid_val + matrix_cycle5_FIBO_MATRIX_trapezoid_val
+fm_cycle6 <-bubble_cycle6_FIBO_MATRIX_trapezoid_val + fibo_cycle6_FIBO_MATRIX_trapezoid_val + collatz_cycle6_FIBO_MATRIX_trapezoid_val + matrix_cycle6_FIBO_MATRIX_trapezoid_val
+fm_cycle7 <-bubble_cycle7_FIBO_MATRIX_trapezoid_val + fibo_cycle7_FIBO_MATRIX_trapezoid_val + collatz_cycle7_FIBO_MATRIX_trapezoid_val + matrix_cycle7_FIBO_MATRIX_trapezoid_val
+fm_cycle8 <-bubble_cycle8_FIBO_MATRIX_trapezoid_val + fibo_cycle8_FIBO_MATRIX_trapezoid_val + collatz_cycle8_FIBO_MATRIX_trapezoid_val + matrix_cycle8_FIBO_MATRIX_trapezoid_val
+fm_cycle9 <-bubble_cycle9_FIBO_MATRIX_trapezoid_val + fibo_cycle9_FIBO_MATRIX_trapezoid_val + collatz_cycle9_FIBO_MATRIX_trapezoid_val + matrix_cycle9_FIBO_MATRIX_trapezoid_val
+fm_cycle10 <-bubble_cycle10_FIBO_MATRIX_trapezoid_val + fibo_cycle10_FIBO_MATRIX_trapezoid_val + collatz_cycle10_FIBO_MATRIX_trapezoid_val + matrix_cycle10_FIBO_MATRIX_trapezoid_val 
+#ALL
+all_cycle1 <-bubble_cycle1_ALL_trapezoid_val + fibo_cycle1_ALL_trapezoid_val + collatz_cycle1_ALL_trapezoid_val + matrix_cycle1_ALL_trapezoid_val
+all_cycle2 <-bubble_cycle2_ALL_trapezoid_val + fibo_cycle2_ALL_trapezoid_val + collatz_cycle2_ALL_trapezoid_val + matrix_cycle2_ALL_trapezoid_val
+all_cycle3 <-bubble_cycle3_ALL_trapezoid_val + fibo_cycle3_ALL_trapezoid_val + collatz_cycle3_ALL_trapezoid_val + matrix_cycle3_ALL_trapezoid_val
+all_cycle4 <-bubble_cycle4_ALL_trapezoid_val + fibo_cycle4_ALL_trapezoid_val + collatz_cycle4_ALL_trapezoid_val + matrix_cycle4_ALL_trapezoid_val
+all_cycle5 <-bubble_cycle5_ALL_trapezoid_val + fibo_cycle5_ALL_trapezoid_val + collatz_cycle5_ALL_trapezoid_val + matrix_cycle5_ALL_trapezoid_val
+all_cycle6 <-bubble_cycle6_ALL_trapezoid_val + fibo_cycle6_ALL_trapezoid_val + collatz_cycle6_ALL_trapezoid_val + matrix_cycle6_ALL_trapezoid_val
+all_cycle7 <-bubble_cycle7_ALL_trapezoid_val + fibo_cycle7_ALL_trapezoid_val + collatz_cycle7_ALL_trapezoid_val + matrix_cycle7_ALL_trapezoid_val
+all_cycle8 <-bubble_cycle8_ALL_trapezoid_val + fibo_cycle8_ALL_trapezoid_val + collatz_cycle8_ALL_trapezoid_val + matrix_cycle8_ALL_trapezoid_val
+all_cycle9 <-bubble_cycle9_ALL_trapezoid_val + fibo_cycle9_ALL_trapezoid_val + collatz_cycle9_ALL_trapezoid_val + matrix_cycle9_ALL_trapezoid_val
+all_cycle10 <-bubble_cycle10_ALL_trapezoid_val + fibo_cycle10_ALL_trapezoid_val + collatz_cycle10_ALL_trapezoid_val + matrix_cycle10_ALL_trapezoid_val 
+#UP_IDLE
+upidle_cycle1 <-bubble_cycle1_UP_IDLE_trapezoid_val + fibo_cycle1_UP_IDLE_trapezoid_val + collatz_cycle1_UP_IDLE_trapezoid_val + matrix_cycle1_UP_IDLE_trapezoid_val
+upidle_cycle2 <-bubble_cycle2_UP_IDLE_trapezoid_val + fibo_cycle2_UP_IDLE_trapezoid_val + collatz_cycle2_UP_IDLE_trapezoid_val + matrix_cycle2_UP_IDLE_trapezoid_val
+upidle_cycle3 <-bubble_cycle3_UP_IDLE_trapezoid_val + fibo_cycle3_UP_IDLE_trapezoid_val + collatz_cycle3_UP_IDLE_trapezoid_val + matrix_cycle3_UP_IDLE_trapezoid_val
+upidle_cycle4 <-bubble_cycle4_UP_IDLE_trapezoid_val + fibo_cycle4_UP_IDLE_trapezoid_val + collatz_cycle4_UP_IDLE_trapezoid_val + matrix_cycle4_UP_IDLE_trapezoid_val
+upidle_cycle5 <-bubble_cycle5_UP_IDLE_trapezoid_val + fibo_cycle5_UP_IDLE_trapezoid_val + collatz_cycle5_UP_IDLE_trapezoid_val + matrix_cycle5_UP_IDLE_trapezoid_val
+upidle_cycle6 <-bubble_cycle6_UP_IDLE_trapezoid_val + fibo_cycle6_UP_IDLE_trapezoid_val + collatz_cycle6_UP_IDLE_trapezoid_val + matrix_cycle6_UP_IDLE_trapezoid_val
+upidle_cycle7 <-bubble_cycle7_UP_IDLE_trapezoid_val + fibo_cycle7_UP_IDLE_trapezoid_val + collatz_cycle7_UP_IDLE_trapezoid_val + matrix_cycle7_UP_IDLE_trapezoid_val
+upidle_cycle8 <-bubble_cycle8_UP_IDLE_trapezoid_val + fibo_cycle8_UP_IDLE_trapezoid_val + collatz_cycle8_UP_IDLE_trapezoid_val + matrix_cycle8_UP_IDLE_trapezoid_val
+upidle_cycle9 <-bubble_cycle9_UP_IDLE_trapezoid_val + fibo_cycle9_UP_IDLE_trapezoid_val + collatz_cycle9_UP_IDLE_trapezoid_val + matrix_cycle9_UP_IDLE_trapezoid_val
+upidle_cycle10 <-bubble_cycle10_UP_IDLE_trapezoid_val + fibo_cycle10_UP_IDLE_trapezoid_val + collatz_cycle10_UP_IDLE_trapezoid_val + matrix_cycle10_UP_IDLE_trapezoid_val 
+
+
+#Create the SW and RAPL energy usage vectors
+smartwatts_energy_usage <- c(bc_cycle1,bc_cycle2,bc_cycle3,bc_cycle4,bc_cycle5,bc_cycle6,bc_cycle7,bc_cycle8,bc_cycle9,bc_cycle10,fm_cycle1,fm_cycle2,fm_cycle3,fm_cycle4,fm_cycle5,fm_cycle6,fm_cycle7,fm_cycle8,fm_cycle9,fm_cycle10,all_cycle1,all_cycle2,all_cycle3,all_cycle4,all_cycle5,all_cycle6,all_cycle7,all_cycle8,all_cycle9,all_cycle10,upidle_cycle1,upidle_cycle2,upidle_cycle3,upidle_cycle4,upidle_cycle5,upidle_cycle6,upidle_cycle7,upidle_cycle8,upidle_cycle9,upidle_cycle10)
+rapl_energy_usage <- c(rapl_cycle1_BUBBLE_COLLATZ_trapezoid_val,rapl_cycle2_BUBBLE_COLLATZ_trapezoid_val,rapl_cycle3_BUBBLE_COLLATZ_trapezoid_val,rapl_cycle4_BUBBLE_COLLATZ_trapezoid_val,rapl_cycle5_BUBBLE_COLLATZ_trapezoid_val,rapl_cycle6_BUBBLE_COLLATZ_trapezoid_val,rapl_cycle7_BUBBLE_COLLATZ_trapezoid_val,rapl_cycle8_BUBBLE_COLLATZ_trapezoid_val,rapl_cycle9_BUBBLE_COLLATZ_trapezoid_val,rapl_cycle10_BUBBLE_COLLATZ_trapezoid_val,rapl_cycle1_FIBO_MATRIX_trapezoid_val,rapl_cycle2_FIBO_MATRIX_trapezoid_val,rapl_cycle3_FIBO_MATRIX_trapezoid_val,rapl_cycle4_FIBO_MATRIX_trapezoid_val,rapl_cycle5_FIBO_MATRIX_trapezoid_val,rapl_cycle6_FIBO_MATRIX_trapezoid_val,rapl_cycle7_FIBO_MATRIX_trapezoid_val,rapl_cycle8_FIBO_MATRIX_trapezoid_val,rapl_cycle9_FIBO_MATRIX_trapezoid_val,rapl_cycle10_FIBO_MATRIX_trapezoid_val,rapl_cycle1_ALL_trapezoid_val,rapl_cycle2_ALL_trapezoid_val,rapl_cycle3_ALL_trapezoid_val,rapl_cycle4_ALL_trapezoid_val,rapl_cycle5_ALL_trapezoid_val,rapl_cycle6_ALL_trapezoid_val,rapl_cycle7_ALL_trapezoid_val,rapl_cycle8_ALL_trapezoid_val,rapl_cycle9_ALL_trapezoid_val,rapl_cycle10_ALL_trapezoid_val,rapl_cycle1_UP_IDLE_trapezoid_val,rapl_cycle2_UP_IDLE_trapezoid_val,rapl_cycle3_UP_IDLE_trapezoid_val,rapl_cycle4_UP_IDLE_trapezoid_val,rapl_cycle5_UP_IDLE_trapezoid_val,rapl_cycle6_UP_IDLE_trapezoid_val,rapl_cycle7_UP_IDLE_trapezoid_val,rapl_cycle8_UP_IDLE_trapezoid_val,rapl_cycle9_UP_IDLE_trapezoid_val,rapl_cycle10_UP_IDLE_trapezoid_val)
+
+#Extract WattsUpPro data
+
+#1. Extract the Watts Up Pro data into tables and sum up the GL3 and GL4 readings
+wattsup_gl3<- read.table("gl3.log", header=FALSE, col.name=c("date", "time", "id", "W", "V", "A"), sep=" ", fileEncoding="utf8")
+wattsup_gl4<- read.table("gl4.log", header=FALSE, col.name=c("date", "time", "id", "W", "V", "A"), sep=" ", fileEncoding="utf8")
+#Process the Watts Up Pro data
+select_earliest_wattsup_start_time_vec <- function(gl3_start_time, gl4_start_time, gl3_time_vec, gl4_time_vec){
+  if(gl3_start_time < gl4_start_time){
+    return (gl3_time_vec)
+  }else{
+    return (gl4_time_vec)
+  }
+}
+select_earliest_wattsup_start_time <- function(gl3_start_time, gl4_start_time){
+  if(gl3_start_time < gl4_start_time){
+    return (gl3_start_time)
+  }else{
+    return (gl4_start_time)
+  }
+}
+
+wattsup_gl4$date <- paste(wattsup_gl4$date, wattsup_gl4$time, sep=" ")
+wattsup_gl3$date <- paste(wattsup_gl3$date, wattsup_gl3$time, sep=" ")
+wattsup_gl3$time <- NULL
+wattsup_gl4$time <- NULL
+
+gl4_log_length <- length(wattsup_gl4$W)
+gl3_log_length <- length(wattsup_gl3$W)
+if(gl4_log_length < gl3_log_length){
+  wattsup_gl3 <- wattsup_gl3[c(1:gl4_log_length), ] 
+} else{ 
+  wattsup_gl4 <- wattsup_gl4[c(1:gl3_log_length), ] 
+}
+
+#Sum up the results from GL3 and GL4 machines
+wattsup_gl6_W <- wattsup_gl3$W + wattsup_gl4$W
+wattsup_gl6 <- data.frame(wattsup_gl6_W)
+gl3_initial_time <- anytime(wattsup_gl3[1, "date"])
+gl4_initial_time <- anytime(wattsup_gl4[1, "date"])
+
+wattsup_start_time <- select_earliest_wattsup_start_time(gl3_initial_time, gl4_initial_time)
+wattsup_time_vec <- select_earliest_wattsup_start_time_vec(gl3_initial_time, gl4_initial_time, wattsup_gl3$date, wattsup_gl4$date)
+wattsup_gl6_final <- cbind(wattsup_gl6, wattsup_time_vec)
+colnames(wattsup_gl6_final) <- c("W", "time")
+
+#Create SmartWatts experiment log df
+experiment_log <- read.csv('experiment_log.csv', header=F)
+colnames(experiment_log) <- c("cycle", "treatment", "start_time", "end_time")
+experiment_log_ALL <- experiment_log[ which(experiment_log$treatment=='ALL'), ]
+experiment_log_ALL <- experiment_log_ALL %>% mutate(start_time=anytime(start_time))
+experiment_log_ALL <- experiment_log_ALL %>% mutate(end_time=anytime(end_time))
+#experiment_log_IDLE <- experiment_log[ which(experiment_log$treatment=='IDLE'), ]
+experiment_log_UP_IDLE <- experiment_log[ which(experiment_log$treatment=='UP_IDLE'), ]
+experiment_log_UP_IDLE <- experiment_log_UP_IDLE %>% mutate(start_time=anytime(start_time))
+experiment_log_UP_IDLE <- experiment_log_UP_IDLE %>% mutate(end_time=anytime(end_time))
+experiment_log_FIBO_MATRIX <- experiment_log[ which(experiment_log$treatment=='FIBO_MATRIX'), ]
+experiment_log_FIBO_MATRIX <- experiment_log_FIBO_MATRIX %>% mutate(start_time=anytime(start_time))
+experiment_log_FIBO_MATRIX <- experiment_log_FIBO_MATRIX %>% mutate(end_time=anytime(end_time))
+experiment_log_BUBBLE_COLLATZ <- experiment_log[ which(experiment_log$treatment=='BUBBLE_COLLATZ'), ]
+experiment_log_BUBBLE_COLLATZ <- experiment_log_BUBBLE_COLLATZ %>% mutate(start_time=anytime(start_time))
+experiment_log_BUBBLE_COLLATZ <- experiment_log_BUBBLE_COLLATZ %>% mutate(end_time=anytime(end_time))
+
+row.names(experiment_log_ALL) <- NULL
+# row.names(experiment_log_IDLE) <- NULL
+row.names(experiment_log_UP_IDLE) <- NULL
+row.names(experiment_log_FIBO_MATRIX) <- NULL
+row.names(experiment_log_BUBBLE_COLLATZ) <- NULL
+
+#Extract the treatment data from Watts Up Pro result file, create the chart ticks
+wup_bc_cycle1 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_BUBBLE_COLLATZ[1, "start_time"] & wattsup_gl6_final$time < experiment_log_BUBBLE_COLLATZ[1, "end_time"]), ]
+wup_bc_cycle1 <- wup_bc_cycle1 %>% mutate(chart_ticks=round((minute(time) - minute(wup_bc_cycle1[1, 'time'])) * 60 + second(time) - second(wup_bc_cycle1[1, 'time']), 0))
+wup_bc_cycle2 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_BUBBLE_COLLATZ[2, "start_time"] & wattsup_gl6_final$time < experiment_log_BUBBLE_COLLATZ[2, "end_time"]), ]
+wup_bc_cycle2 <- wup_bc_cycle2 %>% mutate(chart_ticks=round((minute(time) - minute(wup_bc_cycle2[1, 'time'])) * 60 + second(time) - second(wup_bc_cycle2[1, 'time']), 0))
+wup_bc_cycle3 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_BUBBLE_COLLATZ[3, "start_time"] & wattsup_gl6_final$time < experiment_log_BUBBLE_COLLATZ[3, "end_time"]), ]
+wup_bc_cycle3 <- wup_bc_cycle3 %>% mutate(chart_ticks=round((minute(time) - minute(wup_bc_cycle3[1, 'time'])) * 60 + second(time) - second(wup_bc_cycle3[1, 'time']), 0))
+wup_bc_cycle4 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_BUBBLE_COLLATZ[4, "start_time"] & wattsup_gl6_final$time < experiment_log_BUBBLE_COLLATZ[4, "end_time"]), ]
+wup_bc_cycle4 <- wup_bc_cycle4 %>% mutate(chart_ticks=round((minute(time) - minute(wup_bc_cycle4[1, 'time'])) * 60 + second(time) - second(wup_bc_cycle4[1, 'time']), 0))
+wup_bc_cycle5 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_BUBBLE_COLLATZ[5, "start_time"] & wattsup_gl6_final$time < experiment_log_BUBBLE_COLLATZ[5, "end_time"]), ]
+wup_bc_cycle5 <- wup_bc_cycle5 %>% mutate(chart_ticks=round((minute(time) - minute(wup_bc_cycle5[1, 'time'])) * 60 + second(time) - second(wup_bc_cycle5[1, 'time']), 0))
+wup_bc_cycle6 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_BUBBLE_COLLATZ[6, "start_time"] & wattsup_gl6_final$time < experiment_log_BUBBLE_COLLATZ[6, "end_time"]), ]
+wup_bc_cycle6 <- wup_bc_cycle6 %>% mutate(chart_ticks=round((minute(time) - minute(wup_bc_cycle6[1, 'time'])) * 60 + second(time) - second(wup_bc_cycle6[1, 'time']), 0))
+wup_bc_cycle7 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_BUBBLE_COLLATZ[7, "start_time"] & wattsup_gl6_final$time < experiment_log_BUBBLE_COLLATZ[7, "end_time"]), ]
+wup_bc_cycle7 <- wup_bc_cycle7 %>% mutate(chart_ticks=round((minute(time) - minute(wup_bc_cycle7[1, 'time'])) * 60 + second(time) - second(wup_bc_cycle7[1, 'time']), 0))
+wup_bc_cycle8 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_BUBBLE_COLLATZ[8, "start_time"] & wattsup_gl6_final$time < experiment_log_BUBBLE_COLLATZ[8, "end_time"]), ]
+wup_bc_cycle8 <- wup_bc_cycle8 %>% mutate(chart_ticks=round((minute(time) - minute(wup_bc_cycle8[1, 'time'])) * 60 + second(time) - second(wup_bc_cycle8[1, 'time']), 0))
+wup_bc_cycle9 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_BUBBLE_COLLATZ[9, "start_time"] & wattsup_gl6_final$time < experiment_log_BUBBLE_COLLATZ[9, "end_time"]), ]
+wup_bc_cycle9 <- wup_bc_cycle9 %>% mutate(chart_ticks=round((minute(time) - minute(wup_bc_cycle9[1, 'time'])) * 60 + second(time) - second(wup_bc_cycle9[1, 'time']), 0))
+wup_bc_cycle10 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_BUBBLE_COLLATZ[10, "start_time"] & wattsup_gl6_final$time < experiment_log_BUBBLE_COLLATZ[10, "end_time"]), ]
+wup_bc_cycle10 <- wup_bc_cycle10 %>% mutate(chart_ticks=round((minute(time) - minute(wup_bc_cycle10[1, 'time'])) * 60 + second(time) - second(wup_bc_cycle10[1, 'time']), 0))
+wup_fm_cycle1 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_FIBO_MATRIX[1, "start_time"] & wattsup_gl6_final$time < experiment_log_FIBO_MATRIX[1, "end_time"]), ]
+wup_fm_cycle1 <- wup_fm_cycle1 %>% mutate(chart_ticks=round((minute(time) - minute(wup_fm_cycle1[1, 'time'])) * 60 + second(time) - second(wup_fm_cycle1[1, 'time']), 0))
+wup_fm_cycle2 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_FIBO_MATRIX[2, "start_time"] & wattsup_gl6_final$time < experiment_log_FIBO_MATRIX[2, "end_time"]), ]
+wup_fm_cycle2 <- wup_fm_cycle2 %>% mutate(chart_ticks=round((minute(time) - minute(wup_fm_cycle2[1, 'time'])) * 60 + second(time) - second(wup_fm_cycle2[1, 'time']), 0))
+wup_fm_cycle3 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_FIBO_MATRIX[3, "start_time"] & wattsup_gl6_final$time < experiment_log_FIBO_MATRIX[3, "end_time"]), ]
+wup_fm_cycle3 <- wup_fm_cycle3 %>% mutate(chart_ticks=round((minute(time) - minute(wup_fm_cycle3[1, 'time'])) * 60 + second(time) - second(wup_fm_cycle3[1, 'time']), 0))
+wup_fm_cycle4 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_FIBO_MATRIX[4, "start_time"] & wattsup_gl6_final$time < experiment_log_FIBO_MATRIX[4, "end_time"]), ]
+wup_fm_cycle4 <- wup_fm_cycle4 %>% mutate(chart_ticks=round((minute(time) - minute(wup_fm_cycle4[1, 'time'])) * 60 + second(time) - second(wup_fm_cycle4[1, 'time']), 0))
+wup_fm_cycle5 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_FIBO_MATRIX[5, "start_time"] & wattsup_gl6_final$time < experiment_log_FIBO_MATRIX[5, "end_time"]), ]
+wup_fm_cycle5 <- wup_fm_cycle5 %>% mutate(chart_ticks=round((minute(time) - minute(wup_fm_cycle5[1, 'time'])) * 60 + second(time) - second(wup_fm_cycle5[1, 'time']), 0))
+wup_fm_cycle6 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_FIBO_MATRIX[6, "start_time"] & wattsup_gl6_final$time < experiment_log_FIBO_MATRIX[6, "end_time"]), ]
+wup_fm_cycle6 <- wup_fm_cycle6 %>% mutate(chart_ticks=round((minute(time) - minute(wup_fm_cycle6[1, 'time'])) * 60 + second(time) - second(wup_fm_cycle6[1, 'time']), 0))
+wup_fm_cycle7 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_FIBO_MATRIX[7, "start_time"] & wattsup_gl6_final$time < experiment_log_FIBO_MATRIX[7, "end_time"]), ]
+wup_fm_cycle7 <- wup_fm_cycle7 %>% mutate(chart_ticks=round((minute(time) - minute(wup_fm_cycle7[1, 'time'])) * 60 + second(time) - second(wup_fm_cycle7[1, 'time']), 0))
+wup_fm_cycle8 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_FIBO_MATRIX[8, "start_time"] & wattsup_gl6_final$time < experiment_log_FIBO_MATRIX[8, "end_time"]), ]
+wup_fm_cycle8 <- wup_fm_cycle8 %>% mutate(chart_ticks=round((minute(time) - minute(wup_fm_cycle8[1, 'time'])) * 60 + second(time) - second(wup_fm_cycle8[1, 'time']), 0))
+wup_fm_cycle9 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_FIBO_MATRIX[9, "start_time"] & wattsup_gl6_final$time < experiment_log_FIBO_MATRIX[9, "end_time"]), ]
+wup_fm_cycle9 <- wup_fm_cycle9 %>% mutate(chart_ticks=round((minute(time) - minute(wup_fm_cycle9[1, 'time'])) * 60 + second(time) - second(wup_fm_cycle9[1, 'time']), 0))
+wup_fm_cycle10 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_FIBO_MATRIX[10, "start_time"] & wattsup_gl6_final$time < experiment_log_FIBO_MATRIX[10, "end_time"]), ]
+wup_fm_cycle10 <- wup_fm_cycle10 %>% mutate(chart_ticks=round((minute(time) - minute(wup_fm_cycle10[1, 'time'])) * 60 + second(time) - second(wup_fm_cycle10[1, 'time']), 0))
+wup_all_cycle1 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_ALL[1, "start_time"] & wattsup_gl6_final$time < experiment_log_ALL[1, "end_time"]), ]
+wup_all_cycle1 <- wup_all_cycle1 %>% mutate(chart_ticks=round((minute(time) - minute(wup_all_cycle1[1, 'time'])) * 60 + second(time) - second(wup_all_cycle1[1, 'time']), 0))
+wup_all_cycle2 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_ALL[2, "start_time"] & wattsup_gl6_final$time < experiment_log_ALL[2, "end_time"]), ]
+wup_all_cycle2 <- wup_all_cycle2 %>% mutate(chart_ticks=round((minute(time) - minute(wup_all_cycle2[1, 'time'])) * 60 + second(time) - second(wup_all_cycle2[1, 'time']), 0))
+wup_all_cycle3 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_ALL[3, "start_time"] & wattsup_gl6_final$time < experiment_log_ALL[3, "end_time"]), ]
+wup_all_cycle3 <- wup_all_cycle3 %>% mutate(chart_ticks=round((minute(time) - minute(wup_all_cycle3[1, 'time'])) * 60 + second(time) - second(wup_all_cycle3[1, 'time']), 0))
+wup_all_cycle4 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_ALL[4, "start_time"] & wattsup_gl6_final$time < experiment_log_ALL[4, "end_time"]), ]
+wup_all_cycle4 <- wup_all_cycle4 %>% mutate(chart_ticks=round((minute(time) - minute(wup_all_cycle4[1, 'time'])) * 60 + second(time) - second(wup_all_cycle4[1, 'time']), 0))
+wup_all_cycle5 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_ALL[5, "start_time"] & wattsup_gl6_final$time < experiment_log_ALL[5, "end_time"]), ]
+wup_all_cycle5 <- wup_all_cycle5 %>% mutate(chart_ticks=round((minute(time) - minute(wup_all_cycle5[1, 'time'])) * 60 + second(time) - second(wup_all_cycle5[1, 'time']), 0))
+wup_all_cycle6 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_ALL[6, "start_time"] & wattsup_gl6_final$time < experiment_log_ALL[6, "end_time"]), ]
+wup_all_cycle6 <- wup_all_cycle6 %>% mutate(chart_ticks=round((minute(time) - minute(wup_all_cycle6[1, 'time'])) * 60 + second(time) - second(wup_all_cycle6[1, 'time']), 0))
+wup_all_cycle7 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_ALL[7, "start_time"] & wattsup_gl6_final$time < experiment_log_ALL[7, "end_time"]), ]
+wup_all_cycle7 <- wup_all_cycle7 %>% mutate(chart_ticks=round((minute(time) - minute(wup_all_cycle7[1, 'time'])) * 60 + second(time) - second(wup_all_cycle7[1, 'time']), 0))
+wup_all_cycle8 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_ALL[8, "start_time"] & wattsup_gl6_final$time < experiment_log_ALL[8, "end_time"]), ]
+wup_all_cycle8 <- wup_all_cycle8 %>% mutate(chart_ticks=round((minute(time) - minute(wup_all_cycle8[1, 'time'])) * 60 + second(time) - second(wup_all_cycle8[1, 'time']), 0))
+wup_all_cycle9 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_ALL[9, "start_time"] & wattsup_gl6_final$time < experiment_log_ALL[9, "end_time"]), ]
+wup_all_cycle9 <- wup_all_cycle9 %>% mutate(chart_ticks=round((minute(time) - minute(wup_all_cycle9[1, 'time'])) * 60 + second(time) - second(wup_all_cycle9[1, 'time']), 0))
+wup_all_cycle10 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_ALL[10, "start_time"] & wattsup_gl6_final$time < experiment_log_ALL[10, "end_time"]), ]
+wup_all_cycle10 <- wup_all_cycle10 %>% mutate(chart_ticks=round((minute(time) - minute(wup_all_cycle10[1, 'time'])) * 60 + second(time) - second(wup_all_cycle10[1, 'time']), 0))
+wup_upidle_cycle1 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_UP_IDLE[1, "start_time"] & wattsup_gl6_final$time < experiment_log_UP_IDLE[1, "end_time"]), ]
+wup_upidle_cycle1 <- wup_upidle_cycle1 %>% mutate(chart_ticks=round((minute(time) - minute(wup_upidle_cycle1[1, 'time'])) * 60 + second(time) - second(wup_upidle_cycle1[1, 'time']), 0))
+wup_upidle_cycle2 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_UP_IDLE[2, "start_time"] & wattsup_gl6_final$time < experiment_log_UP_IDLE[2, "end_time"]), ]
+wup_upidle_cycle2 <- wup_upidle_cycle2 %>% mutate(chart_ticks=round((minute(time) - minute(wup_upidle_cycle2[1, 'time'])) * 60 + second(time) - second(wup_upidle_cycle2[1, 'time']), 0))
+wup_upidle_cycle3 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_UP_IDLE[3, "start_time"] & wattsup_gl6_final$time < experiment_log_UP_IDLE[3, "end_time"]), ]
+wup_upidle_cycle3 <- wup_upidle_cycle3 %>% mutate(chart_ticks=round((minute(time) - minute(wup_upidle_cycle3[1, 'time'])) * 60 + second(time) - second(wup_upidle_cycle3[1, 'time']), 0))
+wup_upidle_cycle4 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_UP_IDLE[4, "start_time"] & wattsup_gl6_final$time < experiment_log_UP_IDLE[4, "end_time"]), ]
+wup_upidle_cycle4 <- wup_upidle_cycle4 %>% mutate(chart_ticks=round((minute(time) - minute(wup_upidle_cycle4[1, 'time'])) * 60 + second(time) - second(wup_upidle_cycle4[1, 'time']), 0))
+wup_upidle_cycle5 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_UP_IDLE[5, "start_time"] & wattsup_gl6_final$time < experiment_log_UP_IDLE[5, "end_time"]), ]
+wup_upidle_cycle5 <- wup_upidle_cycle5 %>% mutate(chart_ticks=round((minute(time) - minute(wup_upidle_cycle5[1, 'time'])) * 60 + second(time) - second(wup_upidle_cycle5[1, 'time']), 0))
+wup_upidle_cycle6 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_UP_IDLE[6, "start_time"] & wattsup_gl6_final$time < experiment_log_UP_IDLE[6, "end_time"]), ]
+wup_upidle_cycle6 <- wup_upidle_cycle6 %>% mutate(chart_ticks=round((minute(time) - minute(wup_upidle_cycle6[1, 'time'])) * 60 + second(time) - second(wup_upidle_cycle6[1, 'time']), 0))
+wup_upidle_cycle7 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_UP_IDLE[7, "start_time"] & wattsup_gl6_final$time < experiment_log_UP_IDLE[7, "end_time"]), ]
+wup_upidle_cycle7 <- wup_upidle_cycle7 %>% mutate(chart_ticks=round((minute(time) - minute(wup_upidle_cycle7[1, 'time'])) * 60 + second(time) - second(wup_upidle_cycle7[1, 'time']), 0))
+wup_upidle_cycle8 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_UP_IDLE[8, "start_time"] & wattsup_gl6_final$time < experiment_log_UP_IDLE[8, "end_time"]), ]
+wup_upidle_cycle8 <- wup_upidle_cycle8 %>% mutate(chart_ticks=round((minute(time) - minute(wup_upidle_cycle8[1, 'time'])) * 60 + second(time) - second(wup_upidle_cycle8[1, 'time']), 0))
+wup_upidle_cycle9 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_UP_IDLE[9, "start_time"] & wattsup_gl6_final$time < experiment_log_UP_IDLE[9, "end_time"]), ]
+wup_upidle_cycle9 <- wup_upidle_cycle9 %>% mutate(chart_ticks=round((minute(time) - minute(wup_upidle_cycle9[1, 'time'])) * 60 + second(time) - second(wup_upidle_cycle9[1, 'time']), 0))
+wup_upidle_cycle10 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_UP_IDLE[10, "start_time"] & wattsup_gl6_final$time < experiment_log_UP_IDLE[10, "end_time"]), ]
+wup_upidle_cycle10 <- wup_upidle_cycle10 %>% mutate(chart_ticks=round((minute(time) - minute(wup_upidle_cycle10[1, 'time'])) * 60 + second(time) - second(wup_upidle_cycle10[1, 'time']), 0))
+
+wup_bc_cycle1$id <- 1:nrow(wup_bc_cycle1)
+wup_bc_cycle2$id <- 1:nrow(wup_bc_cycle2)
+wup_bc_cycle3$id <- 1:nrow(wup_bc_cycle3)
+wup_bc_cycle4$id <- 1:nrow(wup_bc_cycle4)
+wup_bc_cycle5$id <- 1:nrow(wup_bc_cycle5)
+wup_bc_cycle6$id <- 1:nrow(wup_bc_cycle6)
+wup_bc_cycle7$id <- 1:nrow(wup_bc_cycle7)
+wup_bc_cycle8$id <- 1:nrow(wup_bc_cycle8)
+wup_bc_cycle9$id <- 1:nrow(wup_bc_cycle9)
+wup_bc_cycle10$id <- 1:nrow(wup_bc_cycle10)
+wup_fm_cycle1$id <- 1:nrow(wup_fm_cycle1)
+wup_fm_cycle2$id <- 1:nrow(wup_fm_cycle2)
+wup_fm_cycle3$id <- 1:nrow(wup_fm_cycle3)
+wup_fm_cycle4$id <- 1:nrow(wup_fm_cycle4)
+wup_fm_cycle5$id <- 1:nrow(wup_fm_cycle5)
+wup_fm_cycle6$id <- 1:nrow(wup_fm_cycle6)
+wup_fm_cycle7$id <- 1:nrow(wup_fm_cycle7)
+wup_fm_cycle8$id <- 1:nrow(wup_fm_cycle8)
+wup_fm_cycle9$id <- 1:nrow(wup_fm_cycle9)
+wup_fm_cycle10$id <- 1:nrow(wup_fm_cycle10)
+wup_all_cycle1$id <- 1:nrow(wup_all_cycle1)
+wup_all_cycle2$id <- 1:nrow(wup_all_cycle2)
+wup_all_cycle3$id <- 1:nrow(wup_all_cycle3)
+wup_all_cycle4$id <- 1:nrow(wup_all_cycle4)
+wup_all_cycle5$id <- 1:nrow(wup_all_cycle5)
+wup_all_cycle6$id <- 1:nrow(wup_all_cycle6)
+wup_all_cycle7$id <- 1:nrow(wup_all_cycle7)
+wup_all_cycle8$id <- 1:nrow(wup_all_cycle8)
+wup_all_cycle9$id <- 1:nrow(wup_all_cycle9)
+wup_all_cycle10$id <- 1:nrow(wup_all_cycle10)
+wup_upidle_cycle1$id <- 1:nrow(wup_upidle_cycle1)
+wup_upidle_cycle2$id <- 1:nrow(wup_upidle_cycle2)
+wup_upidle_cycle3$id <- 1:nrow(wup_upidle_cycle3)
+wup_upidle_cycle4$id <- 1:nrow(wup_upidle_cycle4)
+wup_upidle_cycle5$id <- 1:nrow(wup_upidle_cycle5)
+wup_upidle_cycle6$id <- 1:nrow(wup_upidle_cycle6)
+wup_upidle_cycle7$id <- 1:nrow(wup_upidle_cycle7)
+wup_upidle_cycle8$id <- 1:nrow(wup_upidle_cycle8)
+wup_upidle_cycle9$id <- 1:nrow(wup_upidle_cycle9)
+wup_upidle_cycle10$id <- 1:nrow(wup_upidle_cycle10)
+
+#Compute the trapezoid value
+wup_bc_cycle1_trapezoid_val <- trapz(wup_bc_cycle1$id, wup_bc_cycle1$W)
+wup_bc_cycle2_trapezoid_val <- trapz(wup_bc_cycle2$id, wup_bc_cycle2$W)
+wup_bc_cycle3_trapezoid_val <- trapz(wup_bc_cycle3$id, wup_bc_cycle3$W)
+wup_bc_cycle4_trapezoid_val <- trapz(wup_bc_cycle4$id, wup_bc_cycle4$W)
+wup_bc_cycle5_trapezoid_val <- trapz(wup_bc_cycle5$id, wup_bc_cycle5$W)
+wup_bc_cycle6_trapezoid_val <- trapz(wup_bc_cycle6$id, wup_bc_cycle6$W)
+wup_bc_cycle7_trapezoid_val <- trapz(wup_bc_cycle7$id, wup_bc_cycle7$W)
+wup_bc_cycle8_trapezoid_val <- trapz(wup_bc_cycle8$id, wup_bc_cycle8$W)
+wup_bc_cycle9_trapezoid_val <- trapz(wup_bc_cycle9$id, wup_bc_cycle9$W)
+wup_bc_cycle10_trapezoid_val <- trapz(wup_bc_cycle10$id, wup_bc_cycle10$W)
+wup_fm_cycle1_trapezoid_val <- trapz(wup_fm_cycle1$id, wup_fm_cycle1$W)
+wup_fm_cycle2_trapezoid_val <- trapz(wup_fm_cycle2$id, wup_fm_cycle2$W)
+wup_fm_cycle3_trapezoid_val <- trapz(wup_fm_cycle3$id, wup_fm_cycle3$W)
+wup_fm_cycle4_trapezoid_val <- trapz(wup_fm_cycle4$id, wup_fm_cycle4$W)
+wup_fm_cycle5_trapezoid_val <- trapz(wup_fm_cycle5$id, wup_fm_cycle5$W)
+wup_fm_cycle6_trapezoid_val <- trapz(wup_fm_cycle6$id, wup_fm_cycle6$W)
+wup_fm_cycle7_trapezoid_val <- trapz(wup_fm_cycle7$id, wup_fm_cycle7$W)
+wup_fm_cycle8_trapezoid_val <- trapz(wup_fm_cycle8$id, wup_fm_cycle8$W)
+wup_fm_cycle9_trapezoid_val <- trapz(wup_fm_cycle9$id, wup_fm_cycle9$W)
+wup_fm_cycle10_trapezoid_val <- trapz(wup_fm_cycle10$id, wup_fm_cycle10$W)
+wup_all_cycle1_trapezoid_val <- trapz(wup_all_cycle1$id, wup_all_cycle1$W)
+wup_all_cycle2_trapezoid_val <- trapz(wup_all_cycle2$id, wup_all_cycle2$W)
+wup_all_cycle3_trapezoid_val <- trapz(wup_all_cycle3$id, wup_all_cycle3$W)
+wup_all_cycle4_trapezoid_val <- trapz(wup_all_cycle4$id, wup_all_cycle4$W)
+wup_all_cycle5_trapezoid_val <- trapz(wup_all_cycle5$id, wup_all_cycle5$W)
+wup_all_cycle6_trapezoid_val <- trapz(wup_all_cycle6$id, wup_all_cycle6$W)
+wup_all_cycle7_trapezoid_val <- trapz(wup_all_cycle7$id, wup_all_cycle7$W)
+wup_all_cycle8_trapezoid_val <- trapz(wup_all_cycle8$id, wup_all_cycle8$W)
+wup_all_cycle9_trapezoid_val <- trapz(wup_all_cycle9$id, wup_all_cycle9$W)
+wup_all_cycle10_trapezoid_val <- trapz(wup_all_cycle10$id, wup_all_cycle10$W)
+wup_upidle_cycle1_trapezoid_val <- trapz(wup_upidle_cycle1$id, wup_upidle_cycle1$W)
+wup_upidle_cycle2_trapezoid_val <- trapz(wup_upidle_cycle2$id, wup_upidle_cycle2$W)
+wup_upidle_cycle3_trapezoid_val <- trapz(wup_upidle_cycle3$id, wup_upidle_cycle3$W)
+wup_upidle_cycle4_trapezoid_val <- trapz(wup_upidle_cycle4$id, wup_upidle_cycle4$W)
+wup_upidle_cycle5_trapezoid_val <- trapz(wup_upidle_cycle5$id, wup_upidle_cycle5$W)
+wup_upidle_cycle6_trapezoid_val <- trapz(wup_upidle_cycle6$id, wup_upidle_cycle6$W)
+wup_upidle_cycle7_trapezoid_val <- trapz(wup_upidle_cycle7$id, wup_upidle_cycle7$W)
+wup_upidle_cycle8_trapezoid_val <- trapz(wup_upidle_cycle8$id, wup_upidle_cycle8$W)
+wup_upidle_cycle9_trapezoid_val <- trapz(wup_upidle_cycle9$id, wup_upidle_cycle9$W)
+wup_upidle_cycle10_trapezoid_val <- trapz(wup_upidle_cycle10$id, wup_upidle_cycle10$W)
+
+#Watts Up Pro Energy usage vector 
+wup_energy_usage <- c(wup_bc_cycle1_trapezoid_val,wup_bc_cycle2_trapezoid_val,wup_bc_cycle3_trapezoid_val,wup_bc_cycle4_trapezoid_val,wup_bc_cycle5_trapezoid_val,wup_bc_cycle6_trapezoid_val,wup_bc_cycle7_trapezoid_val,wup_bc_cycle8_trapezoid_val,wup_bc_cycle9_trapezoid_val,wup_bc_cycle10_trapezoid_val,wup_fm_cycle1_trapezoid_val,wup_fm_cycle2_trapezoid_val,wup_fm_cycle3_trapezoid_val,wup_fm_cycle4_trapezoid_val,wup_fm_cycle5_trapezoid_val,wup_fm_cycle6_trapezoid_val,wup_fm_cycle7_trapezoid_val,wup_fm_cycle8_trapezoid_val,wup_fm_cycle9_trapezoid_val,wup_fm_cycle10_trapezoid_val,wup_all_cycle1_trapezoid_val,wup_all_cycle2_trapezoid_val,wup_all_cycle3_trapezoid_val,wup_all_cycle4_trapezoid_val,wup_all_cycle5_trapezoid_val,wup_all_cycle6_trapezoid_val,wup_all_cycle7_trapezoid_val,wup_all_cycle8_trapezoid_val,wup_all_cycle9_trapezoid_val,wup_all_cycle10_trapezoid_val,wup_upidle_cycle1_trapezoid_val,wup_upidle_cycle2_trapezoid_val,wup_upidle_cycle3_trapezoid_val,wup_upidle_cycle4_trapezoid_val,wup_upidle_cycle5_trapezoid_val,wup_upidle_cycle6_trapezoid_val,wup_upidle_cycle7_trapezoid_val,wup_upidle_cycle8_trapezoid_val,wup_upidle_cycle9_trapezoid_val,wup_upidle_cycle10_trapezoid_val)
+
+
+#Create timeline plots for each Experiment Cycle for SmartWatts, RAPL and WUP
+#Cycle1 plots
+#Bubble collatz
+cycle1_BUBBLE_COLLATZ_plot <-ggplot() + geom_line(data=bubble_cycle1_BUBBLE_COLLATZ_data[seq(1, length(bubble_cycle1_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle1_BUBBLE_COLLATZ_data[seq(1, length(fibo_cycle1_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle1_BUBBLE_COLLATZ_data[seq(1, length(matrix_cycle1_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle1_BUBBLE_COLLATZ_data[seq(1, length(collatz_cycle1_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle1_BUBBLE_COLLATZ_data[seq(1, length(rapl_cycle1_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_bc_cycle1[seq(1, length(wup_bc_cycle1$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle1_BUBBLE_COLLATZ_data[seq(1, length(bubble_cycle1_BUBBLE_COLLATZ_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.50, "cm")) +
+  theme(
+    axis.title.y = element_text(vjust = +1.2),
+    axis.title.x = element_text(vjust = -0.6)
+  ) + 
+  ggtitle("a) BUBBLE_COLLATZ Treatment") +
+  theme(legend.position="none") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle1_BUBBLE_COLLATZ_plot    
+#Save as pdf
+ggsave('./plots/cycle1_BUBBLE_COLLATZ_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+#Fibonaccy Matrix
+cycle1_FIBONACCI_MATRIX_plot <-ggplot() + geom_line(data=bubble_cycle1_FIBO_MATRIX_data[seq(1, length(bubble_cycle1_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle1_FIBO_MATRIX_data[seq(1, length(fibo_cycle1_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle1_FIBO_MATRIX_data[seq(1, length(matrix_cycle1_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle1_FIBO_MATRIX_data[seq(1, length(collatz_cycle1_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle1_FIBO_MATRIX_data[seq(1, length(rapl_cycle1_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_fm_cycle1[seq(1, length(wup_fm_cycle1$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle1_FIBO_MATRIX_data[seq(1, length(bubble_cycle1_FIBO_MATRIX_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("b) FIBONACCI_MATRIX Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle1_FIBONACCI_MATRIX_plot    
+#Save as pdf
+ggsave('./plots/cycle1_FIBONACCI_MATRIX_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#All
+cycle1_ALL_plot <-ggplot() + geom_line(data=bubble_cycle1_ALL_data[seq(1, length(bubble_cycle1_ALL_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle1_ALL_data[seq(1, length(fibo_cycle1_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle1_ALL_data[seq(1, length(matrix_cycle1_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle1_ALL_data[seq(1, length(collatz_cycle1_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle1_ALL_data[seq(1, length(rapl_cycle1_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_all_cycle1[seq(1, length(wup_all_cycle1$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle1_ALL_data[seq(1, length(bubble_cycle1_ALL_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("c) ALL Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle1_ALL_plot    
+#Save as pdf
+ggsave('./plots/cycle1_ALL_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#Up Idle
+cycle1_UP_IDLE_plot <-ggplot() + geom_line(data=bubble_cycle1_UP_IDLE_data[seq(1, length(bubble_cycle1_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle1_UP_IDLE_data[seq(1, length(fibo_cycle1_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle1_UP_IDLE_data[seq(1, length(matrix_cycle1_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle1_UP_IDLE_data[seq(1, length(collatz_cycle1_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle1_UP_IDLE_data[seq(1, length(rapl_cycle1_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_upidle_cycle1[seq(1, length(wup_upidle_cycle1$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle1_UP_IDLE_data[seq(1, length(bubble_cycle1_UP_IDLE_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("c) UP_IDLE Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle1_UP_IDLE_plot    
+#Save as pdf
+ggsave('./plots/cycle1_UP_IDLE_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#Cycle2 plots
+#Bubble collatz
+cycle2_BUBBLE_COLLATZ_plot <-ggplot() + geom_line(data=bubble_cycle2_BUBBLE_COLLATZ_data[seq(1, length(bubble_cycle2_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle2_BUBBLE_COLLATZ_data[seq(1, length(fibo_cycle2_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle2_BUBBLE_COLLATZ_data[seq(1, length(matrix_cycle2_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle2_BUBBLE_COLLATZ_data[seq(1, length(collatz_cycle2_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle2_BUBBLE_COLLATZ_data[seq(1, length(rapl_cycle2_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_bc_cycle2[seq(1, length(wup_bc_cycle2$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle2_BUBBLE_COLLATZ_data[seq(1, length(bubble_cycle2_BUBBLE_COLLATZ_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("a) BUBBLE_COLLATZ Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle2_BUBBLE_COLLATZ_plot    
+#Save as pdf
+ggsave('./plots/cycle2_BUBBLE_COLLATZ_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+#Fibonaccy Matrix
+cycle2_FIBONACCI_MATRIX_plot <-ggplot() + geom_line(data=bubble_cycle2_FIBO_MATRIX_data[seq(1, length(bubble_cycle2_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle2_FIBO_MATRIX_data[seq(1, length(fibo_cycle2_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle2_FIBO_MATRIX_data[seq(1, length(matrix_cycle2_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle2_FIBO_MATRIX_data[seq(1, length(collatz_cycle2_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle2_FIBO_MATRIX_data[seq(1, length(rapl_cycle2_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_fm_cycle2[seq(1, length(wup_fm_cycle2$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle2_FIBO_MATRIX_data[seq(1, length(bubble_cycle2_FIBO_MATRIX_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("b) FIBONACCI_MATRIX Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle2_FIBONACCI_MATRIX_plot    
+#Save as pdf
+ggsave('./plots/cycle2_FIBONACCI_MATRIX_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#All
+cycle2_ALL_plot <-ggplot() + geom_line(data=bubble_cycle2_ALL_data[seq(1, length(bubble_cycle2_ALL_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle2_ALL_data[seq(1, length(fibo_cycle2_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle2_ALL_data[seq(1, length(matrix_cycle2_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle2_ALL_data[seq(1, length(collatz_cycle2_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle2_ALL_data[seq(1, length(rapl_cycle2_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_all_cycle2[seq(1, length(wup_all_cycle2$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle2_ALL_data[seq(1, length(bubble_cycle2_ALL_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("c) ALL Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle2_ALL_plot    
+#Save as pdf
+ggsave('./plots/cycle2_ALL_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#Up Idle
+cycle2_UP_IDLE_plot <-ggplot() + geom_line(data=bubble_cycle2_UP_IDLE_data[seq(1, length(bubble_cycle2_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle2_UP_IDLE_data[seq(1, length(fibo_cycle2_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle2_UP_IDLE_data[seq(1, length(matrix_cycle2_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle2_UP_IDLE_data[seq(1, length(collatz_cycle2_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle2_UP_IDLE_data[seq(1, length(rapl_cycle2_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_upidle_cycle2[seq(1, length(wup_upidle_cycle2$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle2_UP_IDLE_data[seq(1, length(bubble_cycle2_UP_IDLE_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("d) UP_IDLE Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle2_UP_IDLE_plot    
+#Save as pdf
+ggsave('./plots/cycle2_UP_IDLE_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#Cycle3 plots
+#Bubble collatz
+cycle3_BUBBLE_COLLATZ_plot <-ggplot() + geom_line(data=bubble_cycle3_BUBBLE_COLLATZ_data[seq(1, length(bubble_cycle3_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle3_BUBBLE_COLLATZ_data[seq(1, length(fibo_cycle3_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle3_BUBBLE_COLLATZ_data[seq(1, length(matrix_cycle3_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle3_BUBBLE_COLLATZ_data[seq(1, length(collatz_cycle3_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle3_BUBBLE_COLLATZ_data[seq(1, length(rapl_cycle3_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_bc_cycle3[seq(1, length(wup_bc_cycle3$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle3_BUBBLE_COLLATZ_data[seq(1, length(bubble_cycle3_BUBBLE_COLLATZ_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("a) BUBBLE_COLLATZ Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle3_BUBBLE_COLLATZ_plot    
+#Save as pdf
+ggsave('./plots/cycle3_BUBBLE_COLLATZ_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+#Fibonaccy Matrix
+cycle3_FIBONACCI_MATRIX_plot <-ggplot() + geom_line(data=bubble_cycle3_FIBO_MATRIX_data[seq(1, length(bubble_cycle3_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle3_FIBO_MATRIX_data[seq(1, length(fibo_cycle3_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle3_FIBO_MATRIX_data[seq(1, length(matrix_cycle3_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle3_FIBO_MATRIX_data[seq(1, length(collatz_cycle3_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle3_FIBO_MATRIX_data[seq(1, length(rapl_cycle3_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_fm_cycle3[seq(1, length(wup_fm_cycle3$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle3_FIBO_MATRIX_data[seq(1, length(bubble_cycle3_FIBO_MATRIX_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("b) FIBONACCI_MATRIX Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle3_FIBONACCI_MATRIX_plot    
+#Save as pdf
+ggsave('./plots/cycle3_FIBONACCI_MATRIX_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#All
+cycle3_ALL_plot <-ggplot() + geom_line(data=bubble_cycle3_ALL_data[seq(1, length(bubble_cycle3_ALL_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle3_ALL_data[seq(1, length(fibo_cycle3_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle3_ALL_data[seq(1, length(matrix_cycle3_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle3_ALL_data[seq(1, length(collatz_cycle3_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle3_ALL_data[seq(1, length(rapl_cycle3_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_all_cycle3[seq(1, length(wup_all_cycle3$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle3_ALL_data[seq(1, length(bubble_cycle3_ALL_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("c) ALL Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle3_ALL_plot    
+#Save as pdf
+ggsave('./plots/cycle3_ALL_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#Up Idle
+cycle3_UP_IDLE_plot <-ggplot() + geom_line(data=bubble_cycle3_UP_IDLE_data[seq(1, length(bubble_cycle3_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle3_UP_IDLE_data[seq(1, length(fibo_cycle3_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle3_UP_IDLE_data[seq(1, length(matrix_cycle3_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle3_UP_IDLE_data[seq(1, length(collatz_cycle3_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle3_UP_IDLE_data[seq(1, length(rapl_cycle3_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_upidle_cycle3[seq(1, length(wup_upidle_cycle3$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle3_UP_IDLE_data[seq(1, length(bubble_cycle3_UP_IDLE_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("d) UP_IDLE Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle3_UP_IDLE_plot    
+#Save as pdf
+ggsave('./plots/cycle3_UP_IDLE_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#Cycle5 plots
+#Bubble collatz
+cycle5_BUBBLE_COLLATZ_plot <-ggplot() + geom_line(data=bubble_cycle5_BUBBLE_COLLATZ_data[seq(1, length(bubble_cycle5_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle5_BUBBLE_COLLATZ_data[seq(1, length(fibo_cycle5_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle5_BUBBLE_COLLATZ_data[seq(1, length(matrix_cycle5_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle5_BUBBLE_COLLATZ_data[seq(1, length(collatz_cycle5_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle5_BUBBLE_COLLATZ_data[seq(1, length(rapl_cycle5_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_bc_cycle5[seq(1, length(wup_bc_cycle5$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle5_BUBBLE_COLLATZ_data[seq(1, length(bubble_cycle5_BUBBLE_COLLATZ_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("a) BUBBLE_COLLATZ Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle5_BUBBLE_COLLATZ_plot    
+#Save as pdf
+ggsave('./plots/cycle5_BUBBLE_COLLATZ_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+#Fibonaccy Matrix
+cycle5_FIBONACCI_MATRIX_plot <-ggplot() + geom_line(data=bubble_cycle5_FIBO_MATRIX_data[seq(1, length(bubble_cycle5_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle5_FIBO_MATRIX_data[seq(1, length(fibo_cycle5_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle5_FIBO_MATRIX_data[seq(1, length(matrix_cycle5_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle5_FIBO_MATRIX_data[seq(1, length(collatz_cycle5_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle5_FIBO_MATRIX_data[seq(1, length(rapl_cycle5_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_fm_cycle5[seq(1, length(wup_fm_cycle5$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle5_FIBO_MATRIX_data[seq(1, length(bubble_cycle5_FIBO_MATRIX_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("b) FIBONACCI_MATRIX Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle5_FIBONACCI_MATRIX_plot    
+#Save as pdf
+ggsave('./plots/cycle5_FIBONACCI_MATRIX_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#All
+cycle5_ALL_plot <-ggplot() + geom_line(data=bubble_cycle5_ALL_data[seq(1, length(bubble_cycle5_ALL_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle5_ALL_data[seq(1, length(fibo_cycle5_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle5_ALL_data[seq(1, length(matrix_cycle5_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle5_ALL_data[seq(1, length(collatz_cycle5_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle5_ALL_data[seq(1, length(rapl_cycle5_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_all_cycle5[seq(1, length(wup_all_cycle5$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle5_ALL_data[seq(1, length(bubble_cycle5_ALL_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("c) ALL Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle5_ALL_plot    
+#Save as pdf
+ggsave('./plots/cycle5_ALL_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#Up Idle
+cycle5_UP_IDLE_plot <-ggplot() + geom_line(data=bubble_cycle5_UP_IDLE_data[seq(1, length(bubble_cycle5_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle5_UP_IDLE_data[seq(1, length(fibo_cycle5_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle5_UP_IDLE_data[seq(1, length(matrix_cycle5_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle5_UP_IDLE_data[seq(1, length(collatz_cycle5_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle5_UP_IDLE_data[seq(1, length(rapl_cycle5_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_upidle_cycle5[seq(1, length(wup_upidle_cycle5$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle5_UP_IDLE_data[seq(1, length(bubble_cycle5_UP_IDLE_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("d) UP_IDLE Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle5_UP_IDLE_plot    
+#Save as pdf
+ggsave('./plots/cycle5_UP_IDLE_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#Cycle6 plots
+#Bubble collatz
+cycle6_BUBBLE_COLLATZ_plot <-ggplot() + geom_line(data=bubble_cycle6_BUBBLE_COLLATZ_data[seq(1, length(bubble_cycle6_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle6_BUBBLE_COLLATZ_data[seq(1, length(fibo_cycle6_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle6_BUBBLE_COLLATZ_data[seq(1, length(matrix_cycle6_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle6_BUBBLE_COLLATZ_data[seq(1, length(collatz_cycle6_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle6_BUBBLE_COLLATZ_data[seq(1, length(rapl_cycle6_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_bc_cycle6[seq(1, length(wup_bc_cycle6$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle6_BUBBLE_COLLATZ_data[seq(1, length(bubble_cycle6_BUBBLE_COLLATZ_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("a) BUBBLE_COLLATZ Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle6_BUBBLE_COLLATZ_plot    
+#Save as pdf
+ggsave('./plots/cycle6_BUBBLE_COLLATZ_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+#Fibonaccy Matrix
+cycle6_FIBONACCI_MATRIX_plot <-ggplot() + geom_line(data=bubble_cycle6_FIBO_MATRIX_data[seq(1, length(bubble_cycle6_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle6_FIBO_MATRIX_data[seq(1, length(fibo_cycle6_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle6_FIBO_MATRIX_data[seq(1, length(matrix_cycle6_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle6_FIBO_MATRIX_data[seq(1, length(collatz_cycle6_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle6_FIBO_MATRIX_data[seq(1, length(rapl_cycle6_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_fm_cycle6[seq(1, length(wup_fm_cycle6$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle6_FIBO_MATRIX_data[seq(1, length(bubble_cycle6_FIBO_MATRIX_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("b) FIBONACCI_MATRIX Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle6_FIBONACCI_MATRIX_plot    
+#Save as pdf
+ggsave('./plots/cycle6_FIBONACCI_MATRIX_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#All
+cycle6_ALL_plot <-ggplot() + geom_line(data=bubble_cycle6_ALL_data[seq(1, length(bubble_cycle6_ALL_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle6_ALL_data[seq(1, length(fibo_cycle6_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle6_ALL_data[seq(1, length(matrix_cycle6_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle6_ALL_data[seq(1, length(collatz_cycle6_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle6_ALL_data[seq(1, length(rapl_cycle6_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_all_cycle6[seq(1, length(wup_all_cycle6$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle6_ALL_data[seq(1, length(bubble_cycle6_ALL_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("c) ALL Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle6_ALL_plot    
+#Save as pdf
+ggsave('./plots/cycle6_ALL_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#Up Idle
+cycle6_UP_IDLE_plot <-ggplot() + geom_line(data=bubble_cycle6_UP_IDLE_data[seq(1, length(bubble_cycle6_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle6_UP_IDLE_data[seq(1, length(fibo_cycle6_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle6_UP_IDLE_data[seq(1, length(matrix_cycle6_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle6_UP_IDLE_data[seq(1, length(collatz_cycle6_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle6_UP_IDLE_data[seq(1, length(rapl_cycle6_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_upidle_cycle6[seq(1, length(wup_upidle_cycle6$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle6_UP_IDLE_data[seq(1, length(bubble_cycle6_UP_IDLE_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("d) UP_IDLE Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle6_UP_IDLE_plot    
+#Save as pdf
+ggsave('./plots/cycle6_UP_IDLE_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#Cycle7 plots
+#Bubble collatz
+cycle7_BUBBLE_COLLATZ_plot <-ggplot() + geom_line(data=bubble_cycle7_BUBBLE_COLLATZ_data[seq(1, length(bubble_cycle7_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle7_BUBBLE_COLLATZ_data[seq(1, length(fibo_cycle7_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle7_BUBBLE_COLLATZ_data[seq(1, length(matrix_cycle7_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle7_BUBBLE_COLLATZ_data[seq(1, length(collatz_cycle7_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle7_BUBBLE_COLLATZ_data[seq(1, length(rapl_cycle7_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_bc_cycle7[seq(1, length(wup_bc_cycle7$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle7_BUBBLE_COLLATZ_data[seq(1, length(bubble_cycle7_BUBBLE_COLLATZ_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("a) BUBBLE_COLLATZ Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle7_BUBBLE_COLLATZ_plot    
+#Save as pdf
+ggsave('./plots/cycle7_BUBBLE_COLLATZ_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+#Fibonaccy Matrix
+cycle7_FIBONACCI_MATRIX_plot <-ggplot() + geom_line(data=bubble_cycle7_FIBO_MATRIX_data[seq(1, length(bubble_cycle7_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle7_FIBO_MATRIX_data[seq(1, length(fibo_cycle7_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle7_FIBO_MATRIX_data[seq(1, length(matrix_cycle7_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle7_FIBO_MATRIX_data[seq(1, length(collatz_cycle7_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle7_FIBO_MATRIX_data[seq(1, length(rapl_cycle7_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_fm_cycle7[seq(1, length(wup_fm_cycle7$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle7_FIBO_MATRIX_data[seq(1, length(bubble_cycle7_FIBO_MATRIX_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("b) FIBONACCI_MATRIX Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle7_FIBONACCI_MATRIX_plot    
+#Save as pdf
+ggsave('./plots/cycle7_FIBONACCI_MATRIX_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#All
+cycle7_ALL_plot <-ggplot() + geom_line(data=bubble_cycle7_ALL_data[seq(1, length(bubble_cycle7_ALL_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle7_ALL_data[seq(1, length(fibo_cycle7_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle7_ALL_data[seq(1, length(matrix_cycle7_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle7_ALL_data[seq(1, length(collatz_cycle7_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle7_ALL_data[seq(1, length(rapl_cycle7_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_all_cycle7[seq(1, length(wup_all_cycle7$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle7_ALL_data[seq(1, length(bubble_cycle7_ALL_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("c) ALL Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle7_ALL_plot    
+#Save as pdf
+ggsave('./plots/cycle7_ALL_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#Up Idle
+cycle7_UP_IDLE_plot <-ggplot() + geom_line(data=bubble_cycle7_UP_IDLE_data[seq(1, length(bubble_cycle7_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle7_UP_IDLE_data[seq(1, length(fibo_cycle7_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle7_UP_IDLE_data[seq(1, length(matrix_cycle7_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle7_UP_IDLE_data[seq(1, length(collatz_cycle7_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle7_UP_IDLE_data[seq(1, length(rapl_cycle7_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_upidle_cycle7[seq(1, length(wup_upidle_cycle7$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle7_UP_IDLE_data[seq(1, length(bubble_cycle7_UP_IDLE_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("d) UP_IDLE Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle7_UP_IDLE_plot    
+#Save as pdf
+ggsave('./plots/cycle7_UP_IDLE_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#Cycle8 plots
+#Bubble collatz
+cycle8_BUBBLE_COLLATZ_plot <-ggplot() + geom_line(data=bubble_cycle8_BUBBLE_COLLATZ_data[seq(1, length(bubble_cycle8_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle8_BUBBLE_COLLATZ_data[seq(1, length(fibo_cycle8_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle8_BUBBLE_COLLATZ_data[seq(1, length(matrix_cycle8_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle8_BUBBLE_COLLATZ_data[seq(1, length(collatz_cycle8_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle8_BUBBLE_COLLATZ_data[seq(1, length(rapl_cycle8_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_bc_cycle8[seq(1, length(wup_bc_cycle8$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle8_BUBBLE_COLLATZ_data[seq(1, length(bubble_cycle8_BUBBLE_COLLATZ_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("a) BUBBLE_COLLATZ Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle8_BUBBLE_COLLATZ_plot    
+#Save as pdf
+ggsave('./plots/cycle8_BUBBLE_COLLATZ_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+#Fibonaccy Matrix
+cycle8_FIBONACCI_MATRIX_plot <-ggplot() + geom_line(data=bubble_cycle8_FIBO_MATRIX_data[seq(1, length(bubble_cycle8_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle8_FIBO_MATRIX_data[seq(1, length(fibo_cycle8_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle8_FIBO_MATRIX_data[seq(1, length(matrix_cycle8_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle8_FIBO_MATRIX_data[seq(1, length(collatz_cycle8_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle8_FIBO_MATRIX_data[seq(1, length(rapl_cycle8_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_fm_cycle8[seq(1, length(wup_fm_cycle8$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle8_FIBO_MATRIX_data[seq(1, length(bubble_cycle8_FIBO_MATRIX_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("b) FIBONACCI_MATRIX Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle8_FIBONACCI_MATRIX_plot    
+#Save as pdf
+ggsave('./plots/cycle8_FIBONACCI_MATRIX_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#All
+cycle8_ALL_plot <-ggplot() + geom_line(data=bubble_cycle8_ALL_data[seq(1, length(bubble_cycle8_ALL_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle8_ALL_data[seq(1, length(fibo_cycle8_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle8_ALL_data[seq(1, length(matrix_cycle8_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle8_ALL_data[seq(1, length(collatz_cycle8_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle8_ALL_data[seq(1, length(rapl_cycle8_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_all_cycle8[seq(1, length(wup_all_cycle8$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle8_ALL_data[seq(1, length(bubble_cycle8_ALL_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("c) ALL Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle8_ALL_plot    
+#Save as pdf
+ggsave('./plots/cycle8_ALL_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#Up Idle
+cycle8_UP_IDLE_plot <-ggplot() + geom_line(data=bubble_cycle8_UP_IDLE_data[seq(1, length(bubble_cycle8_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle8_UP_IDLE_data[seq(1, length(fibo_cycle8_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle8_UP_IDLE_data[seq(1, length(matrix_cycle8_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle8_UP_IDLE_data[seq(1, length(collatz_cycle8_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle8_UP_IDLE_data[seq(1, length(rapl_cycle8_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_upidle_cycle8[seq(1, length(wup_upidle_cycle8$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle8_UP_IDLE_data[seq(1, length(bubble_cycle8_UP_IDLE_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("d) UP_IDLE Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle8_UP_IDLE_plot    
+#Save as pdf
+ggsave('./plots/cycle8_UP_IDLE_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+#Cycle9 plots
+#Bubble collatz
+cycle9_BUBBLE_COLLATZ_plot <-ggplot() + geom_line(data=bubble_cycle9_BUBBLE_COLLATZ_data[seq(1, length(bubble_cycle9_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle9_BUBBLE_COLLATZ_data[seq(1, length(fibo_cycle9_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle9_BUBBLE_COLLATZ_data[seq(1, length(matrix_cycle9_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle9_BUBBLE_COLLATZ_data[seq(1, length(collatz_cycle9_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle9_BUBBLE_COLLATZ_data[seq(1, length(rapl_cycle9_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_bc_cycle9[seq(1, length(wup_bc_cycle9$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle9_BUBBLE_COLLATZ_data[seq(1, length(bubble_cycle9_BUBBLE_COLLATZ_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("a) BUBBLE_COLLATZ Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle9_BUBBLE_COLLATZ_plot    
+#Save as pdf
+ggsave('./plots/cycle9_BUBBLE_COLLATZ_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+#Fibonaccy Matrix
+cycle9_FIBONACCI_MATRIX_plot <-ggplot() + geom_line(data=bubble_cycle9_FIBO_MATRIX_data[seq(1, length(bubble_cycle9_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle9_FIBO_MATRIX_data[seq(1, length(fibo_cycle9_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle9_FIBO_MATRIX_data[seq(1, length(matrix_cycle9_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle9_FIBO_MATRIX_data[seq(1, length(collatz_cycle9_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle9_FIBO_MATRIX_data[seq(1, length(rapl_cycle9_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_fm_cycle9[seq(1, length(wup_fm_cycle9$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle9_FIBO_MATRIX_data[seq(1, length(bubble_cycle9_FIBO_MATRIX_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("b) FIBONACCI_MATRIX Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle9_FIBONACCI_MATRIX_plot    
+#Save as pdf
+ggsave('./plots/cycle9_FIBONACCI_MATRIX_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#All
+cycle9_ALL_plot <-ggplot() + geom_line(data=bubble_cycle9_ALL_data[seq(1, length(bubble_cycle9_ALL_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle9_ALL_data[seq(1, length(fibo_cycle9_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle9_ALL_data[seq(1, length(matrix_cycle9_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle9_ALL_data[seq(1, length(collatz_cycle9_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle9_ALL_data[seq(1, length(rapl_cycle9_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_all_cycle9[seq(1, length(wup_all_cycle9$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle9_ALL_data[seq(1, length(bubble_cycle9_ALL_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("c) ALL Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle9_ALL_plot    
+#Save as pdf
+ggsave('./plots/cycle9_ALL_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#Up Idle
+cycle9_UP_IDLE_plot <-ggplot() + geom_line(data=bubble_cycle9_UP_IDLE_data[seq(1, length(bubble_cycle9_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle9_UP_IDLE_data[seq(1, length(fibo_cycle9_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle9_UP_IDLE_data[seq(1, length(matrix_cycle9_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle9_UP_IDLE_data[seq(1, length(collatz_cycle9_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle9_UP_IDLE_data[seq(1, length(rapl_cycle9_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_upidle_cycle9[seq(1, length(wup_upidle_cycle9$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle9_UP_IDLE_data[seq(1, length(bubble_cycle9_UP_IDLE_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("d) UP_IDLE Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle9_UP_IDLE_plot    
+#Save as pdf
+ggsave('./plots/cycle9_UP_IDLE_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+#Cycle4 plots
+#Bubble collatz
+cycle4_BUBBLE_COLLATZ_plot <-ggplot() + geom_line(data=bubble_cycle4_BUBBLE_COLLATZ_data[seq(1, length(bubble_cycle4_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle4_BUBBLE_COLLATZ_data[seq(1, length(fibo_cycle4_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle4_BUBBLE_COLLATZ_data[seq(1, length(matrix_cycle4_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle4_BUBBLE_COLLATZ_data[seq(1, length(collatz_cycle4_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle4_BUBBLE_COLLATZ_data[seq(1, length(rapl_cycle4_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_bc_cycle4[seq(1, length(wup_bc_cycle4$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle4_BUBBLE_COLLATZ_data[seq(1, length(bubble_cycle4_BUBBLE_COLLATZ_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("a) BUBBLE_COLLATZ Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle4_BUBBLE_COLLATZ_plot    
+#Save as pdf
+ggsave('./plots/cycle4_BUBBLE_COLLATZ_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+#Fibonaccy Matrix
+cycle4_FIBONACCI_MATRIX_plot <-ggplot() + geom_line(data=bubble_cycle4_FIBO_MATRIX_data[seq(1, length(bubble_cycle4_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle4_FIBO_MATRIX_data[seq(1, length(fibo_cycle4_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle4_FIBO_MATRIX_data[seq(1, length(matrix_cycle4_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle4_FIBO_MATRIX_data[seq(1, length(collatz_cycle4_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle4_FIBO_MATRIX_data[seq(1, length(rapl_cycle4_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_fm_cycle4[seq(1, length(wup_fm_cycle4$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle4_FIBO_MATRIX_data[seq(1, length(bubble_cycle4_FIBO_MATRIX_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("b) FIBONACCI_MATRIX Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle4_FIBONACCI_MATRIX_plot    
+#Save as pdf
+ggsave('./plots/cycle4_FIBONACCI_MATRIX_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#All
+cycle4_ALL_plot <-ggplot() + geom_line(data=bubble_cycle4_ALL_data[seq(1, length(bubble_cycle4_ALL_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle4_ALL_data[seq(1, length(fibo_cycle4_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle4_ALL_data[seq(1, length(matrix_cycle4_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle4_ALL_data[seq(1, length(collatz_cycle4_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle4_ALL_data[seq(1, length(rapl_cycle4_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_all_cycle4[seq(1, length(wup_all_cycle4$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle4_ALL_data[seq(1, length(bubble_cycle4_ALL_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("c) ALL Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle4_ALL_plot    
+#Save as pdf
+ggsave('./plots/cycle4_ALL_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#Up Idle
+cycle4_UP_IDLE_plot <-ggplot() + geom_line(data=bubble_cycle4_UP_IDLE_data[seq(1, length(bubble_cycle4_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle4_UP_IDLE_data[seq(1, length(fibo_cycle4_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle4_UP_IDLE_data[seq(1, length(matrix_cycle4_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle4_UP_IDLE_data[seq(1, length(collatz_cycle4_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle4_UP_IDLE_data[seq(1, length(rapl_cycle4_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_upidle_cycle4[seq(1, length(wup_upidle_cycle4$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle4_UP_IDLE_data[seq(1, length(bubble_cycle4_UP_IDLE_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("d) UP_IDLE Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle4_UP_IDLE_plot    
+#Save as pdf
+ggsave('./plots/cycle4_UP_IDLE_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#Cycle10 plots
+#Bubble collatz
+cycle10_BUBBLE_COLLATZ_plot <-ggplot() + geom_line(data=bubble_cycle10_BUBBLE_COLLATZ_data[seq(1, length(bubble_cycle10_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle10_BUBBLE_COLLATZ_data[seq(1, length(fibo_cycle10_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle10_BUBBLE_COLLATZ_data[seq(1, length(matrix_cycle10_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle10_BUBBLE_COLLATZ_data[seq(1, length(collatz_cycle10_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle10_BUBBLE_COLLATZ_data[seq(1, length(rapl_cycle10_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_bc_cycle10[seq(1, length(wup_bc_cycle10$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle10_BUBBLE_COLLATZ_data[seq(1, length(bubble_cycle10_BUBBLE_COLLATZ_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("a) BUBBLE_COLLATZ Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle10_BUBBLE_COLLATZ_plot    
+#Save as pdf
+ggsave('./plots/cycle10_BUBBLE_COLLATZ_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+#Fibonaccy Matrix
+cycle10_FIBONACCI_MATRIX_plot <-ggplot() + geom_line(data=bubble_cycle10_FIBO_MATRIX_data[seq(1, length(bubble_cycle10_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle10_FIBO_MATRIX_data[seq(1, length(fibo_cycle10_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle10_FIBO_MATRIX_data[seq(1, length(matrix_cycle10_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle10_FIBO_MATRIX_data[seq(1, length(collatz_cycle10_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle10_FIBO_MATRIX_data[seq(1, length(rapl_cycle10_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_fm_cycle10[seq(1, length(wup_fm_cycle10$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle10_FIBO_MATRIX_data[seq(1, length(bubble_cycle10_FIBO_MATRIX_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("b) FIBONACCI_MATRIX Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle10_FIBONACCI_MATRIX_plot    
+#Save as pdf
+ggsave('./plots/cycle10_FIBONACCI_MATRIX_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#All
+cycle10_ALL_plot <-ggplot() + geom_line(data=bubble_cycle10_ALL_data[seq(1, length(bubble_cycle10_ALL_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle10_ALL_data[seq(1, length(fibo_cycle10_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle10_ALL_data[seq(1, length(matrix_cycle10_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle10_ALL_data[seq(1, length(collatz_cycle10_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle10_ALL_data[seq(1, length(rapl_cycle10_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_all_cycle10[seq(1, length(wup_all_cycle10$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle10_ALL_data[seq(1, length(bubble_cycle10_ALL_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("c) ALL Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle10_ALL_plot    
+#Save as pdf
+ggsave('./plots/cycle10_ALL_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#Up Idle
+cycle10_UP_IDLE_plot <-ggplot() + geom_line(data=bubble_cycle10_UP_IDLE_data[seq(1, length(bubble_cycle10_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
+  geom_line(data=fibo_cycle10_UP_IDLE_data[seq(1, length(fibo_cycle10_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
+  geom_line(data=matrix_cycle10_UP_IDLE_data[seq(1, length(matrix_cycle10_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
+  geom_line(data=collatz_cycle10_UP_IDLE_data[seq(1, length(collatz_cycle10_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=rapl_cycle10_UP_IDLE_data[seq(1, length(rapl_cycle10_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_upidle_cycle10[seq(1, length(wup_upidle_cycle10$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(bubble_cycle10_UP_IDLE_data[seq(1, length(bubble_cycle10_UP_IDLE_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) +
+  theme(axis.ticks = element_line(linewidth = 1.3)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("a) BUBBLE_COLLATZ Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle10_UP_IDLE_plot    
+#Save as pdf
+ggsave('./plots/cycle10_UP_IDLE_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+
+
+#Correlation coefficients
+#Get indices for each treatment
+bc_indices <- c(1:10)
+fm_indices <- c(11:20)
+all_indices <- c(21:30)
+up_idle_indices <- c(31:40)
+#Compute the correlation using a non-parametric test
+print("Rapl_BUBBLE_COLLATZ_corr")
+cor.test(rapl_energy_usage[bc_indices], smartwatts_energy_usage[bc_indices], method='kendall')
+print("Rapl_FIBO_MATRIX_corr")
+cor.test(rapl_energy_usage[fm_indices], smartwatts_energy_usage[fm_indices], method='kendall')
+print("Rapl_ALL_corr")
+cor.test(rapl_energy_usage[all_indices], smartwatts_energy_usage[all_indices], method='kendall')
+print("Rapl_UP_IDLE_corr")
+cor.test(rapl_energy_usage[up_idle_indices], smartwatts_energy_usage[up_idle_indices], method='kendall')
+print("WUP_BUBBLE_COLLATZ_corr")
+cor.test(wup_energy_usage[bc_indices], smartwatts_energy_usage[bc_indices], method='kendall')
+print("WUP_FIBO_MATRIX_corr")
+cor.test(wup_energy_usage[fm_indices], smartwatts_energy_usage[fm_indices], method='kendall')
+print("WUP_ALL_corr")
+cor.test(wup_energy_usage[all_indices], smartwatts_energy_usage[all_indices], method='kendall')
+print("WUP_UP_IDLE_corr")
+cor.test(wup_energy_usage[up_idle_indices], smartwatts_energy_usage[up_idle_indices], method='kendall')
+

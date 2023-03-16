@@ -222,6 +222,8 @@ collatz_cycle8_UP_IDLE_treatment <- "/Experiment_Iteration_8/UP_IDLE/powerapi/se
 collatz_cycle9_UP_IDLE_treatment <- "/Experiment_Iteration_9/UP_IDLE/powerapi/sensor-collatz/PowerReport.csv"
 collatz_cycle10_UP_IDLE_treatment <- "/Experiment_Iteration_10/UP_IDLE/powerapi/sensor-collatz/PowerReport.csv"
 
+rapl_cycle1_IDLE_treatment <- "/Experiment_Iteration_1/IDLE/powerapi/sensor-rapl/PowerReport.csv"
+
 rapl_cycle1_UP_IDLE_treatment <- "/Experiment_Iteration_1/UP_IDLE/powerapi/sensor-rapl/PowerReport.csv"
 rapl_cycle2_UP_IDLE_treatment <- "/Experiment_Iteration_2/UP_IDLE/powerapi/sensor-rapl/PowerReport.csv"
 rapl_cycle3_UP_IDLE_treatment <- "/Experiment_Iteration_3/UP_IDLE/powerapi/sensor-rapl/PowerReport.csv"
@@ -1758,6 +1760,13 @@ collatz_cycle10_UP_IDLE_data <- collatz_cycle10_UP_IDLE_data %>% mutate(chart_ti
 collatz_cycle10_UP_IDLE_trapezoid_val <- trapz(collatz_cycle10_UP_IDLE_data$id, collatz_cycle10_UP_IDLE_data$power) 
 
 
+rapl_cycle1_IDLE_paths <- paste(main_dir, rapl_cycle1_IDLE_treatment, sep="")
+rapl_cycle1_IDLE_data <- read.csv(rapl_cycle1_IDLE_paths, header=T)
+rapl_cycle1_IDLE_data$id <- 1:nrow(rapl_cycle1_IDLE_data)
+rapl_cycle1_IDLE_data$time <- anytime(rapl_cycle1_IDLE_data$timestamp / 1000)
+rapl_cycle1_IDLE_data <- rapl_cycle1_IDLE_data %>% mutate(chart_ticks=round((minute(time) - minute(rapl_cycle1_IDLE_data[1, 'time'])) * 60 + second(time)  - second(rapl_cycle1_IDLE_data[1, 'time']), 0))
+
+
 rapl_cycle1_UP_IDLE_paths <- paste(main_dir, rapl_cycle1_UP_IDLE_treatment, sep="")
 rapl_cycle1_UP_IDLE_data <- read.csv(rapl_cycle1_UP_IDLE_paths, header=T)
 rapl_cycle1_UP_IDLE_data$id <- 1:nrow(rapl_cycle1_UP_IDLE_data)
@@ -1951,7 +1960,9 @@ colnames(experiment_log) <- c("cycle", "treatment", "start_time", "end_time")
 experiment_log_ALL <- experiment_log[ which(experiment_log$treatment=='ALL'), ]
 experiment_log_ALL <- experiment_log_ALL %>% mutate(start_time=anytime(start_time))
 experiment_log_ALL <- experiment_log_ALL %>% mutate(end_time=anytime(end_time))
-#experiment_log_IDLE <- experiment_log[ which(experiment_log$treatment=='IDLE'), ]
+experiment_log_IDLE <- experiment_log[ which(experiment_log$treatment=='IDLE'), ]
+experiment_log_IDLE <- experiment_log_IDLE %>% mutate(start_time=anytime(start_time))
+experiment_log_IDLE <- experiment_log_IDLE %>% mutate(end_time=anytime(end_time))
 experiment_log_UP_IDLE <- experiment_log[ which(experiment_log$treatment=='UP_IDLE'), ]
 experiment_log_UP_IDLE <- experiment_log_UP_IDLE %>% mutate(start_time=anytime(start_time))
 experiment_log_UP_IDLE <- experiment_log_UP_IDLE %>% mutate(end_time=anytime(end_time))
@@ -2050,6 +2061,11 @@ wup_upidle_cycle9 <- wup_upidle_cycle9 %>% mutate(chart_ticks=round((minute(time
 wup_upidle_cycle10 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_UP_IDLE[10, "start_time"] & wattsup_gl6_final$time < experiment_log_UP_IDLE[10, "end_time"]), ]
 wup_upidle_cycle10 <- wup_upidle_cycle10 %>% mutate(chart_ticks=round((minute(time) - minute(wup_upidle_cycle10[1, 'time'])) * 60 + second(time) - second(wup_upidle_cycle10[1, 'time']), 0))
 
+wup_idle_cycle1 <- wattsup_gl6_final[which(wattsup_gl6_final$time > experiment_log_IDLE[1, "start_time"] & wattsup_gl6_final$time < experiment_log_IDLE[1, "end_time"]), ]
+wup_idle_cycle1 <- wup_idle_cycle1 %>% mutate(chart_ticks=round((minute(time) - minute(wup_idle_cycle1[1, 'time'])) * 60 + second(time) - second(wup_idle_cycle1[1, 'time']), 0))
+
+wup_idle_cycle1$id <- 1:nrow(wup_idle_cycle1)
+
 wup_bc_cycle1$id <- 1:nrow(wup_bc_cycle1)
 wup_bc_cycle2$id <- 1:nrow(wup_bc_cycle2)
 wup_bc_cycle3$id <- 1:nrow(wup_bc_cycle3)
@@ -2139,16 +2155,20 @@ wup_energy_usage <- c(wup_bc_cycle1_trapezoid_val,wup_bc_cycle2_trapezoid_val,wu
 
 #Create timeline plots for each Experiment Cycle for SmartWatts, RAPL and WUP
 #Cycle1 plots
+
+sum_of_services <- fibo_cycle1_BUBBLE_COLLATZ_data
+sum_of_services$power <- fibo_cycle1_BUBBLE_COLLATZ_data$power + matrix_cycle1_BUBBLE_COLLATZ_data$power +collatz_cycle1_BUBBLE_COLLATZ_data$power +bubble_cycle1_BUBBLE_COLLATZ_data$power
 #Bubble collatz
 cycle1_BUBBLE_COLLATZ_plot <-ggplot() + geom_line(data=bubble_cycle1_BUBBLE_COLLATZ_data[seq(1, length(bubble_cycle1_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
   geom_line(data=fibo_cycle1_BUBBLE_COLLATZ_data[seq(1, length(fibo_cycle1_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
   geom_line(data=matrix_cycle1_BUBBLE_COLLATZ_data[seq(1, length(matrix_cycle1_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
   geom_line(data=collatz_cycle1_BUBBLE_COLLATZ_data[seq(1, length(collatz_cycle1_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
   geom_line(data=rapl_cycle1_BUBBLE_COLLATZ_data[seq(1, length(rapl_cycle1_BUBBLE_COLLATZ_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=sum_of_services[seq(1, length(sum_of_services$id),30),], aes(x=chart_ticks, y = power ,color = "All Services",), size = 1.2) +  
   geom_line(data=wup_bc_cycle1[seq(1, length(wup_bc_cycle1$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
   scale_x_continuous(breaks = round(seq(0, max(bubble_cycle1_BUBBLE_COLLATZ_data[seq(1, length(bubble_cycle1_BUBBLE_COLLATZ_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
   scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
-  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "All Services", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "yellow", "brown4")) +
   labs(y="Power (Watts)", x="Time (seconds)") +
   theme(plot.title = element_text(hjust = 0.5, size = 30))+
   theme(legend.text = element_text(size = 30))+
@@ -2162,7 +2182,7 @@ cycle1_BUBBLE_COLLATZ_plot <-ggplot() + geom_line(data=bubble_cycle1_BUBBLE_COLL
     axis.title.y = element_text(vjust = +1.2),
     axis.title.x = element_text(vjust = -0.6)
   ) + 
-  ggtitle("a) BUBBLE_COLLATZ Treatment") +
+  ggtitle("b) BUBBLE_COLLATZ Treatment") +
   theme(legend.position="none") +
   guides(color = guide_legend(override.aes = list(size = 3)))
 
@@ -2170,16 +2190,20 @@ cycle1_BUBBLE_COLLATZ_plot
 #Save as pdf
 ggsave('./plots/cycle1_BUBBLE_COLLATZ_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
 
+sum_of_services <- bubble_cycle1_FIBO_MATRIX_data
+sum_of_services$power <- fibo_cycle1_FIBO_MATRIX_data$power + matrix_cycle1_FIBO_MATRIX_data$power +collatz_cycle1_FIBO_MATRIX_data$power +bubble_cycle1_FIBO_MATRIX_data$power
+
 #Fibonaccy Matrix
 cycle1_FIBONACCI_MATRIX_plot <-ggplot() + geom_line(data=bubble_cycle1_FIBO_MATRIX_data[seq(1, length(bubble_cycle1_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
   geom_line(data=fibo_cycle1_FIBO_MATRIX_data[seq(1, length(fibo_cycle1_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
   geom_line(data=matrix_cycle1_FIBO_MATRIX_data[seq(1, length(matrix_cycle1_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
   geom_line(data=collatz_cycle1_FIBO_MATRIX_data[seq(1, length(collatz_cycle1_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=sum_of_services[seq(1, length(sum_of_services$id),30),], aes(x=chart_ticks, y = power ,color = "All services",), size = 1.2) +  
   geom_line(data=rapl_cycle1_FIBO_MATRIX_data[seq(1, length(rapl_cycle1_FIBO_MATRIX_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
   geom_line(data=wup_fm_cycle1[seq(1, length(wup_fm_cycle1$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
   scale_x_continuous(breaks = round(seq(0, max(bubble_cycle1_FIBO_MATRIX_data[seq(1, length(bubble_cycle1_FIBO_MATRIX_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
   scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
-  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz","All services", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red","yellow", "darkmagenta", "brown4")) +
   labs(y="Power (Watts)", x="Time (seconds)") +
   theme(plot.title = element_text(hjust = 0.5, size = 30))+
   theme(legend.text = element_text(size = 30))+
@@ -2190,7 +2214,7 @@ cycle1_FIBONACCI_MATRIX_plot <-ggplot() + geom_line(data=bubble_cycle1_FIBO_MATR
   theme(axis.ticks = element_line(linewidth = 1.3)) + 
   theme(axis.ticks.length = unit(.25, "cm")) +
   theme(legend.position="none") +
-  ggtitle("b) FIBONACCI_MATRIX Treatment") +
+  ggtitle("c) FIBONACCI_MATRIX Treatment") +
   guides(color = guide_legend(override.aes = list(size = 3)))
 
 cycle1_FIBONACCI_MATRIX_plot    
@@ -2198,16 +2222,19 @@ cycle1_FIBONACCI_MATRIX_plot
 ggsave('./plots/cycle1_FIBONACCI_MATRIX_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
 
 
+sum_of_services <- bubble_cycle1_ALL_data
+sum_of_services$power <- fibo_cycle1_ALL_data$power + matrix_cycle1_ALL_data$power +collatz_cycle1_ALL_data$power +bubble_cycle1_ALL_data$power
 #All
 cycle1_ALL_plot <-ggplot() + geom_line(data=bubble_cycle1_ALL_data[seq(1, length(bubble_cycle1_ALL_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
   geom_line(data=fibo_cycle1_ALL_data[seq(1, length(fibo_cycle1_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
   geom_line(data=matrix_cycle1_ALL_data[seq(1, length(matrix_cycle1_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
   geom_line(data=collatz_cycle1_ALL_data[seq(1, length(collatz_cycle1_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=sum_of_services[seq(1, length(sum_of_services$id),30),], aes(x=chart_ticks, y = power ,color = "All Services",), size = 1.2) +  
   geom_line(data=rapl_cycle1_ALL_data[seq(1, length(rapl_cycle1_ALL_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
   geom_line(data=wup_all_cycle1[seq(1, length(wup_all_cycle1$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
   scale_x_continuous(breaks = round(seq(0, max(bubble_cycle1_ALL_data[seq(1, length(bubble_cycle1_ALL_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
   scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
-  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "All Services", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "yellow", "darkmagenta", "brown4")) +
   labs(y="Power (Watts)", x="Time (seconds)") +
   theme(plot.title = element_text(hjust = 0.5, size = 30))+
   theme(legend.text = element_text(size = 30))+
@@ -2218,7 +2245,7 @@ cycle1_ALL_plot <-ggplot() + geom_line(data=bubble_cycle1_ALL_data[seq(1, length
   theme(axis.ticks = element_line(linewidth = 1.3)) + 
   theme(axis.ticks.length = unit(.25, "cm")) +
   theme(legend.position="none") +
-  ggtitle("c) ALL Treatment") +
+  ggtitle("d) ALL Treatment") +
   guides(color = guide_legend(override.aes = list(size = 3)))
 
 cycle1_ALL_plot    
@@ -2226,16 +2253,19 @@ cycle1_ALL_plot
 ggsave('./plots/cycle1_ALL_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
 
 
+sum_of_services <- bubble_cycle1_UP_IDLE_data
+sum_of_services$power <- fibo_cycle1_UP_IDLE_data$power + matrix_cycle1_UP_IDLE_data$power +collatz_cycle1_UP_IDLE_data$power +bubble_cycle1_UP_IDLE_data$power
 #Up Idle
 cycle1_UP_IDLE_plot <-ggplot() + geom_line(data=bubble_cycle1_UP_IDLE_data[seq(1, length(bubble_cycle1_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power,color= "Bubble",), size = 1.2) + 
   geom_line(data=fibo_cycle1_UP_IDLE_data[seq(1, length(fibo_cycle1_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Fibonacci",), size = 1.2) + 
   geom_line(data=matrix_cycle1_UP_IDLE_data[seq(1, length(matrix_cycle1_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Matrix",), size = 1.2) +  
   geom_line(data=collatz_cycle1_UP_IDLE_data[seq(1, length(collatz_cycle1_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "Collatz",), size = 1.2) +  
+  geom_line(data=sum_of_services[seq(1, length(sum_of_services$id),30),], aes(x=chart_ticks, y = power ,color = "All Services",), size = 1.2) +  
   geom_line(data=rapl_cycle1_UP_IDLE_data[seq(1, length(rapl_cycle1_UP_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
   geom_line(data=wup_upidle_cycle1[seq(1, length(wup_upidle_cycle1$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
   scale_x_continuous(breaks = round(seq(0, max(bubble_cycle1_UP_IDLE_data[seq(1, length(bubble_cycle1_UP_IDLE_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
   scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
-  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "darkmagenta", "brown4")) +
+  scale_colour_manual("", breaks = c("Bubble", "Fibonacci", "Matrix", "Collatz", "All Services", "RAPL", "WattsUpPro"), values = c("darkturquoise", "blue", "chartreuse3", "red", "yellow", "darkmagenta", "brown4")) +
   labs(y="Power (Watts)", x="Time (seconds)") +
   theme(plot.title = element_text(hjust = 0.5, size = 30))+
   theme(legend.text = element_text(size = 30))+
@@ -2245,12 +2275,34 @@ cycle1_UP_IDLE_plot <-ggplot() + geom_line(data=bubble_cycle1_UP_IDLE_data[seq(1
   theme(axis.text.y = element_text(vjust = 0.2, size = 30)) + 
   theme(axis.ticks.length = unit(.25, "cm")) +
   theme(legend.position="none") +
-  ggtitle("c) UP_IDLE Treatment") +
+  ggtitle("e) UP_IDLE Treatment") +
   guides(color = guide_legend(override.aes = list(size = 3)))
 
 cycle1_UP_IDLE_plot    
 #Save as pdf
 ggsave('./plots/cycle1_UP_IDLE_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
+#Idle
+cycle1_IDLE_plot <-ggplot() +
+  geom_line(data=rapl_cycle1_IDLE_data[seq(1, length(rapl_cycle1_IDLE_data$id),30),], aes(x=chart_ticks, y = power ,color = "RAPL",), size = 1.2) +  
+  geom_line(data=wup_idle_cycle1[seq(1, length(wup_idle_cycle1$id),30),], aes(x=chart_ticks, y = W ,color = "WattsUpPro",), size = 1.2) +  
+  scale_x_continuous(breaks = round(seq(0, max(rapl_cycle1_IDLE_data[seq(1, length(rapl_cycle1_IDLE_data$time),45), 'chart_ticks'] + 30), by = 30),0)) +  
+  scale_y_continuous(breaks = seq(0, 250, by = 40)) +  
+  scale_colour_manual("", breaks = c("RAPL", "WattsUpPro"), values = c("darkmagenta", "brown4")) +
+  labs(y="Power (Watts)", x="Time (seconds)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 30))+
+  theme(legend.text = element_text(size = 30))+
+  theme(axis.title.x = element_text(hjust = 0.5, vjust = 0.3, size = 30))+
+  theme(axis.title.y = element_text(hjust = 0.5, vjust = 0.3,size = 30))+
+  theme(axis.text.x = element_text(vjust = 0.2 , size = 30))+
+  theme(axis.text.y = element_text(vjust = 0.2, size = 30)) + 
+  theme(axis.ticks.length = unit(.25, "cm")) +
+  theme(legend.position="none") +
+  ggtitle("a) IDLE Treatment") +
+  guides(color = guide_legend(override.aes = list(size = 3)))
+
+cycle1_IDLE_plot    
+#Save as pdf
+ggsave('./plots/cycle1_IDLE_plot.pdf', scale = 1.5, height = 12, width = 22, unit='cm')
 
 
 #Cycle2 plots
